@@ -2,6 +2,8 @@
 # AirBnB
 
 ## Database Schema Design
+![image](https://user-images.githubusercontent.com/76670635/196824377-8664794a-5622-46fd-b8b5-e0c22c9312d2.png)
+
 
 `<insert database schema design here>`
 
