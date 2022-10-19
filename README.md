@@ -1,5 +1,5 @@
 # API-project
-# `<name of application here>`
+# AirBnB
 
 ## Database Schema Design
 
