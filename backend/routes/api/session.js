@@ -32,6 +32,7 @@ const validateLogin = [
 // Log in
 router.post(
     '/',
+    validateLogin,
     async (req, res, next) => {
       const { credential, password } = req.body;
 
