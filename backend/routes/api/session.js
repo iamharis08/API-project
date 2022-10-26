@@ -45,11 +45,10 @@ router.post(
         err.errors = ['The provided credentials were invalid.'];
         return next(err);
       }
-
-      await setTokenCookie(res, user);
-
+      const token = await setTokenCookie(res, user);
+      const currentUser = {...user}
       return res.json({
-        user
+        ...currentUser.dataValues, token
       });
     }
   );
@@ -71,10 +70,7 @@ router.delete(
 // ...
 
 // Restore session user
-router.get(
-    '/',
-    restoreUser,
-    (req, res) => {
+router.get('/', restoreUser, (req, res) => {
       const { user } = req;
       if (user) {
         return res.json({

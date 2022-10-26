@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
      toSafeObject() {
-      const { id, username, email } = this; // context will be the User instance
-      return { id, username, email };
+      const { id, firstName, lastName, username, email, token} = this; // context will be the User instance
+      return { id, firstName, lastName, email, username, token};
     }
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
@@ -50,6 +50,14 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+      //Spots table
+      User.hasMany(models.Spot, { foreignKey: 'ownerId' });
+
+      // Bookings Join table (many to many relationship) Users with Spots table
+      User.hasMany(models.Booking, { foreignKey: 'userId' });
+
+      // Reviews Join Table (many to many relationship) Users with Spots table
+      User.hasMany(models.Review, { foreignKey: 'userId' });
     }
   }
   User.init(
@@ -100,7 +108,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       scopes: {
         currentUser: {
-          attributes: { exclude: ["hashedPassword"] }
+          attributes: { exclude: ["hashedPassword", "createdAt", "updatedAt"] }
         },
         loginUser: {
           attributes: {}

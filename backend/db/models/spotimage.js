@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // Spots Table (one to many relationship) spotId association
+      SpotImage.belongsTo(models.Spot, { foreignKey: 'spotId' });
     }
   }
   SpotImage.init({
