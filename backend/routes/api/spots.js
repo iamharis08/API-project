@@ -228,7 +228,7 @@ router.get('/:spotId', async(req, res, next) => {
                 ],
             ],
         },
-        group: ['Spot.id']
+        group: ['Spot.id', 'Owner.id']
 
     })
 
