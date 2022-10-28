@@ -20,6 +20,34 @@ const handleValidationErrors = (req, _res, next) => {
   next();
 };
 
+const handleInputValidationErrors = (req, _res, next) => {
+  const validationErrors = validationResult(req);
+
+  if (!validationErrors.isEmpty()) {
+    let errors = validationErrors
+      .mapped()
+   const formattedError = {}
+      for (let field in errors){
+        let fieldErr = errors[field]
+
+        for (let key in fieldErr) {
+          if (key === 'msg'){
+            formattedError[field] = fieldErr[key]
+          }
+        }
+
+      }
+
+
+    const err = Error('Validation Error');
+    err.status = 400;
+    err.errors = formattedError;
+
+    next(err);
+  }
+  next();
+};
 module.exports = {
-  handleValidationErrors
+  handleValidationErrors,
+  handleInputValidationErrors
 };

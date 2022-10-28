@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       //reviewImages table relationship (one to many), reviews having many review images
-      Review.hasMany(models.ReviewImage, { foreignKey: 'reviewId' });
+      Review.hasMany(models.ReviewImage, { foreignKey: 'reviewId'});
 
       //Users and Spots table relationship (many to many) Join Table,
       Review.belongsTo(models.Spot, { foreignKey: 'spotId' });
