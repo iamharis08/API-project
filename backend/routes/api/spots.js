@@ -8,8 +8,8 @@ const { handleInputValidationErrors } = require('../../utils/validation');
 const { reviewAggregate } = require('../../utils/reviewsAggregate');
 // ...
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Spot, Review, sequelize, ReviewImage, SpotImage } = require('../../db/models');
-const spot = require('../../db/models/spot');
+const { User, Spot, Review, sequelize, ReviewImage, SpotImage , Booking} = require('../../db/models');
+// const spot = require('../../db/models/spot');
 const { ValidationError } = require('sequelize');
 const router = express.Router();
 
@@ -366,5 +366,59 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
           })
     }
 })
+
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+
+    const spotId = req.params.spotId
+
+        const allBookings = await Booking.findAll({
+            where: {spotId: spotId},
+            attributes: ["spotId", 'startDate', "endDate"],
+            order: ['spotId']
+        })
+
+
+        const spot = await Spot.findByPk(spotId)
+
+
+        if (!spot) {
+            res.status(404)
+            res.json({
+                message: " Spot couldn't be found",
+                statusCode: 404
+            })
+        }else if (spot.toJSON().ownerId !== req.user.id) {
+            res.json({
+                Bookings: allBookings
+            })
+        }else {
+            const allUserBookings = await Booking.findAll({
+                where: {spotId: spotId},
+                include: {
+                    model: User,
+                    attributes: ["id", "firstName", "lastName"]
+                },
+                order: ['spotId'],
+                group: ["spotId"]
+            })
+            res.json({
+                Bookings: allUserBookings
+            })
+        }
+
+
+if (!allBookings[0]) {
+    res.status(404)
+    res.json({
+        message: "No Bookings found"
+    })
+}
+
+// console.log(allBookings)
+//     res.json({
+//         Bookings: allBookings
+//     })
+})
+
 
 module.exports = router;
