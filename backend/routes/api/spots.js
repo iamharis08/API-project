@@ -297,7 +297,6 @@ router.put('/:spotId', requireAuth, validateInputs, async (req, res, next) => {
     const {address, city, state, country, lat, lng, name, description, price} = req.body
 
     const spot = await Spot.findByPk(spotId)
-    console.log(spot.ownerId)
     if (!spot){
         const err = new Error("Spot couldn't be found")
         err.status = 404
