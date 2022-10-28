@@ -232,6 +232,16 @@ router.get('/:spotId', async(req, res, next) => {
 
     })
 
+    if (!spot[0]) {
+        // const err = new Error("Spot couldn't be found")
+        // err.status = 404
+        // next(err)
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+
     let spotList = []
     spot.forEach((ele) => {
         spotList.push(ele.toJSON())
@@ -252,9 +262,7 @@ router.get('/:spotId', async(req, res, next) => {
     }
 
 
-    const err = new Error("Spot couldn't be found")
-    err.status = 404
-    next(err)
+
 
 })
 
@@ -333,11 +341,21 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
         const err = new Error("Couldn't find spot with specified id")
         err.status = 404
         next(err)
+        res.status(404)
+        res.json({
+            message: "Couldn't find spot with specified id",
+            statusCode: 404
+        })
     }
     else if (spot.toJSON().ownerId !== req.user.id) {
-        const err = new Error("Access Denied: you do not have authorization")
-        err.status = 403
-        next(err)
+        // const err = new Error("Access Denied: you do not have authorization")
+        // err.status = 403
+        // next(err)
+        res.status(403)
+        res.json({
+            message: "Access Denied: you do not have authorization",
+            statusCode: 403
+        })
 
     } else {
 
