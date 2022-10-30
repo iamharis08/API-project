@@ -20,7 +20,7 @@ const handleValidationErrors = (req, _res, next) => {
   next();
 };
 
-const handleInputValidationErrors = (req, _res, next) => {
+const handleInputValidationErrors = (req, res, next) => {
   const validationErrors = validationResult(req);
 
   if (!validationErrors.isEmpty()) {
@@ -42,8 +42,13 @@ const handleInputValidationErrors = (req, _res, next) => {
     const err = Error('Validation Error');
     err.status = 400;
     err.errors = formattedError;
-
-    next(err);
+    res.status(400)
+    return res.json({
+      message: 'Validation Error',
+      statusCode: 400,
+      errors: err.errors
+    })
+    // next(err);
   }
   next();
 };

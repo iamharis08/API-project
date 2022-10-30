@@ -23,18 +23,22 @@ router.get('/current', requireAuth, async (req, res, next) => {
         where: {userId: req.user.id},
         include: {
             model: Spot,
+            attributes: {
+                exclude: ["description", "createdAt", "updatedAt"]
+            }
         },
         order: ['spotId']
     })
 if (!allBookings[0]) {
     res.status(404)
-    res.json({
-        message: "No Bookings found"
+    return res.json({
+        message: "No Bookings found",
+        statusCode: 404
     })
 }
 
-console.log(allBookings)
-    res.json({
+
+    return res.json({
         Bookings: allBookings
     })
 })
@@ -205,7 +209,7 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
             statusCode: 403
         })
     }
-    
+
     const bookingsEndDateToObject = new Date(booking.toJSON().endDate);
     const bookingsStartDateToObject = new Date(booking.toJSON().startDate);
 

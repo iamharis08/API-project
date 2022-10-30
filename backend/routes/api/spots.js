@@ -13,6 +13,50 @@ const { User, Spot, Review, sequelize, ReviewImage, SpotImage , Booking} = requi
 const { ValidationError } = require('sequelize');
 const router = express.Router();
 
+const validateInputs = [
+  check('address')
+    .exists({ checkFalsy: true })
+    .withMessage('Street address is required'),
+  check('city')
+    .exists({ checkFalsy: true })
+    .withMessage('City is required.'),
+    check('state')
+    .exists({ checkFalsy: true })
+    .withMessage('State is required.'),
+  check('country')
+    .exists({ checkFalsy: true })
+    .withMessage('Country is required.'),
+  check('lat')
+    .exists({ checkFalsy: true })
+    .withMessage("Latitude is required")
+    .not()
+    .isString()
+    .withMessage('Latitude is not valid'),
+    check('lng')
+    .exists({ checkFalsy: true })
+    .withMessage("Longitude is required")
+    .not()
+    .isString()
+    .withMessage('Longitude is not valid'),
+    check('name')
+    .exists({ checkFalsy: true })
+    .withMessage("Name is required")
+    .isLength({ max: 50 })
+    .withMessage('Name must be less than 50 characters'),
+    check('description')
+    .exists({ checkFalsy: true })
+    .withMessage('Description is required'),
+    check('price')
+    .exists({ checkFalsy: true })
+    .withMessage('Price per day is required')
+    .not()
+    .isString()
+    .withMessage('Price per day is required'),
+
+  handleInputValidationErrors
+];
+
+
 
 router.get('/', async (req, res) => {
     const spots = await Spot.findAll({
@@ -48,15 +92,16 @@ router.get('/', async (req, res) => {
             }
         } else spotStars[spot.id] = 0
 
-        if (sum !== 0) spotStars[spot.id] = sum / reviewsArray.length
+        // if (sum !== 0)
+        spotStars[spot.id] = sum / reviewsArray.length
 
         delete spots[i].dataValues.Reviews;
         spots[i].dataValues.avgRating = spotStars[spot.id]
 
 
 
-
-if (spots[i].dataValues.SpotImages.length) {
+// spots[i].dataValues.SpotImages
+if (spots[i].dataValues.SpotImages) {
     let previewImage = spots[i].dataValues.SpotImages[0].url
     spots[i].dataValues.previewImage = previewImage
 }else spots[i].dataValues.previewImage = ''
@@ -65,7 +110,7 @@ delete spots[i].dataValues.SpotImages
     }
 
 
-    res.json({
+    return res.json({
          Spots: spots,
     })
 });
@@ -126,7 +171,7 @@ delete spots[i].dataValues.SpotImages
     }
 
 
-    res.json({
+   return res.json({
         Spots: spots
     })
 
@@ -135,11 +180,7 @@ delete spots[i].dataValues.SpotImages
 
 
 
-
-
-
-
-router.post('/', requireAuth, async (req, res) => {
+router.post('/', requireAuth, validateInputs, async (req, res) => {
     const {address, city, state, country, lat, lng, name, description, price} = req.body
 
     const spot = await Spot.create({
@@ -155,7 +196,7 @@ router.post('/', requireAuth, async (req, res) => {
         price
     })
 
-    res.json({
+    return res.json({
         ...spot.dataValues
     })
 })
@@ -176,13 +217,23 @@ if (isSpot) isSpot = isSpot.toJSON()
 
 
 if (!isSpot  ) {
-    const err = new Error("Spot couldn't be found")
-    err.status = 404
-    next(err)
+    // const err = new Error("Spot couldn't be found")
+    // err.status = 404
+    // next(err)
+    res.status(404)
+    return res.json({
+      message: "Spot couldn't be found",
+      statusCode: 404
+    })
  }else if (isSpot.ownerId !== req.user.id){
-    const err = new Error("Access denied: You do not own this Spot")
-    err.status = 403
-    next(err)
+    // const err = new Error("Access denied: You do not own this Spot")
+    // err.status = 403
+    // next(err)
+    res.status(403)
+    return res.json({
+      message: "Access denied: You do not own this Spot",
+      statusCode: 403
+    })
  }
     const newSpotImage = await SpotImage.create({
         spotId: spotId,
@@ -190,7 +241,7 @@ if (!isSpot  ) {
         preview: preview,
     })
 
-    res.json({
+    return res.json({
         id: spotId,
         url: newSpotImage.url,
         preview: newSpotImage.preview
@@ -236,7 +287,8 @@ router.get('/:spotId', async(req, res, next) => {
         // const err = new Error("Spot couldn't be found")
         // err.status = 404
         // next(err)
-        res.status(404).json({
+         res.status(404)
+         return res.json({
             message: "Spot couldn't be found",
             statusCode: 404
         })
@@ -250,13 +302,14 @@ router.get('/:spotId', async(req, res, next) => {
     const SpotImages = await SpotImage.findAll({
         where: {
             spotId: spotId
-        }
+        },
+        attributes: ["id", "url", "preview"]
     })
 
 
 
     if (spot[0].id){
-        res.json({
+        return res.json({
             ...spotList[0],SpotImages
         })
     }
@@ -271,36 +324,7 @@ router.get('/:spotId', async(req, res, next) => {
 
 
 
-const validateInputs = [
-    check('address')
-      .exists({ checkFalsy: true })
-      .isLength({ min: 2 })
-      .withMessage('Please provide an address.'),
-    check('city')
-      .exists({ checkFalsy: true })
-      .withMessage('City is required.'),
-    check('country')
-      .exists({ checkFalsy: true })
-      .withMessage('Country is required.'),
-    check('lat')
-      .exists({ checkFalsy: true })
-      .withMessage('Latitude is not valid'),
-      check('lng')
-      .exists({ checkFalsy: true })
-      .withMessage('Longitude is not valid'),
-      check('name')
-      .exists({ checkFalsy: true })
-      .isLength({ max: 50 })
-      .withMessage('Name must be less than 50 characters'),
-      check('description')
-      .exists({ checkFalsy: true })
-      .withMessage('Description is required'),
-      check('price')
-      .exists({ checkFalsy: true })
-      .withMessage('Price per day is required'),
 
-    handleInputValidationErrors
-  ];
 
 router.put('/:spotId', requireAuth, validateInputs, async (req, res, next) => {
     const spotId = req.params.spotId
@@ -308,13 +332,23 @@ router.put('/:spotId', requireAuth, validateInputs, async (req, res, next) => {
 
     const spot = await Spot.findByPk(spotId)
     if (!spot){
-        const err = new Error("Spot couldn't be found")
-        err.status = 404
-        next(err)
+        // const err = new Error("Spot couldn't be found")
+        // err.status = 404
+        // next(err)
+        res.status(404)
+        return res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
     }else if (spot.ownerId !== req.user.id){
-        const err = new Error("Access Denied: you do not have authorization")
-        err.status = 403
-        next(err)
+        // const err = new Error("Access Denied: you do not have authorization")
+        // err.status = 403
+        // next(err)
+        res.status(403)
+        return res.json({
+            message: "Access Denied: you do not have authorization",
+            statusCode: 403
+        })
     } else { spot.update({
         address,
         city,
@@ -327,7 +361,7 @@ router.put('/:spotId', requireAuth, validateInputs, async (req, res, next) => {
         price
     })
 
-    res.send(spot.toJSON())
+    return res.send(spot.toJSON())
 }
 
 })
@@ -340,12 +374,12 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
 
     if (!spot) {
-        const err = new Error("Couldn't find spot with specified id")
-        err.status = 404
-        next(err)
+        // const err = new Error("Couldn't find spot with specified id")
+        // err.status = 404
+        // next(err)
         res.status(404)
-        res.json({
-            message: "Couldn't find spot with specified id",
+        return res.json({
+            message: "Spot couldn't be found",
             statusCode: 404
         })
     }
@@ -354,7 +388,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
         // err.status = 403
         // next(err)
         res.status(403)
-        res.json({
+        return res.json({
             message: "Access Denied: you do not have authorization",
             statusCode: 403
         })
@@ -362,7 +396,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
     } else {
 
         await spot.destroy()
-        res.json({
+        return res.json({
             message: "Successfully deleted",
             statusCode: 200
           })
@@ -385,12 +419,12 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
         if (!spot) {
             res.status(404)
-            res.json({
+           return res.json({
                 message: " Spot couldn't be found",
                 statusCode: 404
             })
         }else if (spot.toJSON().ownerId !== req.user.id) {
-            res.json({
+            return res.json({
                 Bookings: allBookings
             })
         }else if (!allBookings.length) {
@@ -413,7 +447,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
                 order: ['spotId'],
 
             })
-            res.json({
+            return res.json({
                 Bookings: allUserBookings
             })
         }
@@ -530,8 +564,8 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         endDate,
       });
 
-      res.json({
-        newBooking,
+      return res.json({
+        ...newBooking.toJSON(),
       });
 
 

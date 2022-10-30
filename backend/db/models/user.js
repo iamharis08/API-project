@@ -112,6 +112,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         loginUser: {
           attributes: {}
+        },
+        signUp: {
+          attributes: { 
+            include: [ "email", "username" ]
+        }
         }
       }
     }

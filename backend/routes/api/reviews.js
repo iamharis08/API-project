@@ -20,7 +20,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
     const currentUserReviews = await Review.findAll({
         where: {
-            id: req.user.id
+            userId: req.user.id
         },
         include: [{
             model: User,
@@ -29,7 +29,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         {
             model: Spot,
             attributes: {
-                exclude: ["description"]
+                exclude: ["description", "createdAt", "updatedAt"]
             },
             include: {
                 model: SpotImage,
@@ -58,11 +58,12 @@ router.get('/current', requireAuth, async (req, res, next) => {
                reviews[i].Spot.previewImage = url
             }
         }
-        res.json(reviews)
+        return res.json({Reviews: reviews})
     } else {
         res.status(404)
         return res.json({
-            message: "No reviews found"
+            message: "No reviews found",
+            statusCode: 404
         })
     }
 
