@@ -178,6 +178,58 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
 
 })
 
-router.delete('/:bookingId', requireAuth)
+router.delete('/:bookingId', requireAuth, async (req, res, next) => {
+    const bookingId = req.params.bookingId
+
+
+
+    const booking = await Booking.findOne({
+        attributes: {
+            include: ["id"]
+        },
+        where: {
+            id: bookingId
+        }
+    })
+
+    if (!booking) {
+        res.status(404)
+        return res.json({
+            message: "Booking couldn't be found",
+            statusCode: 404
+        })
+    }else if (booking.toJSON().userId !== req.user.id) {
+        res.status(403)
+        return res.json({
+            message: "Access Denied: Permission Required",
+            statusCode: 403
+        })
+    }
+    
+    const bookingsEndDateToObject = new Date(booking.toJSON().endDate);
+    const bookingsStartDateToObject = new Date(booking.toJSON().startDate);
+
+    if (bookingsEndDateToObject < Date.now()) {
+        res.status(403)
+        return res.json({
+            message: "Past bookings can't be deleted",
+            statusCode: 403
+        })
+    }else if ((bookingsStartDateToObject < Date.now()) && (bookingsEndDateToObject > Date.now())) {
+        res.status(403)
+        return res.json({
+            message: "Bookings that have been started can't be deleted",
+            statusCode: 403
+        })
+    }else {
+        booking.destroy()
+        res.json({
+            message: "Successfully deleted",
+            statusCode: 200
+        })
+    }
+
+
+})
 
 module.exports = router
