@@ -74,7 +74,7 @@ router.post('/', validateSignup, async (req, res) => {
           username: username
         }
       })
-console.log(usernameExists.toJSON())
+
       if (emailExists && emailExists.dataValues.email === email){
         res.status(403)
         return res.json({
@@ -98,7 +98,7 @@ console.log(usernameExists.toJSON())
       const user = await User.signup({firstName, lastName, email, username, password});
 
      const token = await setTokenCookie(res, user);
-     console.log(token)
+     
      const currentUser = {...user}
      return res.json({
        ...currentUser.dataValues, token

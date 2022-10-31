@@ -20,7 +20,7 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
 
 
     const reviewImage = await ReviewImage.findByPk(imageId)
-    console.log(reviewImage)
+
     if (!reviewImage){
         res.status(404)
         return res.json({

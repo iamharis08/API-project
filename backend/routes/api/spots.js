@@ -225,7 +225,7 @@ let validationErr = {
 // spots[i].dataValues.SpotImages
 if (spots[i].dataValues.SpotImages.length) {
 for (let j = 0; j < spots[i].dataValues.SpotImages.length; j++){
-  // console.log(spots[i].dataValues.SpotImages[j].preview )
+  
   let previewImage = spots[i].dataValues.SpotImages[j].url
 if (spots[i].dataValues.SpotImages[j].preview === true){
   spots[i].dataValues.previewImage = previewImage
