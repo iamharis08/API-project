@@ -225,7 +225,7 @@ let validationErr = {
 // spots[i].dataValues.SpotImages
 if (spots[i].dataValues.SpotImages.length) {
 for (let j = 0; j < spots[i].dataValues.SpotImages.length; j++){
-  
+
   let previewImage = spots[i].dataValues.SpotImages[j].url
 if (spots[i].dataValues.SpotImages[j].preview === true){
   spots[i].dataValues.previewImage = previewImage
@@ -330,7 +330,7 @@ router.post('/', requireAuth, validateInputs, async (req, res) => {
 
     const spot = await Spot.create({
         address,
-        ownerId: req.user.dataValues.id,
+        ownerId: parseInt(req.user.id),
         city,
         state,
         country,
@@ -342,7 +342,7 @@ router.post('/', requireAuth, validateInputs, async (req, res) => {
     })
 
     return res.json({
-        ...spot.dataValues
+        ...spot.toJSON()
     })
 })
 
@@ -352,16 +352,16 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     const { url, preview } = req.body
 
 
-let isSpot = await Spot.findOne({
+const isSpot = await Spot.findOne({
     where: {
         id: spotId
     }
 })
 
-if (isSpot) isSpot = isSpot.toJSON()
+// if (isSpot) isSpot = isSpot.toJSON()
 
 
-if (!isSpot  ) {
+if (!isSpot ) {
     // const err = new Error("Spot couldn't be found")
     // err.status = 404
     // next(err)
@@ -370,7 +370,8 @@ if (!isSpot  ) {
       message: "Spot couldn't be found",
       statusCode: 404
     })
- }else if (isSpot.ownerId !== req.user.id){
+ }
+  if (isSpot.toJSON().ownerId !== req.user.id){
     // const err = new Error("Access denied: You do not own this Spot")
     // err.status = 403
     // next(err)
@@ -379,18 +380,24 @@ if (!isSpot  ) {
       message: "Access denied: You do not own this Spot",
       statusCode: 403
     })
- }
-    const newSpotImage = await SpotImage.create({
-        spotId: spotId,
-        url: url,
-        preview: preview,
-    })
+ }else {
+  const newSpotImage = await SpotImage.create({
+    spotId: spotId,
+    url: url,
+    preview: preview,
+})
+const newImageFormatted = {
+  ...newSpotImage.toJSON()
+}
 
-    return res.json({
-        id: spotId,
-        url: newSpotImage.url,
-        preview: newSpotImage.preview
-    })
+delete newImageFormatted.spotId
+delete newImageFormatted.createdAt
+delete newImageFormatted.updatedAt
+return res.json({
+  ...newImageFormatted
+})
+ }
+
 })
 
 
@@ -428,7 +435,7 @@ router.get('/:spotId', async(req, res, next) => {
 
     })
 
-    if (!spot[0]) {
+    if (!spot.length) {
         // const err = new Error("Spot couldn't be found")
         // err.status = 404
         // next(err)
@@ -451,6 +458,9 @@ router.get('/:spotId', async(req, res, next) => {
         attributes: ["id", "url", "preview"]
     })
 
+    if (spotList[0].avgStarRating === null){
+      spotList[0].avgStarRating = 0
+    }
 
 
     if (spot[0].id){

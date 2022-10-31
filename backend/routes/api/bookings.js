@@ -47,16 +47,24 @@ const bookings = [];
     allBookings.forEach((booking) => {
         bookings.push(booking.toJSON())
     })
-console.log(bookings)
+
     if (bookings.length) {
 
         for (let i = 0; i < bookings.length; i++){
-
-            if (bookings[i].Spot.SpotImages[0].preview === true) {
-                const url = bookings[i].Spot.SpotImages[0].url
-               delete bookings[0].Spot.SpotImages
-               bookings[i].Spot.previewImage = url
+          console.log(bookings[i].Spot.SpotImages.length)
+          let spotImagesArray = bookings[i].Spot.SpotImages
+          console.log(spotImagesArray)
+          if (bookings[i].Spot.SpotImages.length) {
+            for (let j = 0; j < spotImagesArray.length; j++){
+              if (bookings[i].Spot.SpotImages[j].preview === true) {
+                const url = bookings[i].Spot.SpotImages[j].url
+                 delete bookings[i].Spot.SpotImages
+                 bookings[i].Spot.previewImage = url
+              }
             }
+
+          }
+
         }
       }
     return res.json({

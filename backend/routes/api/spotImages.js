@@ -20,7 +20,11 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
     const imageId = parseInt(req.params.imageId)
 
 
-    const spotImage = await SpotImage.findByPk(imageId)
+    const spotImage = await SpotImage.findOne({
+        where: {
+            id: imageId
+        }
+    })
     if (!spotImage){
         res.status(404)
         return res.json({
@@ -28,12 +32,13 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
             statusCode: 404
         })
     }
+    const spotId = spotImage.toJSON().spotId
     const spot = await Spot.findOne({
         where: {
-            id: spotImage.toJSON().spotId
+            id:spotId,
         }
     })
-
+console.log(spot.toJSON(),spotImage.toJSON(),req.user.id)
     if (spot.toJSON().ownerId !== req.user.id){
         res.status(403)
         return res.json({
