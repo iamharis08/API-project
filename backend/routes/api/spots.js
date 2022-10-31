@@ -575,7 +575,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
         if (!spot) {
             res.status(404)
            return res.json({
-                message: " Spot couldn't be found",
+                message: "Spot couldn't be found",
                 statusCode: 404
             })
         }else if (spot.toJSON().ownerId !== req.user.id) {

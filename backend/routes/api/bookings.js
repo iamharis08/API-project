@@ -48,25 +48,31 @@ const bookings = [];
         bookings.push(booking.toJSON())
     })
 
-    if (bookings.length) {
+    console.log(bookings)
 
         for (let i = 0; i < bookings.length; i++){
-          console.log(bookings[i].Spot.SpotImages.length)
+
           let spotImagesArray = bookings[i].Spot.SpotImages
-          console.log(spotImagesArray)
-          if (bookings[i].Spot.SpotImages.length) {
+
+          if (spotImagesArray.length) {
+console.log(spotImagesArray.length)
             for (let j = 0; j < spotImagesArray.length; j++){
-              if (bookings[i].Spot.SpotImages[j].preview === true) {
-                const url = bookings[i].Spot.SpotImages[j].url
+
+              if (spotImagesArray[j].preview === true) {
+
+                const url = spotImagesArray[j].url
+                bookings[i].Spot.previewImage = url
+
                  delete bookings[i].Spot.SpotImages
-                 bookings[i].Spot.previewImage = url
+
+
               }
             }
 
           }
 
         }
-      }
+
     return res.json({
         Bookings: bookings
     })
