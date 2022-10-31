@@ -293,7 +293,7 @@ router.get('/current', requireAuth, async (req, res) => {
                     sum += reviewStars;
 
             }
-        } else spotStars[spot.id] = 0
+        } else spotStars[spot.id] = 1
 
         spotStars[spot.id] = sum / reviewsArray.length
 
