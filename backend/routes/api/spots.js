@@ -274,7 +274,7 @@ router.get('/current', requireAuth, async (req, res) => {
     if (!spots.length){
       res.status(404)
       return res.json({
-        message: "Spot's couldn't be found",
+        message: "Spots couldn't be found",
         statusCode: 404
       })
 
@@ -377,7 +377,7 @@ if (!isSpot ) {
     // next(err)
     res.status(403)
     return res.json({
-      message: "Access denied: You do not own this Spot",
+      message: "Forbidden",
       statusCode: 403
     })
  }else {
@@ -501,7 +501,7 @@ router.put('/:spotId', requireAuth, validateInputs, async (req, res, next) => {
         // next(err)
         res.status(403)
         return res.json({
-            message: "Access Denied: you do not have authorization",
+            message: "Forbidden",
             statusCode: 403
         })
     } else { spot.update({
@@ -544,7 +544,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
         // next(err)
         res.status(403)
         return res.json({
-            message: "Access Denied: you do not have authorization",
+            message: "Forbidden",
             statusCode: 403
         })
 
@@ -626,7 +626,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     if (spot.toJSON().ownerId === req.user.id) {
       res.status(403);
       return res.json({
-        message: "Cannot book own spot",
+        message: "Forbidden",
         statusCode: 403,
       });
     }

@@ -48,14 +48,14 @@ const bookings = [];
         bookings.push(booking.toJSON())
     })
 
-    console.log(bookings)
+
 
         for (let i = 0; i < bookings.length; i++){
 
           let spotImagesArray = bookings[i].Spot.SpotImages
 
           if (spotImagesArray.length) {
-console.log(spotImagesArray.length)
+
             for (let j = 0; j < spotImagesArray.length; j++){
 
               if (spotImagesArray[j].preview === true) {
@@ -104,8 +104,8 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     }else if (booking.toJSON().userId !== req.user.id) {
         res.status(403)
         return res.json({
-            message: "Access Denied: Permission Required",
-            statusCode: 403
+          message: "Forbidden",
+          statusCode: 403
         })
     }
     const spotId = booking.toJSON().spotId
@@ -240,7 +240,7 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
     }else if (booking.toJSON().userId !== req.user.id) {
         res.status(403)
         return res.json({
-            message: "Access Denied: Permission Required",
+            message: "Forbidden",
             statusCode: 403
         })
     }

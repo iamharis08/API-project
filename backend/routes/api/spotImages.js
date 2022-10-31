@@ -38,11 +38,11 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
             id:spotId,
         }
     })
-console.log(spot.toJSON(),spotImage.toJSON(),req.user.id)
+
     if (spot.toJSON().ownerId !== req.user.id){
         res.status(403)
         return res.json({
-            message: "Access Denied: you do not have permission",
+            message: "Forbidden",
             statusCode: 403
         })
     }else {

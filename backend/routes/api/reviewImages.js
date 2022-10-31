@@ -38,7 +38,7 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
     if (review.toJSON().userId !== req.user.id){
         res.status(403)
         return res.json({
-            message: "Access Denied: you do not have permission",
+            message: "Forbidden",
             statusCode: 403
         })
     }else {

@@ -63,7 +63,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
     } else {
         res.status(404)
         return res.json({
-            message: "No reviews found",
+            message: "Reviews couldn't be found",
             statusCode: 404
         })
     }
@@ -117,8 +117,8 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
       }else{
         res.status(403)
         return res.json({
-          message: "Review does not belong to current user",
-          statusCode: 403
+            message: "Forbidden",
+            statusCode: 403
         })
     }
 
@@ -152,7 +152,7 @@ router.put('/:reviewId', requireAuth, validReviewInput, async (req, res, next) =
     if (editReview.toJSON().userId !== req.user.id){
         res.status(403)
         return res.json({
-            message: "Access Denied: you do not have permission",
+            message: "Forbidden",
             statusCode: 403
         })
     }else {
@@ -180,7 +180,7 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
     if (review.toJSON().userId !== req.user.id){
         res.status(403)
         return res.json({
-            message: "Access Denied: you do not have permission",
+            message: "Forbidden",
             statusCode: 403
         })
     }else {
