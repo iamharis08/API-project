@@ -611,7 +611,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
 
 router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
-    const spotId = req.params.spotId;
+    const spotId = parseInt(req.params.spotId);
     const spot = await Spot.findByPk(spotId);
     const { startDate, endDate } = req.body;
     const { Op } = require("sequelize");
@@ -619,7 +619,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     if (!spot) {
       res.status(404);
       return res.json({
-        message: " Spot couldn't be found",
+        message: "Spot couldn't be found",
         statusCode: 404,
       });
     }

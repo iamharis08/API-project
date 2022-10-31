@@ -52,10 +52,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
     if (reviews.length) {
 
         for (let i = 0; i < reviews.length; i++){
-
-            if (reviews[i].Spot.SpotImages[0].preview === true) {
-                const url = reviews[i].Spot.SpotImages[0].url
-               delete reviews[0].Spot.SpotImages
+            let spotImage = reviews[i].Spot.SpotImages
+            for (let j = 0; j < spotImage.length; j++)
+            if (spotImage[j].preview === true) {
+                const url = reviews[i].Spot.SpotImages[j].url
+               delete reviews[i].Spot.SpotImages
                reviews[i].Spot.previewImage = url
             }
         }
