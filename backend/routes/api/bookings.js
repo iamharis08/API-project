@@ -25,11 +25,16 @@ router.get('/current', requireAuth, async (req, res, next) => {
             model: Spot,
             attributes: {
                 exclude: ["description", "createdAt", "updatedAt"]
+            },
+            include:   {
+              model: SpotImage,
+              attributes: ["preview", "url"]
             }
         },
         order: ['spotId']
     })
-if (!allBookings[0]) {
+
+if (!allBookings.length) {
     res.status(404)
     return res.json({
         message: "No Bookings found",
@@ -37,9 +42,25 @@ if (!allBookings[0]) {
     })
 }
 
+const bookings = [];
 
+    allBookings.forEach((booking) => {
+        bookings.push(booking.toJSON())
+    })
+console.log(bookings)
+    if (bookings.length) {
+
+        for (let i = 0; i < bookings.length; i++){
+
+            if (bookings[i].Spot.SpotImages[0].preview === true) {
+                const url = bookings[i].Spot.SpotImages[0].url
+               delete bookings[0].Spot.SpotImages
+               bookings[i].Spot.previewImage = url
+            }
+        }
+      }
     return res.json({
-        Bookings: allBookings
+        Bookings: bookings
     })
 })
 

@@ -34,7 +34,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
             },
             include: {
                 model: SpotImage,
-                attributes: [["preview", "previewImage"], "url"]
+                attributes: ["preview", "url"]
             }
         },
         {
@@ -49,11 +49,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
         reviews.push(review.toJSON())
     })
 
-    if (currentUserReviews.length) {
+    if (reviews.length) {
 
         for (let i = 0; i < reviews.length; i++){
 
-            if (reviews[i].Spot.SpotImages[0].previewImage === 1) {
+            if (reviews[i].Spot.SpotImages[0].preview === true) {
                 const url = reviews[i].Spot.SpotImages[0].url
                delete reviews[0].Spot.SpotImages
                reviews[i].Spot.previewImage = url
@@ -80,7 +80,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
         where: {
             reviewId: reviewId,
 
-        }
+        },
     })
 
     if (!review){
@@ -104,9 +104,15 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
             reviewId,
             url,
         })
-
-        return res.json({
+        const newImageFormatted = {
             ...newReviewImage.toJSON()
+        }
+
+        delete newImageFormatted.createdAt
+        delete newImageFormatted.updatedAt
+        delete newImageFormatted.reviewId
+        return res.json({
+            ...newImageFormatted
         })
       }else{
         res.status(403)
@@ -136,19 +142,18 @@ router.put('/:reviewId', requireAuth, validReviewInput, async (req, res, next) =
     const reviewId = parseInt(req.params.reviewId)
     const { review, stars } = req.body
     const editReview = await Review.findByPk(reviewId)
-    if (editReview.toJSON().userId !== req.user.id){
-        res.status(403)
-        return res.json({
-            message: "Access Denied: you do not have permission",
-            statusCode: 403
-        })
-    }
-
     if (!editReview){
         res.status(404)
         return res.json({
             message: "Review couldn't be found",
             statusCode: 404
+        })
+    }
+    if (editReview.toJSON().userId !== req.user.id){
+        res.status(403)
+        return res.json({
+            message: "Access Denied: you do not have permission",
+            statusCode: 403
         })
     }else {
         editReview.update({
