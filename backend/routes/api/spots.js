@@ -107,13 +107,9 @@ router.get('/', validQueryResults, async (req, res, next) => {
   const size = req.query.size === undefined ? 20 : parseInt(req.query.size);
   const { Op } = require("sequelize");
 
-  if (minLat){
 
-  }
 
-let validationErr = {
 
-}
 
   let query = {
     where: {},
