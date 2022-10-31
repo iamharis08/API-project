@@ -26,6 +26,11 @@ module.exports = {
       {
         spotId: 3,
         url: "https://images.pexels.com/photos/271643/pexels-photo-271643.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        preview: false
+      },
+      {
+        spotId: 3,
+        url: "https://images.pexels.com/photos/271643/pexels-photo-271643.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         preview: true
       },
     ], {});

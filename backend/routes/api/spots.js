@@ -3,7 +3,8 @@ const express = require('express');
 // ...
 
 
-const { check } = require('express-validator');
+const { check, query } = require('express-validator');
+
 const { handleInputValidationErrors } = require('../../utils/validation');
 const { reviewAggregate } = require('../../utils/reviewsAggregate');
 // ...
@@ -56,9 +57,119 @@ const validateInputs = [
   handleInputValidationErrors
 ];
 
+const validQueryResults = [
+  query(['page'])
+  .optional()
+  .isLength({min: 1})
+  .isFloat({min: 1})
+  .withMessage("Page must be greater than or equal to 1")
+  .isNumeric()
+  .withMessage("Page must be greater than or equal to 1"),
+  query('size')
+  .optional()
+  .isLength({min: 1})
+  .isFloat({min: 1})
+  .withMessage("size must be greater than or equal to 1")
+  .isNumeric()
+  .withMessage("size must be greater than or equal to 1"),
+  query('maxLat')
+  .optional()
+  .isNumeric()
+  .withMessage("Maximum latitude is invalid"),
+  query('minLat')
+  .optional()
+  .isNumeric()
+  .withMessage("Minimum latitude is invalid"),
+  query('maxLng')
+  .optional()
+  .isNumeric()
+  .withMessage("Maximum longitude is invalid"),
+  query('minLng')
+  .optional()
+  .isNumeric()
+  .withMessage("Minimum longitude is invalid"),
+  query('minPrice')
+  .optional()
+  .isNumeric()
+  .isFloat({min: 0})
+  .withMessage("Minimum price must be greater than or equal to 0"),
+  query('maxPrice')
+  .optional()
+  .isNumeric()
+  .isFloat({min: 0})
+  .withMessage("Maximum price must be greater than or equal to 0"),
+  handleInputValidationErrors
+]
+
+router.get('/', validQueryResults, async (req, res, next) => {
+  const { minLat , maxLat, minLng, maxLng, minPrice, maxPrice } = req.query
+  const page = req.query.page === undefined ? 1 : parseInt(req.query.page);
+  const size = req.query.size === undefined ? 20 : parseInt(req.query.size);
+  const { Op } = require("sequelize");
+
+  if (minLat){
+
+  }
+
+let validationErr = {
+
+}
+
+  let query = {
+    where: {},
+};
+  if (page >= 1  && size >= 1 ) {
+      query.limit = size;
+      query.offset = size * (page - 1);
+  }
 
 
-router.get('/', async (req, res) => {
+  if (minLat && maxLat) {
+    query.where.lat = {
+        [Op.between]: [minLat, maxLat]
+    }
+  }else if (minLat && !maxLat){
+    query.where.lat = {
+        [Op.gte]: minLat
+    }
+  }else if (!minLat && maxLat){
+    query.where.lat = {
+        [Op.lte]: maxLat
+    }
+  }
+
+  if (minLng && maxLng) {
+    query.where.lng = {
+        [Op.between]: [minLng, maxLng]
+    }
+  }else if (minLng && !maxLng){
+    query.where.lng = {
+        [Op.gte]: minLng
+    }
+  }else if (!minLng && maxLng){
+    query.where.lng = {
+        [Op.lte]: maxLng
+    }
+  }
+
+  if (minPrice && maxPrice) {
+    query.where.price = {
+        [Op.between]: [minPrice, maxPrice]
+    }
+  }else if (minPrice && !maxPrice){
+    query.where.price = {
+        [Op.gte]: minPrice
+    }
+  }else if (!minPrice && maxPrice){
+    query.where.price = {
+        [Op.lte]: maxPrice
+    }
+  }
+
+
+
+
+
     const spots = await Spot.findAll({
         include: [{
             model: Review,
@@ -70,8 +181,18 @@ router.get('/', async (req, res) => {
 
 
         order: ['id'],
-
+        ...query
     })
+
+    if (!spots.length){
+      res.status(404)
+      return res.json({
+        message: "Spots couldn't be found or try changing filters",
+        statusCode: 404
+      })
+    }
+
+
     const spotStars = {};
 
 
@@ -100,11 +221,24 @@ router.get('/', async (req, res) => {
 
 
 
+
 // spots[i].dataValues.SpotImages
-if (spots[i].dataValues.SpotImages) {
-    let previewImage = spots[i].dataValues.SpotImages[0].url
-    spots[i].dataValues.previewImage = previewImage
-}else spots[i].dataValues.previewImage = ''
+if (spots[i].dataValues.SpotImages.length) {
+for (let j = 0; j < spots[i].dataValues.SpotImages.length; j++){
+  // console.log(spots[i].dataValues.SpotImages[j].preview )
+  let previewImage = spots[i].dataValues.SpotImages[j].url
+if (spots[i].dataValues.SpotImages[j].preview === true){
+  spots[i].dataValues.previewImage = previewImage
+}else {
+  spots[i].dataValues.previewImage = "no preview"
+}
+}
+}
+// }
+
+// }else {
+//   spots[i].dataValues.previewImage = ''
+// }
 delete spots[i].dataValues.SpotImages
 
     }
@@ -112,6 +246,8 @@ delete spots[i].dataValues.SpotImages
 
     return res.json({
          Spots: spots,
+         page: page,
+         size: size
     })
 });
 
