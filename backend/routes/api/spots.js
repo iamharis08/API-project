@@ -295,7 +295,7 @@ router.get('/current', requireAuth, async (req, res) => {
             }
         } else spotStars[spot.id] = 0
 
-        if (sum !== 0) spotStars[spot.id] = sum / reviewsArray.length
+        spotStars[spot.id] = sum / reviewsArray.length
 
         delete spots[i].dataValues.Reviews;
         spots[i].dataValues.avgRating = spotStars[spot.id]
