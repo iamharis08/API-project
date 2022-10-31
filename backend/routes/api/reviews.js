@@ -43,6 +43,13 @@ router.get('/current', requireAuth, async (req, res, next) => {
         }
     ]
     })
+    if (!currentUserReviews.length){
+        res.status(404)
+        return res.json({
+            message: "Reviews couldn't be found",
+            statusCode: 404
+        })
+    }
     const reviews = [];
 
     currentUserReviews.forEach((review) => {
@@ -53,12 +60,15 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
         for (let i = 0; i < reviews.length; i++){
             let spotImage = reviews[i].Spot.SpotImages
-            for (let j = 0; j < spotImage.length; j++)
-            if (spotImage[j].preview === true) {
-                const url = reviews[i].Spot.SpotImages[j].url
-               delete reviews[i].Spot.SpotImages
-               reviews[i].Spot.previewImage = url
+            if (spotImage.length) {
+                for (let j = 0; j < spotImage.length; j++)
+                if (spotImage[j].preview === true) {
+                    const url = reviews[i].Spot.SpotImages[j].url
+                    delete reviews[i].Spot.SpotImages
+                    reviews[i].Spot.previewImage = url
+                }
             }
+
         }
         return res.json({Reviews: reviews})
     } else {
