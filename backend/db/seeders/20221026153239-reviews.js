@@ -23,7 +23,7 @@ module.exports = {
         userId: 2,
         spotId: 2,
         review: "I hated this place, instead of counting sheeps at night I was counting rats",
-        stars: 0,
+        stars: 1,
       },
       {
         userId: 3,
