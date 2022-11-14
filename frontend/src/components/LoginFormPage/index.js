@@ -9,7 +9,7 @@ function LoginFormPage() {
   const sessionUser = useSelector(state => state.session.user);
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
 
   if (sessionUser) return (
     <Redirect to="/" />
@@ -17,10 +17,11 @@ function LoginFormPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors([]);
+    setErrors({});
     return dispatch(sessionActions.login({ credential, password }))
       .catch(async (res) => {
         const data = await res.json();
+        console.log(data)
         if (data && data.errors) setErrors(data.errors);
       });
   }
@@ -28,7 +29,7 @@ function LoginFormPage() {
   return (
     <form onSubmit={handleSubmit}>
       <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        {Object.values(errors).map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label>
         Username or Email

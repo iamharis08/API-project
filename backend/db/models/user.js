@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     static async login({ credential, password }) {
       const { Op } = require('sequelize');
+      console.log(credential)
       const user = await User.scope('loginUser').findOne({
         where: {
           [Op.or]: {
@@ -31,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       });
+      console.log(user.toJSON())
       if (user && user.validatePassword(password)) {
         return await User.scope('currentUser').findByPk(user.id);
       }
@@ -114,7 +116,7 @@ module.exports = (sequelize, DataTypes) => {
           attributes: {}
         },
         signUp: {
-          attributes: { 
+          attributes: {
             include: [ "email", "username" ]
         }
         }

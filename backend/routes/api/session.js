@@ -19,8 +19,7 @@ const router = express.Router();
 const validateLogin = [
     check('credential')
       .exists({ checkFalsy: true })
-      // .notEmpty()
-      .isEmail()
+      .notEmpty()
       .withMessage('Email or username is required'),
     check('password')
       .exists({ checkFalsy: true })
@@ -47,9 +46,10 @@ router.post(
         // return next(err);
         res.status(401)
         res.json({
+          errors: {
           message: "Invalid credentials",
           statusCode: 401
-        })
+        }})
       }
       const token = await setTokenCookie(res, user);
       const currentUser = {...user}
