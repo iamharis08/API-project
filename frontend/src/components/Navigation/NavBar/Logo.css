@@ -1,0 +1,32 @@
+.logo {
+    display: flex;
+    width: 200px;
+
+
+}
+
+.logo-text-container {
+    display:flex;
+    align-items: center;
+}
+
+#logo-text {
+    display: flex;
+    align-items: baseline;
+    width: 50px;
+    color: #ff385c;
+    font-size: 25px;
+    padding-left: 3px;
+    font-weight: bold;
+}
+#logo-pic {
+    display: flex;
+    align-items: flex-end;
+}
+
+
+#logo-pic  img {
+
+    height: 40px;
+    width: 40px;
+}

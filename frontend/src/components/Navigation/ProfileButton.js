@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
+import { useDispatch } from "react-redux";
+import * as sessionActions from "../../store/session";
 import DropDown from "./NavBar/DropDownButton.js";
+import "./Navigation.css";
 
-function ProfileButton({ user, setLogin, setShowModal}) {
+function ProfileButton({ user, setLogin, setShowModal }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -19,7 +20,7 @@ function ProfileButton({ user, setLogin, setShowModal}) {
       setShowMenu(false);
     };
 
-    document.addEventListener('click', closeMenu);
+    document.addEventListener("click", closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
@@ -32,39 +33,48 @@ function ProfileButton({ user, setLogin, setShowModal}) {
   return (
     <>
       {/* <button onClick={openMenu}> */}
-        {/* <i className="fas fa-user-circle" /> */}
+      {/* <i className="fas fa-user-circle" /> */}
       {/* </button> */}
 
-      <DropDown openMenu={openMenu}/>
+      <DropDown openMenu={openMenu} />
 
-
-      {showMenu && (user ?
-        (<ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>) :
-        (<ul className="profile-dropdown">
-          <li>
-            <button onClick={() => {
-              setLogin(true)
-              setShowModal(true)
-            }}>
-              Log In
-            </button>
-          </li>
-          <li>
-            <button onClick={() => {
-              setLogin(false)
-              setShowModal(true)
-            }}>
-              Sign Up
-            </button>
-          </li>
-        </ul>)
-      )}
+      {showMenu &&
+        (user ? (
+          <div className="profile-dropdown-container">
+            <ul className="profile-dropdown">
+              <li>{user.username}</li>
+              <li>{user.email}</li>
+              <li>
+                <button onClick={logout}>Log Out</button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <div className="profile-dropdown-container">
+            <ul className="profile-dropdown">
+              <li>
+                <button
+                  onClick={() => {
+                    setLogin(true);
+                    setShowModal(true);
+                  }}
+                >
+                  Log In
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    setLogin(false);
+                    setShowModal(true);
+                  }}
+                >
+                  Sign Up
+                </button>
+              </li>
+            </ul>
+          </div>
+        ))}
     </>
   );
 }

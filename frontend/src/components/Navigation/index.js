@@ -9,6 +9,8 @@ import LoginForm from "../LoginFormModal/LoginForm";
 import SignupFormPage from "../SignupFormPage";
 import { Modal } from "../../context/Modal";
 
+import Logo from "./NavBar/Logo.js";
+
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const [showModal, setShowModal] = useState(false);
@@ -28,25 +30,32 @@ function Navigation({ isLoaded }) {
 
   return (
     <div className="nav-bar">
-      <div className="logo">
-        <NavLink exact to="/">
-          airbnbs
-        </NavLink>
-      </div>
+      <div className="nav-container">
 
+          <NavLink style={{ textDecoration: 'none' }}  exact to="/">
+            <Logo />
+          </NavLink>
       
-      {isLoaded && (
-        <ProfileButton
-          user={sessionUser}
-          setLogin={setLogin}
-          setShowModal={setShowModal}
-        />
-      )}
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          {login ? <LoginForm setShowModal={setShowModal} /> : <SignupFormPage setShowModal={setShowModal} />}
-        </Modal>
-      )}
+
+
+
+        {isLoaded && (
+          <ProfileButton
+            user={sessionUser}
+            setLogin={setLogin}
+            setShowModal={setShowModal}
+          />
+        )}
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)}>
+            {login ? (
+              <LoginForm setShowModal={setShowModal} />
+            ) : (
+              <SignupFormPage setShowModal={setShowModal} />
+            )}
+          </Modal>
+        )}
+      </div>
     </div>
   );
 }
