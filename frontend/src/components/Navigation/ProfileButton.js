@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import DropDownButton from "./NavBar/DropDownButton.js";
+import DropDown from "./NavBar/DropDownButton.js";
 
 function ProfileButton({ user, setLogin, setShowModal}) {
   const dispatch = useDispatch();
@@ -31,10 +31,13 @@ function ProfileButton({ user, setLogin, setShowModal}) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      {/* <DropDown onClick={openMenu}/> */}
+      {/* <button onClick={openMenu}> */}
+        {/* <i className="fas fa-user-circle" /> */}
+      {/* </button> */}
+
+      <DropDown openMenu={openMenu}/>
+
+
       {showMenu && (user ?
         (<ul className="profile-dropdown">
           <li>{user.username}</li>
