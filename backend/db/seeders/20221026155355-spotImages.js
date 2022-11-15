@@ -15,22 +15,17 @@ module.exports = {
      return queryInterface.bulkInsert('SpotImages', [
       {
         spotId: 1,
-        url: "https://assets-global.website-files.com/5dcc7f8c449e597ed83356b8/6269b3a19f67fd137a262d0a_A%20Logo%20Main%20-%20Red.svg",
+        url: "https://s3-media0.fl.yelpcdn.com/bphoto/eRV3EtGh3sdmhslYqSacyg/o.jpg",
         preview: true
       },
       {
         spotId: 2,
-        url: "https://737be737ad21913457cf-63585bc14dac5ad355db04b62b985225.ssl.cf2.rackcdn.com/PdrzkRVTRw1EkNt.jpg",
+        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLGgijcP5bTgMkNDofF6LPEUFFTpQ0fO0BAw&usqp=CAU.jpg",
         preview: true
       },
       {
         spotId: 3,
-        url: "https://images.pexels.com/photos/271643/pexels-photo-271643.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        preview: false
-      },
-      {
-        spotId: 3,
-        url: "https://images.pexels.com/photos/271643/pexels-photo-271643.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzf7YlYhlRfZms09X92YMxdpOaMd5wDGTcMQ&usqp=CAU.jpg",
         preview: true
       },
     ], {});

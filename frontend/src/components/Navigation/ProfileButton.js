@@ -52,26 +52,27 @@ function ProfileButton({ user, setLogin, setShowModal }) {
         ) : (
           <div className="profile-dropdown-container">
             <ul className="profile-dropdown">
-              <li>
-                <button
-                  onClick={() => {
-                    setLogin(true);
-                    setShowModal(true);
-                  }}
-                >
-                  Log In
-                </button>
-              </li>
-              <li>
-                <button
+            <li>
+                <div id="signup-button"
                   onClick={() => {
                     setLogin(false);
                     setShowModal(true);
                   }}
                 >
                   Sign Up
-                </button>
+                </div>
               </li>
+              <li>
+                <div id="login-button"
+                  onClick={() => {
+                    setLogin(true);
+                    setShowModal(true);
+                  }}
+                >
+                  Log In
+                </div>
+              </li>
+
             </ul>
           </div>
         ))}
