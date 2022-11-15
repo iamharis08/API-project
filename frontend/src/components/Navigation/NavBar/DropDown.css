@@ -1,0 +1,43 @@
+.drop-down-button {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 77px;
+    height: 42px;
+    background-color: white;
+    border: solid #DDDDDD 1px ;
+    /* box-shadow: 0px 5px 2px 1px #DDDDDD ; */
+    border-radius: 21px ;
+}
+#user-icon {
+    height: 30px;
+    width: 30px;
+}
+
+#menu-icon {
+    height: 16px;
+    width: 16px;
+}
+
+/* #user-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+ } */
+
+/* #menu-icon-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+} */
+.drop-down-icons {
+    width: 77px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
