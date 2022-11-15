@@ -1,0 +1,20 @@
+.become-host-wrapper{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 200px;
+}
+.become-host-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    border-radius: 22px;
+    width: 130px;
+    font-size: 14px;
+}
+
+.become-host-button:hover{
+    background-color: #f5f5f5 ;
+}

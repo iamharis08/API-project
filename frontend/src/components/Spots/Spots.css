@@ -1,12 +1,39 @@
 .spots {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(4, 1.05fr);
+  grid-template-rows: repeat(5, 2fr);
+
+  grid-auto-flow: rows;
+  justify-items: center;
+  align-items: center;
+  grid-gap: 40px;
+  margin: 16px 0px 40px;
+  width: auto;
+  padding-left: 40px;
+  padding-right: 40px;
+  height: 100vh;
+}
+.spots-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 305px;
+}
+.spot-img {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  height: 321px;
+  width: 100%;
+  border-radius: 10px;
 }
 
-.spots-container img{
-    height: 200px;
-    width: 250px;
-    border-radius: 10px;
+.spots-info {
+  width: 100%;
+}
+
+#spots-address,
+#spots-price span {
+  font-weight: bolder;
 }

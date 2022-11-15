@@ -6,6 +6,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import FilterBar from "./components/FilterBar/FilterBar";
 import Spots from "./components/Spots/Spots";
+import SpotDetails from "./components/SpotDetailsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,12 +18,18 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <FilterBar />
-      <Spots />
+
       {isLoaded && (
         <Switch>
+          <Route exact path="/">
+            <FilterBar />
+            <Spots />
+          </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/spots/:spotId">
+            <SpotDetails />
           </Route>
         </Switch>
       )}

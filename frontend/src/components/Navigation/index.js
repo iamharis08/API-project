@@ -10,6 +10,7 @@ import SignupFormPage from "../SignupFormPage";
 import { Modal } from "../../context/Modal";
 
 import Logo from "./NavBar/Logo.js";
+import BecomeHostButton from "./NavBar/BecomeHostButton";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -32,13 +33,13 @@ function Navigation({ isLoaded }) {
     <div className="nav-bar">
       <div className="nav-container">
 
-          <NavLink style={{ textDecoration: 'none' }}  exact to="/">
+          <NavLink style={{ textDecoration: "none" }} exact to="/">
             <Logo />
           </NavLink>
-      
 
 
-
+          <div className="nav-buttons">
+        <BecomeHostButton />
         {isLoaded && (
           <ProfileButton
             user={sessionUser}
@@ -54,7 +55,10 @@ function Navigation({ isLoaded }) {
               <SignupFormPage setShowModal={setShowModal} />
             )}
           </Modal>
+
+          
         )}
+        </div>
       </div>
     </div>
   );

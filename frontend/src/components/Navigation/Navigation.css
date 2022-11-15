@@ -65,3 +65,10 @@
 #signup-button:hover {
     background-color: rgb(235,235,235);
 }
+
+.nav-buttons{
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+    width: 400px;
+}
