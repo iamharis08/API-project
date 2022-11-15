@@ -8,4 +8,5 @@
 .spots-container img{
     height: 200px;
     width: 250px;
+    border-radius: 10px;
 }
