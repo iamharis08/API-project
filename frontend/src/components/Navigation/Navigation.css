@@ -14,7 +14,14 @@
     align-items: center;
     width: 90%;
 }
-
+.nav-container-spot-details{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 50px;
+}
 #logo-nav{
     text-decoration: none;
 }

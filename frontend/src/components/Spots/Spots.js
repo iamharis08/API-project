@@ -19,7 +19,7 @@ function Spots() {
 
   return (
     <div className="spots">
-      {spots.map((spot) => {
+      {Object.values(spots).map((spot) => {
         return (
             <div  key={spot.id}>
         <NavLink style={{ textDecoration: "none", color: "black" }} to= {`/spots/${spot.id}`}>

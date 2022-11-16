@@ -19,8 +19,33 @@ module.exports = {
         preview: true
       },
       {
+        spotId: 1,
+        url: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F143841549%2F67608921643%2F1%2Foriginal.20191206-193545?w=600&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C3%2C1114%2C557&s=f984f56401fde2b08fc23253698431f2.jpg",
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: "https://s3-media0.fl.yelpcdn.com/bphoto/emIIpAjd2muq7dM1PTga0A/348s.jpg",
+        preview: true
+      },
+      {
+        spotId: 1,
+        url: "https://studydatascience.org/wp-content/uploads/2019/10/35932346_1745684158852431_1214077827402432512_n.jpg",
+        preview: true
+      },
+      {
+        spotId: 1,
+        url: "https://studydatascience.org/wp-content/uploads/2019/10/37585917_1786972501390263_5834834735154593792_n.jpg",
+        preview: true
+      },
+      {
         spotId: 2,
         url: "https://res.cloudinary.com/urby-llc/image/upload/f_auto,h_660/jersey-city-apartments-1_qekytg.jpg",
+        preview: true
+      },
+      {
+        spotId: 3,
+        url: "https://blog.thefoundersclub.com/hubfs/Past%20Models%20or%20Homes/Isabella%20Grande%20Model%20%28Do%20Not%20Use%29/The%20Isabella%20Grande%20luxury%20home%20features%20a%20coastal%20contemporary%20design%20throughout%20its%20open%20floor%20plan.jpg",
         preview: true
       },
       {

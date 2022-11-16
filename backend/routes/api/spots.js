@@ -207,27 +207,46 @@ router.get('/', validQueryResults, async (req, res, next) => {
                     sum += reviewStars;
 
             }
-        } else spotStars[spot.id] = 0
+        }
+        // else spotStars[spot.id] = 0
 
-        // if (sum !== 0)
-        spotStars[spot.id] = sum / reviewsArray.length
+        if (sum === 0){
+          spotStars[spot.id] = 0
+        }else {
+
+          spotStars[spot.id] = sum / reviewsArray.length
+        }
 
         delete spots[i].dataValues.Reviews;
         spots[i].dataValues.avgRating = spotStars[spot.id]
 
 
-
+// console.log("------------")
 
 // spots[i].dataValues.SpotImages
 if (spots[i].dataValues.SpotImages.length) {
+  let previewImages = []
+
+
 for (let j = 0; j < spots[i].dataValues.SpotImages.length; j++){
 
   let previewImage = spots[i].dataValues.SpotImages[j].url
+
+  // for (let n = 0; n < previewImages.length; n++){
+  //   if(previewImages[n])
+  // }
 if (spots[i].dataValues.SpotImages[j].preview === true){
-  spots[i].dataValues.previewImage = previewImage
-}else {
-  spots[i].dataValues.previewImage = "no preview"
+
+  // console.log(previewImage)
+  // previewImages.push(previewImage)
+  previewImages.push(previewImage)
+  // spots[i].dataValues.previewImage = previewImage
 }
+}
+console.log(previewImages)
+spots[i].dataValues.previewImage = previewImages[0]
+if (!spots[i].dataValues.previewImage){
+  spots[i].dataValues.previewImage = "no preview"
 }
 }
 // }
