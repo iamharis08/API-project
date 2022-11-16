@@ -25,12 +25,13 @@ function App() {
             <FilterBar />
             <Spots />
           </Route>
-          <Route path="/signup">
+          {/* <Route path="/signup">
             <SignupFormPage />
-          </Route>
+          </Route> */}
           <Route path="/spots/:spotId">
             <SpotDetails />
           </Route>
+          <h1> 404: page not found</h1>
         </Switch>
       )}
     </>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
+import LoginForm from '../LoginFormModal/LoginForm';
+import BecomeHostButton from '../Navigation/NavBar/BecomeHostButton';
 import CreateSpotForm from './CreateSpotForm';
 
 function CreateSpotFormModal() {
@@ -7,12 +9,17 @@ function CreateSpotFormModal() {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Log In</button>
-      {showModal && (
+      <BecomeHostButton onClick={() => setShowModal(true)} />
+      {/* {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <CreateSpotForm />
+          {login ? (
+                  <CreateSpotForm  setShowModal={setShowModal} />
+                ) : (
+                  <LoginForm setShowModal={setShowModal} />
+                )}
+
         </Modal>
-      )}
+      )} */}
     </>
   );
 }
