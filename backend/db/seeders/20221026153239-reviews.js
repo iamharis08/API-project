@@ -34,8 +34,8 @@ module.exports = {
       {
         userId: 3,
         spotId: 1,
-        review: "I lve App Academy with a passion, best bootcamp out there no kizzy",
-        stars: 2,
+        review: "I love App Academy with a passion, best bootcamp out there no kizzy",
+        stars: 4.5,
       }
     ], {});
   },

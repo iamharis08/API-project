@@ -45,8 +45,8 @@ const spotsReducer = (state = initialState, action) => {
     case LOAD_SPOTS: {
         let newObj = normalizedObj(action.spots.Spots)
       return {
-        ...state,
         spots: newObj,
+        spot:{},
         page: action.spots.page,
         size: action.spots.size,
       };

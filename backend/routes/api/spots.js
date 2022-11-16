@@ -172,11 +172,16 @@ router.get('/', validQueryResults, async (req, res, next) => {
         },
         {
             model: SpotImage,
+            order: [
+              ['id']
+          ],
         }
     ],
 
 
-        order: ['id'],
+        order: [
+            ['id']
+        ],
         ...query
     })
 
@@ -190,7 +195,7 @@ router.get('/', validQueryResults, async (req, res, next) => {
 
 
     const spotStars = {};
-
+// console.log(spots[0].dataValues.SpotImages[0].toJSON())
 
 
     for (let i = 0; i < spots.length; i++) {
@@ -231,7 +236,7 @@ if (spots[i].dataValues.SpotImages.length) {
 for (let j = 0; j < spots[i].dataValues.SpotImages.length; j++){
 
   let previewImage = spots[i].dataValues.SpotImages[j].url
-
+  // console.log(spots[i].dataValues.SpotImages[j].toJSON())
   // for (let n = 0; n < previewImages.length; n++){
   //   if(previewImages[n])
   // }
@@ -243,7 +248,7 @@ if (spots[i].dataValues.SpotImages[j].preview === true){
   // spots[i].dataValues.previewImage = previewImage
 }
 }
-console.log(previewImages)
+// console.log(previewImages)
 spots[i].dataValues.previewImage = previewImages[0]
 if (!spots[i].dataValues.previewImage){
   spots[i].dataValues.previewImage = "no preview"

@@ -11,9 +11,10 @@ function SpotDetails() {
   const { spotId } = params;
 
   const spot = useSelector((state) => state.spots.spot);
+  const spotImages = spot.SpotImages
 
   useEffect(() => {
-    console.log(spotId);
+
     dispatch(fetchSpot(spotId));
   }, [dispatch]);
 
@@ -34,8 +35,21 @@ function SpotDetails() {
             </div>
           </div>
         </div>
+        <div className="spot-pictures-wrapper">
+          <div className="spot-grid">
+            {spotImages?.map(image =>
+              <div key={image.id} id={`spot-image-${image.id}`}>
+              <img  src={image.url} alt="spot-image"/>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
+
+
+
+
   );
 }
 

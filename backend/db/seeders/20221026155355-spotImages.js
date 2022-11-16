@@ -15,13 +15,13 @@ module.exports = {
      return queryInterface.bulkInsert('SpotImages', [
       {
         spotId: 1,
-        url: "https://s3-media0.fl.yelpcdn.com/bphoto/eRV3EtGh3sdmhslYqSacyg/o.jpg",
+        url: "https://s3-media0.fl.yelpcdn.com/bphoto/ELXBGTKH4_dKfZ8qgjbQoQ/ls.jpg",
         preview: true
       },
       {
         spotId: 1,
-        url: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F143841549%2F67608921643%2F1%2Foriginal.20191206-193545?w=600&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C3%2C1114%2C557&s=f984f56401fde2b08fc23253698431f2.jpg",
-        preview: false
+        url: "https://s3-media0.fl.yelpcdn.com/bphoto/eRV3EtGh3sdmhslYqSacyg/o.jpg",
+        preview: true
       },
       {
         spotId: 1,
