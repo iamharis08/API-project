@@ -39,7 +39,7 @@ function normalizedObj(array) {
     });
     return newObj
 }
-const initialState = { spots: {}, spot:{}, page: 0, size: 0 };
+const initialState = { spots: {}, spot:{} };
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_SPOTS: {
@@ -53,7 +53,7 @@ const spotsReducer = (state = initialState, action) => {
     }
     case GET_SPOT: {
       return {
-        ...state,
+        
         spot: action.spot
       };
     }

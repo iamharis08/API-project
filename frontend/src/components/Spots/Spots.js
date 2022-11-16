@@ -17,31 +17,33 @@ function Spots() {
     dispatch(fetchAllSpots());
   }, [dispatch]);
 
+  if (!spots)
+    return (
+      null
+    );
   return (
     <div className="spots">
       {Object.values(spots).map((spot) => {
         return (
-            <div  key={spot.id}>
-        <NavLink style={{ textDecoration: "none", color: "black" }} to= {`/spots/${spot.id}`}>
-        <div
+          <div key={spot.id}>
+            <NavLink
+              style={{ textDecoration: "none", color: "black" }}
+              to={`/spots/${spot.id}`}
+            >
+              <div className="spots-container" onClick={handleClick(spot.id)}>
+                <div className="spot-img">
+                  <img src={spot.previewImage} alt="spots" />
+                </div>
 
-            className="spots-container"
-            onClick={handleClick(spot.id)}
-          >
-            <div className="spot-img">
-              <img src={spot.previewImage} alt="spots" />
-            </div>
-
-            <div className="spots-info">
-              <div id="spots-address">{`${spot.city}, ${spot.state}`}</div>
-              <div id="spots-stars">{`Stars: ${spot.avgRating}`}</div>
-              <div id="spots-price">
-                <span>{`$${spot.price} `}</span>night
+                <div className="spots-info">
+                  <div id="spots-address">{`${spot.city}, ${spot.state}`}</div>
+                  <div id="spots-stars">{`Stars: ${spot.avgRating}`}</div>
+                  <div id="spots-price">
+                    <span>{`$${spot.price} `}</span>night
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </NavLink>
-
+            </NavLink>
           </div>
         );
       })}

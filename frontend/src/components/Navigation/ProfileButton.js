@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import DropDown from "./NavBar/DropDownButton.js";
 import "./Navigation.css";
@@ -7,6 +8,9 @@ import "./Navigation.css";
 function ProfileButton({ user, setLogin, setShowModal }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const { pathname } = useLocation();
+  const spotId = (pathname) =>  pathname.split('/')[2]
+
 
   const openMenu = () => {
     if (showMenu) return;
@@ -40,7 +44,8 @@ function ProfileButton({ user, setLogin, setShowModal }) {
 
       {showMenu &&
         (user ? (
-          <div className="profile-dropdown-container">
+
+          <div className= {pathname === `/spots/${spotId(pathname)}` ? "profile-dropdown-container-spot-details" : "profile-dropdown-container"}>
             <ul className="profile-dropdown">
               <li>{user.username}</li>
               <li>{user.email}</li>
@@ -50,7 +55,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
             </ul>
           </div>
         ) : (
-          <div className="profile-dropdown-container">
+          <div className= {pathname === `/spots/${spotId(pathname)}` ? "profile-dropdown-container-spot-details" : "profile-dropdown-container"}>
             <ul className="profile-dropdown">
             <li>
                 <div id="signup-button"

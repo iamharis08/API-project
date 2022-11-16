@@ -37,3 +37,8 @@
 #spots-price span {
   font-weight: bolder;
 }
+
+.loading{
+  display: flex;
+  justify-content: center;
+}

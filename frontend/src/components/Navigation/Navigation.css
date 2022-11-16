@@ -20,7 +20,7 @@
     justify-content: space-between;
     align-items: center;
     width: 90%;
-    margin: 50px;
+    padding: 0px 220px;
 }
 #logo-nav{
     text-decoration: none;
@@ -35,7 +35,20 @@
     background-color: white;
     border-radius: 15px;
     box-shadow: 0px 1px 13px 0px rgb(211, 210, 210)  ;
+    z-index: 10;
 
+}
+
+.profile-dropdown-container-spot-details{
+    position: absolute;
+    height: 200px;
+    width: 230px;
+    right: 220px;
+    top: 50px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 1px 13px 0px rgb(211, 210, 210)  ;
+    z-index: 10;
 }
 
 .profile-dropdown {

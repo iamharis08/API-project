@@ -1,7 +1,7 @@
 .spot-details {
   box-sizing: border-box;
   width: 100vw;
- 
+
 }
 .spot-details-container {
   margin: 0px 15%;
@@ -57,8 +57,8 @@ h1 {
 
 }
 
- #spot-image-1,
-#spot-image-1 img{
+
+#spot-image-0 img{
   border-radius: 20px 0px  0px 20px;
 
 }
@@ -78,20 +78,20 @@ h1 {
 
 }
 
-#spot-image-2 {
+#spot-image-1 {
   grid-area: s1;
 }
 
-#spot-image-3 img{
+#spot-image-2 img{
   grid-area: s2;
   border-radius: 0px 20px  0px 0px;
 }
 
-#spot-image-4 {
+#spot-image-3 {
   grid-area: s3;
 }
 
-#spot-image-5 img{
+#spot-image-4 img{
   grid-area: s4;
   border-radius: 0px 0px 20px 0px;
 }

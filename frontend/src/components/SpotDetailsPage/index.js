@@ -18,6 +18,7 @@ function SpotDetails() {
     dispatch(fetchSpot(spotId));
   }, [dispatch]);
 
+  if (!spotImages) return(null)
   return (
     <div className="spot-details">
       <div className="spot-details-container">
@@ -37,8 +38,8 @@ function SpotDetails() {
         </div>
         <div className="spot-pictures-wrapper">
           <div className="spot-grid">
-            {spotImages?.map(image =>
-              <div key={image.id} id={`spot-image-${image.id}`}>
+            {spotImages?.map((image,i) =>
+              <div key={image.id} id={`spot-image-${i}`}>
               <img  src={image.url} alt="spot-image"/>
               </div>
             )}

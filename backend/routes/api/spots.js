@@ -195,7 +195,7 @@ router.get('/', validQueryResults, async (req, res, next) => {
 
 
     const spotStars = {};
-// console.log(spots[0].dataValues.SpotImages[0].toJSON())
+console.log(spots[0].dataValues.SpotImages[0].toJSON())
 
 
     for (let i = 0; i < spots.length; i++) {

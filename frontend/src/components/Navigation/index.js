@@ -14,8 +14,11 @@ import BecomeHostButton from "./NavBar/BecomeHostButton";
 
 function Navigation({ isLoaded }) {
   const params = useParams();
-  const { spotId } = params;
+  // const { spotId } = params;
+
   const { pathname } = useLocation();
+  const spotId = (pathname) =>  pathname.split('/')[2];
+
   const sessionUser = useSelector((state) => state.session.user);
   const [showModal, setShowModal] = useState(false);
   const [login, setLogin] = useState(true);
@@ -35,7 +38,7 @@ function Navigation({ isLoaded }) {
   return (
     <header>
       <div className="nav-bar">
-        <div className= {pathname === `api/spots/${spotId}` ? "nav-container-spot-details":"nav-container"}>
+        <div className= {pathname === `/spots/${spotId(pathname)}` ? "nav-container-spot-details":"nav-container"}>
           <NavLink style={{ textDecoration: "none" }} exact to="/">
             <Logo />
           </NavLink>
