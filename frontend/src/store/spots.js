@@ -88,22 +88,23 @@ export const fetchPostSpot = (spot) => async (dispatch) => {
   });
   if (spotResponse.ok) {
     const data = await spotResponse.json();
+    console.log(data)
 
-    if (url) {
-      const imageResponse = await csrfFetch(`/api/spots/${data.id}`, {
+      const imageResponse = await csrfFetch(`/api/spots/${data.id}/images`, {
         method: "POST",
+        header: {"Content-Type": "application/json"},
         body: JSON.stringify({
           spotId: data.id,
           url,
           preview: true,
         }),
       });
-    }
+
 
     dispatch(addSpot(data));
     return spotResponse;
   }
-  return;
+  return ;
 };
 
 export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
@@ -122,6 +123,7 @@ export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
 
   const spotResponse = await csrfFetch(`/api/spots/${spotId}`, {
     method: "PUT",
+    header: {"Content-Type": "application/json"},
     body: JSON.stringify({
       address,
       city,
@@ -138,6 +140,7 @@ export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
     if (url) {
       const imageResponse = await csrfFetch(`/api/spots/${data.id}`, {
         method: "POST",
+        header: {"Content-Type": "application/json"},
         body: JSON.stringify({
           spotId: data.id,
           url,

@@ -112,14 +112,14 @@ function EditSpotForm({ setShowEditModal, spotId, spot}) {
           required
         />
       </label>
-      <label>
+      {/* <label>
         Add Image Url
         <input
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
         />
-      </label>
+      </label> */}
       <button type="submit">Edit Spot</button>
     </form>
   );

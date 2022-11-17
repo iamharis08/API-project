@@ -70,7 +70,7 @@ function Navigation({ isLoaded }) {
 
             {showHostModal && (
               <Modal onClose={() => setShowHostModal(false)}>
-                  <CreateSpotForm setShowHostModal={setShowHostModal} />
+                  <CreateSpotForm setShowHostModal={setShowHostModal} showHostModal={showHostModal} />
               </Modal>
             )}
 

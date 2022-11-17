@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import * as sessionActions from '../../store/session';
 import * as spotsActions from '../../store/spots';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +6,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import './CreateSpotForm.css';
 
 
-function CreateSpotForm({ setShowHostModal }) {
+function CreateSpotForm({ setShowHostModal, ShowHostModal }) {
     const dispatch = useDispatch();
     // const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user);
@@ -22,7 +22,7 @@ function CreateSpotForm({ setShowHostModal }) {
 
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     setErrors({});
     const spot = {
         ownerId: sessionUser.id,
@@ -38,12 +38,19 @@ function CreateSpotForm({ setShowHostModal }) {
         url,
     }
     return dispatch(spotsActions.fetchPostSpot(spot))
-    .then(() => setShowHostModal(false))
+    .then(() => {setShowHostModal(false)
+        window.location.reload();})
     .catch(async (res) => {
+
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       });
   }
+  useEffect(()=> {
+    if (ShowHostModal === true) {
+        window.location.reload();
+    }
+  },[ShowHostModal])
 
   return (
     <form onSubmit={handleSubmit}>
@@ -119,6 +126,7 @@ function CreateSpotForm({ setShowHostModal }) {
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
+          required
         />
       </label>
       <button type="submit">Create Spot</button>
