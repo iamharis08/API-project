@@ -4,7 +4,7 @@ const LOAD_SPOTS = "spots/getSpots";
 const GET_SPOT = "spots/getSpot";
 const ADD_SPOT = "spot/createSpot";
 const ADD_IMAGE = "spot/addImage";
-const EDIT_SPOT = "spot/editSpot"
+const EDIT_SPOT = "spot/editSpot";
 const loadSpots = (spots) => {
   return {
     type: LOAD_SPOTS,
@@ -37,8 +37,8 @@ const editSpot = (spot) => {
   return {
     type: EDIT_SPOT,
     spot,
-  }
-}
+  };
+};
 
 export const fetchAllSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
@@ -117,6 +117,7 @@ export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
     name,
     description,
     price,
+    url,
   } = spot;
 
   const spotResponse = await csrfFetch(`/api/spots/${spotId}`, {
@@ -134,6 +135,16 @@ export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
     }),
   });
   if (spotResponse.ok) {
+    if (url) {
+      const imageResponse = await csrfFetch(`/api/spots/${data.id}`, {
+        method: "POST",
+        body: JSON.stringify({
+          spotId: data.id,
+          url,
+          preview: true,
+        }),
+      });
+    }
     const data = await spotResponse.json();
     dispatch(editSpot(data));
     return spotResponse;
@@ -191,9 +202,8 @@ const spotsReducer = (state = initialState, action) => {
       };
     }
     case EDIT_SPOT: {
-
       return {
-        spots: { ...state.spots, ...action.spot },
+        spot: action.spot,
       };
     }
     default:

@@ -28,6 +28,7 @@ function SpotDetails() {
   const { spotId } = params;
 
   const spot = useSelector((state) => state.spots.spot);
+
   const sessionUser = useSelector((state) => state.session.user);
   const [login, setLogin] = useState(true);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -61,7 +62,7 @@ function SpotDetails() {
           {(sessionUser && (spot.Owner.id === sessionUser.id)) && (<DeleteButton user={sessionUser}/> ) }
           {showEditModal && (
             <Modal onClose={() => setShowEditModal(false)}>
-              <EditSpotForm setShowEditModal={setShowEditModal} spotId={spotId} />
+              <EditSpotForm setShowEditModal={setShowEditModal} spotId={spotId} spot={spot}/>
             </Modal>
           )}
 

@@ -6,18 +6,18 @@ import { Redirect, useHistory } from 'react-router-dom';
 import './EditSpotForm.css';
 
 
-function EditSpotForm({ setShowEditModal, spotId}) {
+function EditSpotForm({ setShowEditModal, spotId, spot}) {
     const dispatch = useDispatch();
     // const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user);
-    const [name, setName] = useState("");
-    const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [country, setCountry] = useState("");
-    const [description, setDescription] = useState("");
-    const [url, setUrl] = useState("");
-    const [price, setPrice] = useState(0);
+    const [name, setName] = useState(spot.name);
+    const [address, setAddress] = useState(spot.address);
+    const [city, setCity] = useState(spot.city);
+    const [state, setState] = useState(spot.state);
+    const [country, setCountry] = useState(spot.country);
+    const [description, setDescription] = useState(spot.description);
+    const [url, setUrl] = useState(spot?.url);
+    const [price, setPrice] = useState(spot.price);
     const [errors, setErrors] = useState([]);
 
 
@@ -34,6 +34,7 @@ function EditSpotForm({ setShowEditModal, spotId}) {
         name,
         description,
         price: parseInt(price),
+        url
     }
     return dispatch(spotsActions.fetchPutSpot(spot, spotId))
     .then(() => setShowEditModal(false))
@@ -119,7 +120,7 @@ function EditSpotForm({ setShowEditModal, spotId}) {
           onChange={(e) => setUrl(e.target.value)}
         />
       </label>
-      <button type="submit">Create Spot</button>
+      <button type="submit">Edit Spot</button>
     </form>
   );
 
