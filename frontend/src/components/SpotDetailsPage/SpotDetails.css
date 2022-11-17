@@ -3,6 +3,7 @@
   width: 100vw;
 }
 .spot-details-container {
+  box-sizing: border-box;
   margin: 0px 15%;
 }
 .spot-headings{

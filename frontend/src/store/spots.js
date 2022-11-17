@@ -5,6 +5,8 @@ const GET_SPOT = "spots/getSpot";
 const ADD_SPOT = "spot/createSpot";
 const ADD_IMAGE = "spot/addImage";
 const EDIT_SPOT = "spot/editSpot";
+const DELETE_SPOT = "spot/deleteSpot";
+
 const loadSpots = (spots) => {
   return {
     type: LOAD_SPOTS,
@@ -40,6 +42,12 @@ const editSpot = (spot) => {
   };
 };
 
+const deleteSpot = () => {
+  return {
+    type: DELETE_SPOT,
+  };
+};
+
 export const fetchAllSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
   const data = await response.json();
@@ -54,6 +62,16 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 
   dispatch(getSpot(data));
   return response;
+};
+
+export const fetchDeleteSpot = (spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "DELETE",
+  });
+  const data = await response.json();
+
+  dispatch(deleteSpot());
+  return data;
 };
 
 export const fetchPostSpot = (spot) => async (dispatch) => {
@@ -88,23 +106,22 @@ export const fetchPostSpot = (spot) => async (dispatch) => {
   });
   if (spotResponse.ok) {
     const data = await spotResponse.json();
-    console.log(data)
+    console.log(data);
 
-      const imageResponse = await csrfFetch(`/api/spots/${data.id}/images`, {
-        method: "POST",
-        header: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          spotId: data.id,
-          url,
-          preview: true,
-        }),
-      });
-
+    const imageResponse = await csrfFetch(`/api/spots/${data.id}/images`, {
+      method: "POST",
+      header: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        spotId: data.id,
+        url,
+        preview: true,
+      }),
+    });
 
     dispatch(addSpot(data));
     return spotResponse;
   }
-  return ;
+  return;
 };
 
 export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
@@ -123,7 +140,6 @@ export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
 
   const spotResponse = await csrfFetch(`/api/spots/${spotId}`, {
     method: "PUT",
-    header: {"Content-Type": "application/json"},
     body: JSON.stringify({
       address,
       city,
@@ -140,7 +156,6 @@ export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
     if (url) {
       const imageResponse = await csrfFetch(`/api/spots/${data.id}`, {
         method: "POST",
-        header: {"Content-Type": "application/json"},
         body: JSON.stringify({
           spotId: data.id,
           url,
@@ -207,6 +222,11 @@ const spotsReducer = (state = initialState, action) => {
     case EDIT_SPOT: {
       return {
         spot: action.spot,
+      };
+    }
+    case DELETE_SPOT: {
+      return {
+        spot: {},
       };
     }
     default:

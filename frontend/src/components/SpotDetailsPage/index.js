@@ -20,7 +20,9 @@ import EditButton from "../EditSpotFormModal/EditButton";
 import DeleteButton from "../EditSpotFormModal/DeleteButton";
 import { Modal } from "../../context/Modal";
 import EditSpotForm from "../EditSpotFormModal/EditSpotForm";
+import DeleteSpotConfirmation from "../EditSpotFormModal/DeleteSpotConfirmation";
 import "./SpotDetails.css";
+import Reviews from "../ReviewComponents/Reviews";
 
 function SpotDetails() {
   const dispatch = useDispatch();
@@ -32,6 +34,7 @@ function SpotDetails() {
   const sessionUser = useSelector((state) => state.session.user);
   const [login, setLogin] = useState(true);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const spotImages = spot.SpotImages;
   const array = [0, 1, 2, 3, 4];
@@ -58,15 +61,36 @@ function SpotDetails() {
               </span>
             </div>
           </div>
-          {(sessionUser && (spot.Owner.id === sessionUser.id)) && (<EditButton user={sessionUser} setShowEditModal={setShowEditModal}/> ) }
-          {(sessionUser && (spot.Owner.id === sessionUser.id)) && (<DeleteButton user={sessionUser}/> ) }
+          {sessionUser && spot.Owner.id === sessionUser.id && (
+            <EditButton
+              user={sessionUser}
+              setShowEditModal={setShowEditModal}
+            />
+          )}
+          {sessionUser && spot.Owner.id === sessionUser.id && (
+            <DeleteButton
+              user={sessionUser}
+              setShowDeleteModal={setShowDeleteModal}
+            />
+          )}
           {showEditModal && (
             <Modal onClose={() => setShowEditModal(false)}>
-              <EditSpotForm setShowEditModal={setShowEditModal} spotId={spotId} spot={spot}/>
+              <EditSpotForm
+                setShowEditModal={setShowEditModal}
+                spotId={spotId}
+                spot={spot}
+              />
             </Modal>
           )}
-
-
+          {showDeleteModal && (
+            <Modal onClose={() => setShowDeleteModal(false)}>
+              <DeleteSpotConfirmation
+                setShowDeleteModal={setShowDeleteModal}
+                spotId={spotId}
+                spot={spot}
+              />
+            </Modal>
+          )}
         </div>
         <div className="spot-pictures-wrapper">
           <div className="spot-grid">
@@ -189,6 +213,8 @@ function SpotDetails() {
             </div>
           </div>
         </div>
+
+        <Reviews spot={spot}/>
       </div>
     </div>
   );
