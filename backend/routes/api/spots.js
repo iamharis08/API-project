@@ -481,7 +481,7 @@ router.get('/:spotId', async(req, res, next) => {
 
     if (spotList[0].avgStarRating === null){
       spotList[0].avgStarRating = 0
-    }
+    }else spotList[0].avgStarRating = parseFloat(spotList[0].avgStarRating)
 
 
     if (spot[0].id){
