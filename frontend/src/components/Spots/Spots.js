@@ -32,7 +32,7 @@ function Spots() {
             >
               <div className="spots-container" onClick={handleClick(spot.id)}>
                 <div className="spot-img">
-                  <img src={spot.previewImage} alt="spots" />
+                  <img src={spot.previewImage ? spot.previewImage : "https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg"} alt="spots" />
                 </div>
 
                 <div className="spots-info">

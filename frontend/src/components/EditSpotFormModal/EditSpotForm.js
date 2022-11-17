@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import * as spotsActions from '../../store/spots';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
-import './CreateSpotForm.css';
+import './EditSpotForm.css';
 
 
-function CreateSpotForm({ setShowHostModal }) {
+function EditSpotForm({ setShowEditModal, spotId}) {
     const dispatch = useDispatch();
     // const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user);
@@ -25,7 +25,6 @@ function CreateSpotForm({ setShowHostModal }) {
     // e.preventDefault();
     setErrors({});
     const spot = {
-        ownerId: sessionUser.id,
         address,
         city,
         state,
@@ -35,10 +34,9 @@ function CreateSpotForm({ setShowHostModal }) {
         name,
         description,
         price: parseInt(price),
-        url,
     }
-    return dispatch(spotsActions.fetchPostSpot(spot))
-    .then(() => setShowHostModal(false))
+    return dispatch(spotsActions.fetchPutSpot(spot, spotId))
+    .then(() => setShowEditModal(false))
     .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
@@ -127,4 +125,4 @@ function CreateSpotForm({ setShowHostModal }) {
 
 }
 
-export default CreateSpotForm;
+export default EditSpotForm;

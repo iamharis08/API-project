@@ -1,10 +1,10 @@
-import { csrfFetch } from './csrf';
+import { csrfFetch } from "./csrf";
 
 const LOAD_SPOTS = "spots/getSpots";
 const GET_SPOT = "spots/getSpot";
 const ADD_SPOT = "spot/createSpot";
 const ADD_IMAGE = "spot/addImage";
-
+const EDIT_SPOT = "spot/editSpot"
 const loadSpots = (spots) => {
   return {
     type: LOAD_SPOTS,
@@ -26,10 +26,17 @@ const addSpot = (spot) => {
   };
 };
 
-const addImage = (image) => {
+const addSpotImage = (image) => {
   return {
     type: ADD_IMAGE,
     image,
+  };
+};
+
+const editSpot = (spot) => {
+  return {
+    type: EDIT_SPOT,
+    spot,
   }
 }
 
@@ -61,9 +68,10 @@ export const fetchPostSpot = (spot) => async (dispatch) => {
     name,
     description,
     price,
+    url,
   } = spot;
 
-  const response = await csrfFetch("/api/spots", {
+  const spotResponse = await csrfFetch("/api/spots", {
     method: "POST",
     body: JSON.stringify({
       ownerId,
@@ -78,18 +86,28 @@ export const fetchPostSpot = (spot) => async (dispatch) => {
       price,
     }),
   });
-  if (response.ok) {
-    const data = await response.json();
+  if (spotResponse.ok) {
+    const data = await spotResponse.json();
+
+    if (url) {
+      const imageResponse = await csrfFetch(`/api/spots/${data.id}`, {
+        method: "POST",
+        body: JSON.stringify({
+          spotId: data.id,
+          url,
+          preview: true,
+        }),
+      });
+    }
 
     dispatch(addSpot(data));
-    return response;
+    return spotResponse;
   }
   return;
 };
 
-export const fetchPostImage = (spot) => async (dispatch) => {
+export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
   const {
-    ownerId,
     address,
     city,
     state,
@@ -101,10 +119,9 @@ export const fetchPostImage = (spot) => async (dispatch) => {
     price,
   } = spot;
 
-  const response = await csrfFetch("/api/spots", {
-    method: "POST",
+  const spotResponse = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "PUT",
     body: JSON.stringify({
-      ownerId,
       address,
       city,
       state,
@@ -116,10 +133,29 @@ export const fetchPostImage = (spot) => async (dispatch) => {
       price,
     }),
   });
+  if (spotResponse.ok) {
+    const data = await spotResponse.json();
+    dispatch(editSpot(data));
+    return spotResponse;
+  }
+  return;
+};
+
+export const fetchPostImage = (spotImage) => async (dispatch) => {
+  const { spotId, url, preview } = spotImage;
+
+  const response = await csrfFetch("/api/spots", {
+    method: "POST",
+    body: JSON.stringify({
+      spotId,
+      url,
+      preview,
+    }),
+  });
   if (response.ok) {
     const data = await response.json();
 
-    dispatch(addSpot(data));
+    dispatch(addSpotImage(data));
     return response;
   }
   return;
@@ -132,6 +168,7 @@ function normalizedObj(array) {
   });
   return newObj;
 }
+
 const initialState = { spots: {}, spot: {} };
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -148,9 +185,15 @@ const spotsReducer = (state = initialState, action) => {
       };
     }
     case ADD_SPOT: {
-      let normalizedSpot = {[action.spot.id]: action.spot.id}
+      let normalizedSpot = { [action.spot.id]: action.spot.id };
       return {
-        spots: {...state.spots, normalizedSpot},
+        spots: { ...state.spots, normalizedSpot },
+      };
+    }
+    case EDIT_SPOT: {
+
+      return {
+        spots: { ...state.spots, ...action.spot },
       };
     }
     default:
