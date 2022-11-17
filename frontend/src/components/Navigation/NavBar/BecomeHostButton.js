@@ -2,10 +2,17 @@ import React, { NavLink } from "react";
 import "./BecomeHostButton.css"
 
 
-function BecomeHostButton({ user, setLogin, setShowModal}) {
+function BecomeHostButton({ user, setLogin, setShowModal, setShowHostModal}) {
     const handleClick = (e) => {
         e.preventDefault();
-        setShowModal(true)
+        if (user){
+            setShowHostModal(true)
+        }else {
+            setLogin(true)
+            setShowModal(true)
+        }
+
+
       };
   return (
 

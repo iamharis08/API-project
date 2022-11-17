@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 const LOAD_SPOTS = "spots/getSpots";
 const GET_SPOT = "spots/getSpot";
 const ADD_SPOT = "spot/createSpot";
+const ADD_IMAGE = "spot/addImage";
 
 const loadSpots = (spots) => {
   return {
@@ -24,6 +25,13 @@ const addSpot = (spot) => {
     spot,
   };
 };
+
+const addImage = (image) => {
+  return {
+    type: ADD_IMAGE,
+    image,
+  }
+}
 
 export const fetchAllSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
@@ -54,7 +62,45 @@ export const fetchPostSpot = (spot) => async (dispatch) => {
     description,
     price,
   } = spot;
-  
+
+  const response = await csrfFetch("/api/spots", {
+    method: "POST",
+    body: JSON.stringify({
+      ownerId,
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+    }),
+  });
+  if (response.ok) {
+    const data = await response.json();
+
+    dispatch(addSpot(data));
+    return response;
+  }
+  return;
+};
+
+export const fetchPostImage = (spot) => async (dispatch) => {
+  const {
+    ownerId,
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price,
+  } = spot;
+
   const response = await csrfFetch("/api/spots", {
     method: "POST",
     body: JSON.stringify({
@@ -102,9 +148,9 @@ const spotsReducer = (state = initialState, action) => {
       };
     }
     case ADD_SPOT: {
-      let newObj = normalizedObj(action.spot);
+      let normalizedSpot = {[action.spot.id]: action.spot.id}
       return {
-        spots: {...state.spots, newObj},
+        spots: {...state.spots, normalizedSpot},
       };
     }
     default:

@@ -21,6 +21,7 @@ function Navigation({ isLoaded }) {
 
   const sessionUser = useSelector((state) => state.session.user);
   const [showModal, setShowModal] = useState(false);
+  const [showHostModal, setShowHostModal] = useState(false);
   const [login, setLogin] = useState(true);
 
   // let sessionLinks;
@@ -54,8 +55,9 @@ function Navigation({ isLoaded }) {
               <BecomeHostButton
                 user={sessionUser}
                 setLogin={setLogin}
+                setShowHostModal={setShowHostModal}
                 setShowModal={setShowModal}
-                login={login}
+
               />
             )}
             {isLoaded && (
@@ -66,16 +68,12 @@ function Navigation({ isLoaded }) {
               />
             )}
 
-            {showModal && (
-              <Modal onClose={() => setShowModal(false)}>
-                {login ? (
-                  <CreateSpotForm setShowModal={setShowModal} />
-                ) : (
-                  <LoginForm setShowModal={setShowModal} />
-                  
-                )}
+            {showHostModal && (
+              <Modal onClose={() => setShowHostModal(false)}>
+                  <CreateSpotForm setShowHostModal={setShowHostModal} />
               </Modal>
             )}
+
             {showModal && (
               <Modal onClose={() => setShowModal(false)}>
                 {login ? (

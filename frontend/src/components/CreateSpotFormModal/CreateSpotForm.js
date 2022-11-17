@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 // import * as sessionActions from '../../store/session';
 import * as spotsActions from '../../store/spots';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import './CreateSpotForm.css';
+import { reduce } from 'lodash';
 
-function CreateSpotForm({ setShowModal }) {
+function CreateSpotForm({ setShowHostModal }) {
     const dispatch = useDispatch();
+    // const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user);
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
@@ -14,7 +16,7 @@ function CreateSpotForm({ setShowModal }) {
     const [state, setState] = useState("");
     const [country, setCountry] = useState("");
     const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
+    const [price, setPrice] = useState(0);
     const [errors, setErrors] = useState([]);
 
 
@@ -31,11 +33,11 @@ function CreateSpotForm({ setShowModal }) {
         lng: 10,
         name,
         description,
-        price,
+        price: parseInt(price),
     }
     return dispatch(spotsActions.fetchPostSpot(spot))
-    .then(setShowModal(false))
-      .catch(async (res) => {
+    .then(() => setShowHostModal(false))
+    .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       });
@@ -74,7 +76,7 @@ function CreateSpotForm({ setShowModal }) {
         />
       </label>
       <label>
-        city
+        state
         <input
           type="text"
           value={state}
@@ -94,21 +96,22 @@ function CreateSpotForm({ setShowModal }) {
       <label>
         Description
         <textarea
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
+        type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           required
         />
       </label>
       <label>
         Price
         <input
-          type="text"
+          type="number"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           required
         />
       </label>
-      <button type="submit">Log In</button>
+      <button type="submit">Create Spot</button>
     </form>
   );
 
