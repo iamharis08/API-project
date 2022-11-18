@@ -51,8 +51,11 @@ const deleteSpot = () => {
 export const fetchAllSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
   const data = await response.json();
+  if (response.ok) {
+    dispatch(loadSpots(data));
+    return response;
+  }
 
-  dispatch(loadSpots(data));
   return response;
 };
 
@@ -106,7 +109,7 @@ export const fetchPostSpot = (spot) => async (dispatch) => {
   });
   if (spotResponse.ok) {
     const data = await spotResponse.json();
-    console.log(data);
+
 
     const imageResponse = await csrfFetch(`/api/spots/${data.id}/images`, {
       method: "POST",
@@ -117,11 +120,13 @@ export const fetchPostSpot = (spot) => async (dispatch) => {
         preview: true,
       }),
     });
+    if (imageResponse.ok){
+      dispatch(fetchAllSpots())
+      return spotResponse && imageResponse;
 
-    dispatch(addSpot(data));
-    return spotResponse;
+    }
   }
-  return;
+  return spotResponse;
 };
 
 export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
@@ -167,7 +172,7 @@ export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
     dispatch(editSpot(data));
     return spotResponse;
   }
-  return;
+  return spotResponse;
 };
 
 export const fetchPostImage = (spotImage) => async (dispatch) => {
@@ -187,7 +192,7 @@ export const fetchPostImage = (spotImage) => async (dispatch) => {
     dispatch(addSpotImage(data));
     return response;
   }
-  return;
+  return response;
 };
 
 function normalizedObj(array) {
@@ -205,7 +210,6 @@ const spotsReducer = (state = initialState, action) => {
       let newObj = normalizedObj(action.spots.Spots);
       return {
         spots: newObj,
-        spot: {},
       };
     }
     case GET_SPOT: {
@@ -214,9 +218,9 @@ const spotsReducer = (state = initialState, action) => {
       };
     }
     case ADD_SPOT: {
-      let normalizedSpot = { [action.spot.id]: action.spot.id };
+      let normalizedSpot = { [action.spot.id]: action.spot };
       return {
-        spots: { ...state.spots, normalizedSpot },
+        spots: { ...state.spots, ...normalizedSpot },
       };
     }
     case EDIT_SPOT: {

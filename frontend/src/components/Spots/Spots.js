@@ -23,8 +23,7 @@ function Spots() {
     );
   return (
     <div className="spots">
-      {Object.values(spots).map((spot) => {
-        return (
+      {Object.values(spots).map(spot =>
           <div key={spot.id}>
             <NavLink
               style={{ textDecoration: "none", color: "black" }}
@@ -45,8 +44,8 @@ function Spots() {
               </div>
             </NavLink>
           </div>
-        );
-      })}
+
+      )}
     </div>
   );
 }

@@ -8,7 +8,7 @@ import './CreateSpotForm.css';
 
 function CreateSpotForm({ setShowHostModal, ShowHostModal }) {
     const dispatch = useDispatch();
-    // const history = useHistory()
+    const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user);
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
@@ -39,17 +39,17 @@ function CreateSpotForm({ setShowHostModal, ShowHostModal }) {
     }
     return dispatch(spotsActions.fetchPostSpot(spot))
     .then(() => {setShowHostModal(false)
-        window.location.reload();})
+        
+    })
     .catch(async (res) => {
 
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       });
+
   }
   useEffect(()=> {
-    if (ShowHostModal === true) {
-        window.location.reload();
-    }
+
   },[ShowHostModal])
 
   return (

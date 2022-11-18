@@ -50,9 +50,12 @@ const validateInputs = [
     check('price')
     .exists({ checkFalsy: true })
     .withMessage('Price per day is required')
+    .isInt({ min:0})
+    .withMessage('Price per day needs to be greater than 0')
     .not()
     .isString()
     .withMessage('Price per day is required'),
+
 
   handleInputValidationErrors
 ];

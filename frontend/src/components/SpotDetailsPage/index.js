@@ -36,7 +36,7 @@ function SpotDetails() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  const spotImages = spot.SpotImages;
+  const spotImages = spot?.SpotImages;
   const array = [0, 1, 2, 3, 4];
   useEffect(() => {
     dispatch(fetchSpot(spotId));
