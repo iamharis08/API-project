@@ -203,7 +203,7 @@ function SpotDetails() {
             </div>
           </div>
 
-          <div className="place-offers">
+          {/* <div className="place-offers">
             <div className="offers-img">
               <img
                 src={offers}
@@ -211,7 +211,7 @@ function SpotDetails() {
                 alt="place offers"
               />
             </div>
-          </div>
+          </div> */}
         </div>
 
         <Reviews spot={spot}/>

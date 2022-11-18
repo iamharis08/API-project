@@ -67,9 +67,9 @@
   color: white;
   background: linear-gradient(
     90deg,
-    #DB0E63 0%,
+    #BD1E59 0%,
     #f85390 var(--x),
-    #DB0E63 100%
+    #BD1E59 100%
   );
 }
 #no-button {
@@ -84,9 +84,9 @@
   color: white;
   background: linear-gradient(
     90deg,
-    #DB0E63 0%,
+    #BD1E59 0%,
     #f85390 var(--x),
-    #DB0E63 100%
+    #BD1E59 100%
   );
 }
 .no-button:focus {

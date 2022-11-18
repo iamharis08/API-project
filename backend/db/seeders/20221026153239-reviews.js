@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -11,46 +11,84 @@ module.exports = {
      *   name: 'John Doe',
      *   isBetaMember: false
      * }], {});
-    */
-     return queryInterface.bulkInsert('Reviews', [
-      {
-      userId: 1,
-      spotId: 1,
-      review: "I love App Academy with a passion, best bootcamp out there no kizzy",
-      stars: 5,
-      },
-      {
-        userId: 2,
-        spotId: 2,
-        review: "I hated this place, instead of counting sheeps at night I was counting rats",
-        stars: 1,
-      },
-      {
-        userId: 3,
-        spotId: 3,
-        review: "Had a blast here, one of my best memories for sure",
-        stars: 5,
-      },
-      {
-        userId: 3,
-        spotId: 1,
-        review: "I love App Academy with a passion, best bootcamp out there no kizzy",
-        stars: 4.5,
-      }
-    ], {});
+     */
+    return queryInterface.bulkInsert(
+      "Reviews",
+      [
+        {
+          userId: 4,
+          spotId: 1,
+          review:
+            "I loved this place! It was like no other I had visited before. Will definetly come back! It was in a nice location as well.",
+          stars: 5,
+        },
+        {
+          userId: 2,
+          spotId: 1,
+          review:
+            "Reviews dont lie and this one doesn't either, let me tell ya it was a blast. Havent had this much fun in a long time. It was Amazing",
+          stars: 4,
+        },
+        {
+          userId: 3,
+          spotId: 1,
+          review:
+            "Amazing, will be back again, this time I will bring more people. Definetly recommend this place, the view was amazing",
+          stars: 5,
+        },
+        {
+          userId: 5,
+          spotId: 1,
+          review:
+            "It was clean and the view was good. Pets were allowed. The staff was amazing. I would def recommend",
+          stars: 5,
+        },
+        {
+          userId: 6,
+          spotId: 1,
+          review:
+            "I didnt like the lighting, seemed a bit dim for my liking. Not a big deal, but it definetly was not perfect.",
+          stars: 3.5,
+        },
+        {
+          userId: 7,
+          spotId: 1,
+          review:
+            "When we go there the a/c stopped malfunctioned, but luckily the wind was great that night. The owner was very nice and fixed the a/c in the morning also gave us a refund.",
+          stars: 4,
+        },
+        {
+          userId: 3,
+          spotId: 3,
+          review: "Had a blast here, one of my best memories for sure",
+          stars: 5,
+        },
+        {
+          userId: 3,
+          spotId: 1,
+          review:
+            "I love App Academy with a passion, best bootcamp out there no kizzy",
+          stars: 4.5,
+        },
+      ],
+      {}
+    );
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     const Op = Sequelize.Op;
-     return queryInterface.bulkDelete('Reviews', {
-       userId: { [Op.in]: [1, 2, 3] }
-     }, {});
-
-  }
+    const Op = Sequelize.Op;
+    return queryInterface.bulkDelete(
+      "Reviews",
+      {
+        userId: { [Op.in]: [1, 2, 3] },
+      },
+      {}
+    );
+  },
 };

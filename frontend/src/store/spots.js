@@ -62,8 +62,11 @@ export const fetchAllSpots = () => async (dispatch) => {
 export const fetchSpot = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}`);
   const data = await response.json();
-
-  dispatch(getSpot(data));
+  data.avgStarRating = Math.round(data.avgStarRating * 10) / 10
+  if(response.ok){
+    dispatch(getSpot(data));
+    return response;
+  }
   return response;
 };
 
@@ -140,7 +143,6 @@ export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
     name,
     description,
     price,
-    url,
   } = spot;
 
   const spotResponse = await csrfFetch(`/api/spots/${spotId}`, {
