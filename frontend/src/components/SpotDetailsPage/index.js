@@ -188,7 +188,7 @@ function SpotDetails() {
               listing inaccuracies, and other issues like trouble checking in.
             </div>
             <div className="link">
-              <Link style={{ textDecoration: "none", color: "black" }}>
+              <Link to='' style={{ textDecoration: "none", color: "black" }}>
                 Learn More
               </Link>
             </div>
@@ -197,7 +197,7 @@ function SpotDetails() {
           <div className="spot-description">
             <div className="spot-description-text">{spot.description}</div>
             <div className="link">
-              <Link style={{ textDecoration: "none", color: "black" }}>
+              <Link to='' style={{ textDecoration: "none", color: "black" }}>
                 Show More {">"}{" "}
               </Link>
             </div>
