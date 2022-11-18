@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import { fetchAllReviews } from "./reviews";
 
 const LOAD_SPOTS = "spots/getSpots";
 const GET_SPOT = "spots/getSpot";
@@ -65,7 +66,9 @@ export const fetchSpot = (spotId) => async (dispatch) => {
   data.avgStarRating = Math.round(data.avgStarRating * 10) / 10
   if(response.ok){
     dispatch(getSpot(data));
-    return response;
+    return response
+
+
   }
   return response;
 };
@@ -193,6 +196,9 @@ export const fetchPostImage = (spotImage) => async (dispatch) => {
 function normalizedObj(array) {
   let newObj = {};
   array.forEach((ele) => {
+    if (ele.avgRating){
+      ele.avgRating = Math.round(ele.avgRating * 10) / 10
+    }
     newObj[ele.id] = ele;
   });
   return newObj;

@@ -19,7 +19,7 @@ function EditSpotForm({ setShowEditModal, spotId, spot}) {
     const [url, setUrl] = useState(spot?.url);
     const [price, setPrice] = useState(spot.price);
     const [errors, setErrors] = useState([]);
-
+    
 
   const handleSubmit = (e) => {
     e.preventDefault();

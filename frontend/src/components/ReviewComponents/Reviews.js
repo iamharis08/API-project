@@ -7,46 +7,57 @@ import userIcon from "../Navigation/NavBarImages/user-icon.svg";
 
 import "./Reviews.css";
 
-function Reviews({ spot }) {
+function Reviews({ spot, reviews }) {
   const dispatch = useDispatch();
-  const reviews = useSelector((state) => state.reviews.reviews);
-  const reviewsArray = Object.values(reviews)
-  const array = [0, 1, 2, 3, 4, 5,];
-  const convertToDate = (oldDate) => {
-    if(oldDate){
-        const date = oldDate.split("T")[0];
-        const newDate = new Date(date);
-        const convertedDate = newDate.toDateString();
-        return convertedDate;
-    }
+//   const reviews = useSelector((state) => state.reviews.reviews);
 
-    return null;
-  };
+
+
   useEffect(() => {
-    dispatch(fetchAllReviews(spot?.id));
-  }, [dispatch]);
 
-  //   if (!reviews) {
-  //     return (
-  //       <div className="reviews-section">
-  //         <div className="review-heading">
-  //           <img src={stars} style={{ height: 16, width: 16 }} alt="star" />
-  //           &nbsp;
-  //           {"0"} · &nbsp;
-  //           <span>No Reviews</span>
-  //         </div>
-  //       </div>
-  //     );
-  //   }
+    dispatch(fetchAllReviews(spot.id))
+  }, [dispatch, spot.id]);
 
+  if (!reviews) {
+    return (
+      <div className="reviews-section">
+        <div className="no-review-heading">
+          <img src={stars} style={{ height: 16, width: 16 }} alt="star" />
+          &nbsp;
+          {"0"} · &nbsp;
+          <span>No Reviews</span>
+          <div className="write-review-button">Write a Review</div>
+        </div>
+      </div>
+    );
+  }
+  const reviewsArray = Object.values(reviews)
+
+
+
+    const array = [0, 1, 2, 3, 4, 5,];
+
+
+    const convertToDate = (oldDate) => {
+      if(oldDate){
+          const date = oldDate.split("T")[0];
+          const newDate = new Date(date);
+          const convertedDate = newDate.toDateString();
+          return convertedDate;
+      }
+
+      return null;
+    };
   if (reviewsArray.length > 6) {return (
     <div className="reviews-section">
+
       <div className="review-heading">
         <img src={stars} style={{ height: 16, width: 16 }} alt="star" /> &nbsp;
         {spot?.avgStarRating} · &nbsp;
         <span>{spot?.numReviews} Reviews</span>
-        <span className="write-review-button">Write a Review</span>
+      <div className="write-review-button">Write a Review</div>
       </div>
+
 
       <div className="reviews">
         {reviews && array.map((id) => (

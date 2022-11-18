@@ -1,12 +1,21 @@
+
 .reviews-section{
     border-bottom: solid rgb(235, 235, 235) 2px;
     border-top: solid rgb(235, 235, 235) 2px;
 
 }
+.no-review-heading{
+    font-size: 22px;
+    font-weight: 600;
+    padding-top: 48px ;
+    margin-bottom: 200px;
+    display: flex;
+    align-items: center;
+}
 .reviews{
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
     margin: 50px 0px;
 }
 .review-heading{

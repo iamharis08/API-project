@@ -11,21 +11,21 @@ const loadReviews = (reviews) => {
 
 export const fetchAllReviews = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}/reviews`);
-  if (response.ok) {
-    const data = await response.json();
 
-    dispatch(loadReviews(data));
+    const data = await response.json()
+    if (data.status === "404"){
+        dispatch(loadReviews({}))
+    }else {dispatch(loadReviews(data));}
     return response;
-  }
-  return;
 };
 
 function normalizedObj(array) {
   let newObj = {};
-  array.forEach((ele) => {
-    newObj[ele.id] = ele;
-  });
-  return newObj;
+    if (Array.isArray(array)){array.forEach((ele) => {
+        newObj[ele.id] = ele;
+      });
+      return newObj;}
+      return array
 }
 
 const initialState = { reviews: {}, review: {} };
@@ -36,7 +36,6 @@ const reviewsReducer = (state = initialState, action) => {
       let newObj = normalizedObj(action.reviews.Reviews);
       return {
         reviews: newObj,
-        review: {},
       };
     }
     default:

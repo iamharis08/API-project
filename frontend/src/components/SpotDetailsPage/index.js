@@ -23,6 +23,7 @@ import EditSpotForm from "../EditSpotFormModal/EditSpotForm";
 import DeleteSpotConfirmation from "../EditSpotFormModal/DeleteSpotConfirmation";
 import "./SpotDetails.css";
 import Reviews from "../ReviewComponents/Reviews";
+import { fetchAllReviews } from "../../store/reviews";
 
 function SpotDetails() {
   const dispatch = useDispatch();
@@ -30,8 +31,9 @@ function SpotDetails() {
   const { spotId } = params;
 
   const spot = useSelector((state) => state.spots.spot);
-
+console.log(spot)
   const sessionUser = useSelector((state) => state.session.user);
+  const reviews = useSelector((state) => state.reviews.reviews)
   const [login, setLogin] = useState(true);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -40,6 +42,8 @@ function SpotDetails() {
   const array = [0, 1, 2, 3, 4];
   useEffect(() => {
     dispatch(fetchSpot(spotId));
+    
+    // dispatch(fetchAllReviews(spotId))
   }, [dispatch]);
 
   if (!spotImages || !spot) {
@@ -214,7 +218,7 @@ function SpotDetails() {
           </div> */}
         </div>
 
-        <Reviews spot={spot}/>
+        <Reviews reviews={reviews} spot={spot}/>
       </div>
     </div>
   );
