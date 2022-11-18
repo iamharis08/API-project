@@ -5,7 +5,7 @@ body {
     box-sizing: border-box;
     /* font-family: 'Montserrat', sans-serif; */
     font-family: 'Poppins', sans-serif;
-    max-width: 100vw;
+    width: 100%;
     color: #222222;
     overflow-x: hidden;
 }

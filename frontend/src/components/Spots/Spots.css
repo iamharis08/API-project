@@ -1,41 +1,59 @@
 .spots {
   display: grid;
-  grid-template-columns: repeat(4, 1.05fr);
-  grid-template-rows: repeat(5, 2fr);
-
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
   grid-auto-flow: rows;
-  justify-items: center;
-  align-items: center;
-  grid-gap: 40px;
-  margin: 16px 0px 40px;
-  width: auto;
-  padding-left: 40px;
-  padding-right: 40px;
-  height: 100vh;
+  grid-gap: 1rem;
+  margin: 1rem auto;
+  width: 90%;
+
 }
 .spots-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 305px;
+  width: 100%;
+  height: 100%;
 }
 .spot-img {
   display: flex;
   justify-content: center;
   overflow: hidden;
-  height: 321px;
+  height: 100%;
   width: 100%;
   border-radius: 10px;
+}
+.spot-img > img {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .spots-info {
   width: 100%;
 }
-
-#spots-address,
-#spots-price span {
-  font-weight: bolder;
+.spots-address{
+  display: flex;
+  justify-content: space-between;
+}
+.spots-stars{
+  font-weight:light;
+}
+.star > img{
+  height: 0.8em;
+  padding-right: 0.3em;
+}
+.spots-address,
+.spots-price span {
+  font-weight: 600;
+  font-size: 1em;
 }
 
 .loading{
