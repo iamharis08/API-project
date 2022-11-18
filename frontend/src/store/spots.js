@@ -158,20 +158,13 @@ export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
     }),
   });
   if (spotResponse.ok) {
-    if (url) {
-      const imageResponse = await csrfFetch(`/api/spots/${data.id}`, {
-        method: "POST",
-        body: JSON.stringify({
-          spotId: data.id,
-          url,
-          preview: true,
-        }),
-      });
-    }
+
     const data = await spotResponse.json();
-    dispatch(editSpot(data));
+    dispatch(fetchSpot(data.id));
     return spotResponse;
-  }
+    }
+
+
   return spotResponse;
 };
 
