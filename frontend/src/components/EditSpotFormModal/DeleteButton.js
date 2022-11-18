@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import "../SpotDetailsPage/SpotDetails.css";
 
-function DeleteButton() {
+function DeleteButton({ setShowDeleteModal }) {
   const handleClick = (e) => {
     e.preventDefault();
+    setShowDeleteModal(true);
     // if (user){
     //     setShowHostModal(true)
     // }else {

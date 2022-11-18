@@ -1,8 +1,11 @@
 .spot-details {
   box-sizing: border-box;
   width: 100vw;
+
+
 }
 .spot-details-container {
+  box-sizing: border-box;
   margin: 0px 15%;
 }
 .spot-headings{
@@ -16,7 +19,7 @@
   right: 15%;
   bottom: 2%;
   font-size: 18px;
-  border-radius: 5px;
+  border-radius: 22px;
 }
 .edit-spot-button:hover{
   position: absolute;
@@ -35,7 +38,7 @@
   right: 5%;
   bottom: 2%;
   font-size: 18px;
-  border-radius: 5px;
+  border-radius: 22px;
 }
 .delete-spot-button:hover{
   position: absolute;
@@ -198,7 +201,7 @@ h1 {
   justify-content: flex-start;
   width: 100%;
   padding: 32px 0px;
-  border-bottom: solid rgb(235, 235, 235) 2px;
+
 }
 .link {
   font-weight: bold;

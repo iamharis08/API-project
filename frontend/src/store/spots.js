@@ -1,10 +1,13 @@
 import { csrfFetch } from "./csrf";
+import { fetchAllReviews } from "./reviews";
 
 const LOAD_SPOTS = "spots/getSpots";
 const GET_SPOT = "spots/getSpot";
 const ADD_SPOT = "spot/createSpot";
 const ADD_IMAGE = "spot/addImage";
 const EDIT_SPOT = "spot/editSpot";
+const DELETE_SPOT = "spot/deleteSpot";
+
 const loadSpots = (spots) => {
   return {
     type: LOAD_SPOTS,
@@ -40,20 +43,44 @@ const editSpot = (spot) => {
   };
 };
 
+const deleteSpot = () => {
+  return {
+    type: DELETE_SPOT,
+  };
+};
+
 export const fetchAllSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
   const data = await response.json();
+  if (response.ok) {
+    dispatch(loadSpots(data));
+    return response;
+  }
 
-  dispatch(loadSpots(data));
   return response;
 };
 
 export const fetchSpot = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}`);
   const data = await response.json();
+  data.avgStarRating = Math.round(data.avgStarRating * 10) / 10
+  if(response.ok){
+    dispatch(getSpot(data));
+    return response
 
-  dispatch(getSpot(data));
+
+  }
   return response;
+};
+
+export const fetchDeleteSpot = (spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "DELETE",
+  });
+  const data = await response.json();
+
+  dispatch(deleteSpot());
+  return data;
 };
 
 export const fetchPostSpot = (spot) => async (dispatch) => {
@@ -88,23 +115,24 @@ export const fetchPostSpot = (spot) => async (dispatch) => {
   });
   if (spotResponse.ok) {
     const data = await spotResponse.json();
-    console.log(data)
-
-      const imageResponse = await csrfFetch(`/api/spots/${data.id}/images`, {
-        method: "POST",
-        header: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          spotId: data.id,
-          url,
-          preview: true,
-        }),
-      });
 
 
-    dispatch(addSpot(data));
-    return spotResponse;
+    const imageResponse = await csrfFetch(`/api/spots/${data.id}/images`, {
+      method: "POST",
+      header: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        spotId: data.id,
+        url,
+        preview: true,
+      }),
+    });
+    if (imageResponse.ok){
+      dispatch(fetchAllSpots())
+      return spotResponse && imageResponse;
+
+    }
   }
-  return ;
+  return spotResponse;
 };
 
 export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
@@ -118,12 +146,10 @@ export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
     name,
     description,
     price,
-    url,
   } = spot;
 
   const spotResponse = await csrfFetch(`/api/spots/${spotId}`, {
     method: "PUT",
-    header: {"Content-Type": "application/json"},
     body: JSON.stringify({
       address,
       city,
@@ -137,22 +163,14 @@ export const fetchPutSpot = (spot, spotId) => async (dispatch) => {
     }),
   });
   if (spotResponse.ok) {
-    if (url) {
-      const imageResponse = await csrfFetch(`/api/spots/${data.id}`, {
-        method: "POST",
-        header: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          spotId: data.id,
-          url,
-          preview: true,
-        }),
-      });
-    }
+
     const data = await spotResponse.json();
-    dispatch(editSpot(data));
+    dispatch(fetchSpot(data.id));
     return spotResponse;
-  }
-  return;
+    }
+
+
+  return spotResponse;
 };
 
 export const fetchPostImage = (spotImage) => async (dispatch) => {
@@ -172,12 +190,15 @@ export const fetchPostImage = (spotImage) => async (dispatch) => {
     dispatch(addSpotImage(data));
     return response;
   }
-  return;
+  return response;
 };
 
 function normalizedObj(array) {
   let newObj = {};
   array.forEach((ele) => {
+    if (ele.avgRating){
+      ele.avgRating = Math.round(ele.avgRating * 10) / 10
+    }
     newObj[ele.id] = ele;
   });
   return newObj;
@@ -190,7 +211,6 @@ const spotsReducer = (state = initialState, action) => {
       let newObj = normalizedObj(action.spots.Spots);
       return {
         spots: newObj,
-        spot: {},
       };
     }
     case GET_SPOT: {
@@ -199,14 +219,19 @@ const spotsReducer = (state = initialState, action) => {
       };
     }
     case ADD_SPOT: {
-      let normalizedSpot = { [action.spot.id]: action.spot.id };
+      let normalizedSpot = { [action.spot.id]: action.spot };
       return {
-        spots: { ...state.spots, normalizedSpot },
+        spots: { ...state.spots, ...normalizedSpot },
       };
     }
     case EDIT_SPOT: {
       return {
         spot: action.spot,
+      };
+    }
+    case DELETE_SPOT: {
+      return {
+        spot: {},
       };
     }
     default:

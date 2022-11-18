@@ -20,7 +20,10 @@ import EditButton from "../EditSpotFormModal/EditButton";
 import DeleteButton from "../EditSpotFormModal/DeleteButton";
 import { Modal } from "../../context/Modal";
 import EditSpotForm from "../EditSpotFormModal/EditSpotForm";
+import DeleteSpotConfirmation from "../EditSpotFormModal/DeleteSpotConfirmation";
 import "./SpotDetails.css";
+import Reviews from "../ReviewComponents/Reviews";
+import { fetchAllReviews } from "../../store/reviews";
 
 function SpotDetails() {
   const dispatch = useDispatch();
@@ -28,15 +31,19 @@ function SpotDetails() {
   const { spotId } = params;
 
   const spot = useSelector((state) => state.spots.spot);
-
+console.log(spot)
   const sessionUser = useSelector((state) => state.session.user);
+  const reviews = useSelector((state) => state.reviews.reviews)
   const [login, setLogin] = useState(true);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  const spotImages = spot.SpotImages;
+  const spotImages = spot?.SpotImages;
   const array = [0, 1, 2, 3, 4];
   useEffect(() => {
     dispatch(fetchSpot(spotId));
+    
+    // dispatch(fetchAllReviews(spotId))
   }, [dispatch]);
 
   if (!spotImages || !spot) {
@@ -58,15 +65,36 @@ function SpotDetails() {
               </span>
             </div>
           </div>
-          {(sessionUser && (spot.Owner.id === sessionUser.id)) && (<EditButton user={sessionUser} setShowEditModal={setShowEditModal}/> ) }
-          {(sessionUser && (spot.Owner.id === sessionUser.id)) && (<DeleteButton user={sessionUser}/> ) }
+          {sessionUser && spot.Owner.id === sessionUser.id && (
+            <EditButton
+              user={sessionUser}
+              setShowEditModal={setShowEditModal}
+            />
+          )}
+          {sessionUser && spot.Owner.id === sessionUser.id && (
+            <DeleteButton
+              user={sessionUser}
+              setShowDeleteModal={setShowDeleteModal}
+            />
+          )}
           {showEditModal && (
             <Modal onClose={() => setShowEditModal(false)}>
-              <EditSpotForm setShowEditModal={setShowEditModal} spotId={spotId} spot={spot}/>
+              <EditSpotForm
+                setShowEditModal={setShowEditModal}
+                spotId={spotId}
+                spot={spot}
+              />
             </Modal>
           )}
-
-
+          {showDeleteModal && (
+            <Modal onClose={() => setShowDeleteModal(false)}>
+              <DeleteSpotConfirmation
+                setShowDeleteModal={setShowDeleteModal}
+                spotId={spotId}
+                spot={spot}
+              />
+            </Modal>
+          )}
         </div>
         <div className="spot-pictures-wrapper">
           <div className="spot-grid">
@@ -164,7 +192,7 @@ function SpotDetails() {
               listing inaccuracies, and other issues like trouble checking in.
             </div>
             <div className="link">
-              <Link style={{ textDecoration: "none", color: "black" }}>
+              <Link to='' style={{ textDecoration: "none", color: "black" }}>
                 Learn More
               </Link>
             </div>
@@ -173,13 +201,13 @@ function SpotDetails() {
           <div className="spot-description">
             <div className="spot-description-text">{spot.description}</div>
             <div className="link">
-              <Link style={{ textDecoration: "none", color: "black" }}>
+              <Link to='' style={{ textDecoration: "none", color: "black" }}>
                 Show More {">"}{" "}
               </Link>
             </div>
           </div>
 
-          <div className="place-offers">
+          {/* <div className="place-offers">
             <div className="offers-img">
               <img
                 src={offers}
@@ -187,8 +215,10 @@ function SpotDetails() {
                 alt="place offers"
               />
             </div>
-          </div>
+          </div> */}
         </div>
+
+        <Reviews reviews={reviews} spot={spot}/>
       </div>
     </div>
   );
