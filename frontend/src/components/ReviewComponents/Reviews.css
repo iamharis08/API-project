@@ -5,12 +5,13 @@
 
 }
 .no-review-heading{
-    font-size: 22px;
+    font-size: 1.2rem;
     font-weight: 600;
     padding-top: 48px ;
-    margin-bottom: 200px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20%;
 }
 .reviews{
     display: grid;
