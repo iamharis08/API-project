@@ -3,16 +3,17 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    width: 200px;
+    width: 15rem;
 }
 .become-host-button{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: bolder;
+    font-weight: 500;
     border-radius: 22px;
-    width: 130px;
+    width: 9rem;
     font-size: 14px;
+    cursor: pointer;
 }
 
 .become-host-button:hover{

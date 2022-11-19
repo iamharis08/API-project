@@ -15,9 +15,10 @@
     align-items: baseline;
     width: 50px;
     color: #ff385c;
-    font-size: 25px;
+    font-size: 1.4rem;
     padding-left: 3px;
-    font-weight: 1000;
+    font-weight: 600;
+    width: 100%;
 }
 #logo-pic {
     display: flex;
@@ -27,6 +28,6 @@
 
 #logo-pic  img {
 
-    height: 40px;
-    width: 40px;
+    height: 2rem;
+    width: 2rem;
 }

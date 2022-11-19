@@ -5,6 +5,8 @@ body {
     box-sizing: border-box;
     /* font-family: 'Montserrat', sans-serif; */
     font-family: 'Poppins', sans-serif;
+    /* font-family: 'Montserrat', sans-serif; */
+    font-stretch: expanded;
     width: 100%;
     color: #222222;
 }
