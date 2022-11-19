@@ -18,20 +18,28 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
     // const reviewState = useSelector((state) => state.reviews.reviews)
     const reviewsArray = Object.values(reviews ? reviews : []);
     console.log(reviewsArray, "REVIEWS ARRAY")
-    console.log(user, "USER")
+    console.log(user, "USERRRRRRRRRRRRRRRRR")
     const deleteReviewId = reviewsArray.length ? reviewsArray.find(ele => ele.userId === user?.id)?.id : null
     console.log("reviewId--------", deleteReviewId)
     // console.log(user, spot,"-----------", reviews)
     const reviewExists = (reviews) => {
-        {for(let reviewKey in reviews){
-            let review = reviews[reviewKey];
-            if(review.userId === user?.id){
-                return false
+
+        // for(let reviewKey in reviews){
+        //     let review = reviews[reviewKey];
+        //     if(review.userId === user.id){
+        //         return false
+        //     }
+        // }
+        for (let i = 0; i < reviews?.length; i++) {
+            let review = reviews[i]
+            if (review?.userId === user?.id){
+                return true
             }
-        }}
-        return true
+        }
+        return false
     }
 
+    console.log("WWWWWWWWWWWWW",isLoaded && user && (spot?.ownerId !== user?.id) && (reviewExists(reviews)), "DELETEBUTON SHOWNIG", reviewExists(reviews), user)
     const handleDeleteClick = () => {
         setShowDeleteReviewModal(true)
     }
@@ -54,11 +62,11 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
           <span>{spot?.numReviews} Reviews</span>
           </div>
           <div className="review-buttons">
-          {isLoaded && user && (spot.ownerId !== user?.id) && (reviewExists(reviews)) ? (
+          {isLoaded && user && (spot?.ownerId !== user?.id) && (!reviewExists(reviews)) ? (
             <div className="write-review-button" onClick={handleClick}>
               Write a Review
             </div>
-          ) : (reviewsArray.length ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
+          ) : (reviewExists(reviews) ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
           </div>) : null)
          }
          </div>
@@ -110,11 +118,11 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
           <span>{spot?.numReviews} Reviews</span>
           </div>
           <div className="review-buttons">
-          {isLoaded && user && (spot.ownerId !== user?.id) && (reviewExists(reviews)) ? (
+          {isLoaded && user && (spot?.ownerId !== user?.id) && (!reviewExists(reviews)) ? (
             <div className="write-review-button" onClick={handleClick}>
               Write a Review
             </div>
-          ) : (reviewsArray.length ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
+          ) : (reviewExists(reviews) ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
           </div>) : null)
          }
          </div>
@@ -180,12 +188,12 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
           <span>{spot?.numReviews} Reviews</span>
           </div>
           <div className="review-buttons">
-          {isLoaded && user && ((spot.ownerId !== user?.id) && (reviewExists(reviews)) ? (
+          {isLoaded && user && (spot?.ownerId !== user?.id) && (!reviewExists(reviews)) ? (
             <div className="write-review-button" onClick={handleClick}>
               Write a Review
             </div>
-          ) : (reviewsArray.length ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
-          </div>) : null))
+          ) : (reviewExists(reviews) ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
+          </div>) : null)
          }
          </div>
           {showWriteReviewsModal && spot &&(
