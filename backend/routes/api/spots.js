@@ -799,11 +799,7 @@ const validReviewInput = [
   .isString()
   .withMessage('Review text is required'),
   check('stars')
-  .isFloat({ min: 1, max: 5 })
-  .withMessage('Stars must be an integer from 1 to 5 ')
-  .exists()
-  .not()
-  .isString()
+  .isInt({ min: 0, max: 5 })
   .withMessage('Stars must be an integer from 1 to 5 '),
   handleInputValidationErrors
 ]
@@ -837,7 +833,8 @@ if (reviewExists){
 }else{
   const newReview = await Review.create({
     userId: req.user.id,
-    spotId: parseInt(spotId),
+    // spotId: parseInt(spotId)
+    spotId: spotId,
     review,
     stars
   })

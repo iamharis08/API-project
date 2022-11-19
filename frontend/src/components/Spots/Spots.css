@@ -1,36 +1,101 @@
 .spots {
+
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr;
-  grid-auto-flow: rows;
-  grid-gap: 1rem;
+  grid-auto-rows: 1fr;
+  grid-gap: 1.5rem;
+
+
   margin: 1rem auto;
   width: 90%;
-
 }
+/*
+@media screen and (max-width: 400px) {
+  .spots {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(autofill, 1fr);
+
+    grid-gap: 1.5rem;
+
+
+
+    margin: 1rem auto;
+    width: 90%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .spots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(autofill, 1fr);
+
+    grid-gap: 1.5rem;
+
+
+
+    margin: 1rem auto;
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1024px) {
+  .spots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(autofill, 1fr);
+
+    grid-gap: 1.5rem;
+
+
+
+    margin: 1rem auto;
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .spots {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(autofill, 1fr);
+
+    grid-gap: 1.5rem;
+
+
+
+    margin: 1rem auto;
+    width: 90%;
+  }
+} */
 .spots-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-grow: wrap;
+  /* align-items: center;
+  justify-content: center; */
+  padding: 0;
+  margin: 0;
   width: 100%;
   height: 100%;
+  cursor: pointer;
 }
 .spot-img {
   display: flex;
   justify-content: center;
+  align-items: center;
   overflow: hidden;
   height: 100%;
   width: 100%;
   border-radius: 10px;
 }
 .spot-img > img {
+  display: block;
   width: 100%;
   height: 100%;
-  background-position: center;
+  /* background-position: center; */
   background-repeat: no-repeat;
   object-fit: cover;
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,14 +104,14 @@
 .spots-info {
   width: 100%;
 }
-.spots-address{
+.spots-address {
   display: flex;
   justify-content: space-between;
 }
-.spots-stars{
-  font-weight:light;
+.spots-stars {
+  font-weight: light;
 }
-.star > img{
+.star > img {
   height: 0.8em;
   padding-right: 0.3em;
 }
@@ -56,7 +121,7 @@
   font-size: 1em;
 }
 
-.loading{
+.loading {
   display: flex;
   justify-content: center;
 }

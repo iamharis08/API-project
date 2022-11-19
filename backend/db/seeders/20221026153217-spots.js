@@ -23,8 +23,9 @@ module.exports = {
           country: "United States of America",
           lat: 37.7645358,
           lng: -122.4730327,
-          name: "App Academy",
-          description: "Place where web developers are created",
+          name: "Mansion in the Mountains",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc hendrerit mollis ullamcorper. Curabitur interdum faucibus vestibulum. Pellentesque faucibus odio nec lectus luctus molestie. Vestibulum id finibus est, vel rutrum urna. Morbi fermentum urna eget neque faucibus ultrices. Proin vulputate metus a nulla hendrerit molestie eget sed dolor. Praesent et turpis vestibulum, imperdiet purus quis, malesuada dolor.",
           price: 123,
         },
         {
@@ -36,7 +37,8 @@ module.exports = {
           lat: 40.719074,
           lng: -74.050552,
           name: "City Apartment",
-          description: "Place is a dump, but its the best we got",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc hendrerit mollis ullamcorper. Curabitur interdum faucibus vestibulum. Pellentesque faucibus odio nec lectus luctus molestie. Vestibulum id finibus est, vel rutrum urna. Morbi fermentum urna eget neque faucibus ultrices. Proin vulputate metus a nulla hendrerit molestie eget sed dolor. Praesent et turpis vestibulum, imperdiet purus quis, malesuada dolor.",
           price: 2500,
         },
         {

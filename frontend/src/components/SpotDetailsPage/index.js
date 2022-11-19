@@ -31,18 +31,19 @@ function SpotDetails() {
   const { spotId } = params;
 
   const spot = useSelector((state) => state.spots.spot);
-console.log(spot)
+
   const sessionUser = useSelector((state) => state.session.user);
   const reviews = useSelector((state) => state.reviews.reviews)
   const [login, setLogin] = useState(true);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showWriteReviewsModal, setShowWriteReviewsModal] = useState(false)
 
   const spotImages = spot?.SpotImages;
   const array = [0, 1, 2, 3, 4];
   useEffect(() => {
     dispatch(fetchSpot(spotId));
-    
+
     // dispatch(fetchAllReviews(spotId))
   }, [dispatch]);
 
@@ -218,7 +219,7 @@ console.log(spot)
           </div> */}
         </div>
 
-        <Reviews reviews={reviews} spot={spot}/>
+        {spot && sessionUser && <Reviews reviews={reviews} spot={spot} user={sessionUser} showWriteReviewsModal={showWriteReviewsModal} setShowWriteReviewsModal={setShowWriteReviewsModal}/>}
       </div>
     </div>
   );

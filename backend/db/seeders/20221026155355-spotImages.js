@@ -15,27 +15,27 @@ module.exports = {
      return queryInterface.bulkInsert('SpotImages', [
       {
         spotId: 1,
-        url: "https://s3-media0.fl.yelpcdn.com/bphoto/ELXBGTKH4_dKfZ8qgjbQoQ/ls.jpg",
+        url: "https://images.alphacoders.com/435/thumb-1920-435117.jpg",
         preview: true
       },
       {
         spotId: 1,
-        url: "https://s3-media0.fl.yelpcdn.com/bphoto/eRV3EtGh3sdmhslYqSacyg/o.jpg",
+        url: "https://images.alphacoders.com/605/605759.jpg",
         preview: true
       },
       {
         spotId: 1,
-        url: "https://s3-media0.fl.yelpcdn.com/bphoto/emIIpAjd2muq7dM1PTga0A/348s.jpg",
+        url: "https://8interiors.com/orig/0/62/623/6232/8interiors.com-big-dream-big-house-623249.jpg",
         preview: true
       },
       {
         spotId: 1,
-        url: "https://studydatascience.org/wp-content/uploads/2019/10/35932346_1745684158852431_1214077827402432512_n.jpg",
+        url: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&w=1000&q=80",
         preview: true
       },
       {
         spotId: 1,
-        url: "https://studydatascience.org/wp-content/uploads/2019/10/37585917_1786972501390263_5834834735154593792_n.jpg",
+        url: "https://wallpaperaccess.com/full/2492037.jpg",
         preview: true
       },
       {

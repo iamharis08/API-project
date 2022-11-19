@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 const LOAD_REVIEWS = "reviews/loadReviews";
+const CREATE_REVIEW = "reviews/createReview"
 
 const loadReviews = (reviews) => {
   return {
@@ -8,6 +9,13 @@ const loadReviews = (reviews) => {
     reviews,
   };
 };
+
+const addReview = (review) => {
+    return {
+        type: CREATE_REVIEW,
+        review,
+    }
+}
 
 export const fetchAllReviews = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}/reviews`);
@@ -18,6 +26,26 @@ export const fetchAllReviews = (spotId) => async (dispatch) => {
     }else {dispatch(loadReviews(data));}
     return response;
 };
+
+export const fetchCreateReview = (Review, spotId) => async (dispatch) => {
+   const {review, stars} = Review
+    console.log(Review)
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: "POST",
+        body: JSON.stringify({
+            review,
+            stars
+        }),
+    });
+    if(response.ok){
+        const data = await response.json()
+         dispatch(fetchAllReviews(spotId))
+         .then(() => response);
+    } else if (response.statusCode){
+         return new Error(response.message);
+    }
+
+  };
 
 function normalizedObj(array) {
   let newObj = {};
@@ -38,6 +66,7 @@ const reviewsReducer = (state = initialState, action) => {
         reviews: newObj,
       };
     }
+
     default:
       return state;
   }
