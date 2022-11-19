@@ -26,7 +26,7 @@ import Reviews from "../ReviewComponents/Reviews";
 import DeleteReviewConfirmation from '../ReviewComponents/DeleteReviewConfirmation'
 import { fetchAllReviews } from "../../store/reviews";
 
-function SpotDetails() {
+function SpotDetails({isLoaded}) {
   const dispatch = useDispatch();
   const params = useParams();
   const { spotId } = params;
@@ -220,7 +220,7 @@ function SpotDetails() {
           </div> */}
         </div>
 
-        {spot && <Reviews reviews={reviews} spot={spot} showWriteReviewsModal={showWriteReviewsModal} setShowWriteReviewsModal={setShowWriteReviewsModal} showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal}
+        {spot && <Reviews isLoaded={isLoaded} reviews={reviews} spot={spot} showWriteReviewsModal={showWriteReviewsModal} setShowWriteReviewsModal={setShowWriteReviewsModal} showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal}
         setShowDeleteReviewModal={setShowDeleteReviewModal} showDeleteReviewModal={showDeleteReviewModal}/>}
 
       </div>

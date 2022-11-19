@@ -9,7 +9,7 @@ import "./Reviews.css";
 import { Modal } from "../../context/Modal";
 import DeleteReviewConfirmation from "./DeleteReviewConfirmation";
 
-function Reviews({ spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal, showDeleteReviewModal, setShowDeleteReviewModal }) {
+function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal, showDeleteReviewModal, setShowDeleteReviewModal }) {
   const dispatch = useDispatch();
 
   //   const reviews = useSelector((state) => state.reviews.reviews);
@@ -18,6 +18,7 @@ function Reviews({ spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal
     // const reviewState = useSelector((state) => state.reviews.reviews)
     const reviewsArray = Object.values(reviews ? reviews : []);
     console.log(reviewsArray, "REVIEWS ARRAY")
+    console.log(user, "USER")
     const deleteReviewId = reviewsArray.length ? reviewsArray.find(ele => ele.userId === user?.id)?.id : null
     console.log("reviewId--------", deleteReviewId)
     // console.log(user, spot,"-----------", reviews)
@@ -39,7 +40,7 @@ function Reviews({ spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal
   };
   useEffect(() => {
     dispatch(fetchAllReviews(spot?.id));
-  }, [dispatch, spot.id]);
+  }, [dispatch, spot.id, user]);
 
 
   if (!reviews) {
@@ -53,7 +54,7 @@ function Reviews({ spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal
           <span>{spot?.numReviews} Reviews</span>
           </div>
           <div className="review-buttons">
-          {user && (spot.ownerId !== user?.id) && (reviewExists(reviews)) ? (
+          {isLoaded && user && (spot.ownerId !== user?.id) && (reviewExists(reviews)) ? (
             <div className="write-review-button" onClick={handleClick}>
               Write a Review
             </div>
@@ -109,7 +110,7 @@ function Reviews({ spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal
           <span>{spot?.numReviews} Reviews</span>
           </div>
           <div className="review-buttons">
-          {user && (spot.ownerId !== user?.id) && (reviewExists(reviews)) ? (
+          {isLoaded && user && (spot.ownerId !== user?.id) && (reviewExists(reviews)) ? (
             <div className="write-review-button" onClick={handleClick}>
               Write a Review
             </div>
@@ -179,12 +180,12 @@ function Reviews({ spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal
           <span>{spot?.numReviews} Reviews</span>
           </div>
           <div className="review-buttons">
-          {user && (spot.ownerId !== user?.id) && (reviewExists(reviews)) ? (
+          {isLoaded && user && ((spot.ownerId !== user?.id) && (reviewExists(reviews)) ? (
             <div className="write-review-button" onClick={handleClick}>
               Write a Review
             </div>
           ) : (reviewsArray.length ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
-          </div>) : null)
+          </div>) : null))
          }
          </div>
           {showWriteReviewsModal && spot &&(

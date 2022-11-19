@@ -62,14 +62,7 @@ module.exports = {
           spotId: 3,
           review: "Had a blast here, one of my best memories for sure",
           stars: 5,
-        },
-        {
-          userId: 3,
-          spotId: 1,
-          review:
-            "I love App Academy with a passion, best bootcamp out there no kizzy",
-          stars: 4.5,
-        },
+        }
       ],
       {}
     );

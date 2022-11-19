@@ -29,7 +29,7 @@ function App() {
             <SignupFormPage />
           </Route> */}
           <Route path="/spots/:spotId">
-            <SpotDetails />
+            <SpotDetails isLoaded={isLoaded} />
           </Route>
           <h1> 404: page not found</h1>
         </Switch>
