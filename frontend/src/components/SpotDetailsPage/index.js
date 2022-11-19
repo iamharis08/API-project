@@ -45,8 +45,7 @@ function SpotDetails() {
   useEffect(() => {
     dispatch(fetchSpot(spotId));
 
-    // dispatch(fetchAllReviews(spotId))
-  }, [dispatch]);
+  }, [dispatch, reviews]);
 
   if (!spotImages || !spot) {
     return null;

@@ -15,10 +15,10 @@ function Reviews({ spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal
   //   const reviews = useSelector((state) => state.reviews.reviews);
     // const reviewIsSubmitted = review
     const user = useSelector((state) => state.session.user);
-
+    // const reviewState = useSelector((state) => state.reviews.reviews)
     const reviewsArray = Object.values(reviews ? reviews : []);
     console.log(reviewsArray, "REVIEWS ARRAY")
-    const deleteReviewId = reviewsArray.length ? reviewsArray.find(ele => ele.userId === user.id).id : null
+    const deleteReviewId = reviewsArray.length ? reviewsArray.find(ele => ele.userId === user?.id)?.id : null
     console.log("reviewId--------", deleteReviewId)
     // console.log(user, spot,"-----------", reviews)
     const reviewExists = (reviews) => {
