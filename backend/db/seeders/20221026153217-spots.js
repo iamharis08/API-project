@@ -25,7 +25,7 @@ module.exports = {
           lng: -122.4730327,
           name: "Mansion in the Mountains",
           description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc hendrerit mollis ullamcorper. Curabitur interdum faucibus vestibulum. Pellentesque faucibus odio nec lectus luctus molestie. Vestibulum id finibus est, vel rutrum urna. Morbi fermentum urna eget neque faucibus ultrices. Proin vulputate metus a nulla hendrerit molestie eget sed dolor. Praesent et turpis vestibulum, imperdiet purus quis, malesuada dolor.",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc hendrerit mollis ullamcorper. Curabitur interdum faucibus vestibulum. Pellentesque faucibus odio.",
           price: 123,
         },
         {
