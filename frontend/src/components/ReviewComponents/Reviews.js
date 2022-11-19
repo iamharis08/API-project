@@ -9,7 +9,7 @@ import "./Reviews.css";
 import { Modal } from "../../context/Modal";
 import DeleteReviewConfirmation from "./DeleteReviewConfirmation";
 
-function Reviews({ spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal, showDeleteModal, setShowDeleteModal }) {
+function Reviews({ spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal, showDeleteReviewModal, setShowDeleteReviewModal }) {
   const dispatch = useDispatch();
 
   //   const reviews = useSelector((state) => state.reviews.reviews);
@@ -32,7 +32,7 @@ function Reviews({ spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal
     }
 
     const handleDeleteClick = () => {
-        setShowDeleteModal(true)
+        setShowDeleteReviewModal(true)
     }
   const handleClick = () => {
     setShowWriteReviewsModal(true);
@@ -71,10 +71,10 @@ function Reviews({ spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal
             </Modal>
           )}
 
-          {showDeleteModal && (
-            <Modal onClose={() => setShowDeleteModal(false)}>
+          {showDeleteReviewModal && (
+            <Modal onClose={() => setShowDeleteReviewModal(false)}>
               <DeleteReviewConfirmation
-                setShowDeleteModal={setShowDeleteModal}
+                setShowDeleteModal={setShowDeleteReviewModal}
                 spotId={spot.id}
                 reviewId={deleteReviewId}
               />
@@ -127,10 +127,10 @@ function Reviews({ spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal
             </Modal>
           )}
 
-          {showDeleteModal && (
-            <Modal onClose={() => setShowDeleteModal(false)}>
+          {showDeleteReviewModal && (
+            <Modal onClose={() => setShowDeleteReviewModal(false)}>
               <DeleteReviewConfirmation
-                setShowDeleteModal={setShowDeleteModal}
+                setShowDeleteModal={setShowDeleteReviewModal}
                 spotId={spot.id}
                 reviewId={deleteReviewId}
               />
@@ -197,10 +197,10 @@ function Reviews({ spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal
             </Modal>
           )}
 
-          {showDeleteModal && (
-            <Modal onClose={() => setShowDeleteModal(false)}>
+          {showDeleteReviewModal && (
+            <Modal onClose={() => setShowDeleteReviewModal(false)}>
               <DeleteReviewConfirmation
-                setShowDeleteModal={setShowDeleteModal}
+                setShowDeleteModal={setShowDeleteReviewModal}
                 spotId={spot.id}
                 reviewId={deleteReviewId}
               />

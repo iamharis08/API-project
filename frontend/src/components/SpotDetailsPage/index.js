@@ -38,6 +38,7 @@ function SpotDetails() {
   const [login, setLogin] = useState(true);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showDeleteReviewModal, setShowDeleteReviewModal] = useState(false);
   const [showWriteReviewsModal, setShowWriteReviewsModal] = useState(false)
 
   const spotImages = spot?.SpotImages;
@@ -219,7 +220,8 @@ function SpotDetails() {
           </div> */}
         </div>
 
-        {spot && <Reviews reviews={reviews} spot={spot} showWriteReviewsModal={showWriteReviewsModal} setShowWriteReviewsModal={setShowWriteReviewsModal} showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal}/>}
+        {spot && <Reviews reviews={reviews} spot={spot} showWriteReviewsModal={showWriteReviewsModal} setShowWriteReviewsModal={setShowWriteReviewsModal} showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal}
+        setShowDeleteReviewModal={setShowDeleteReviewModal} showDeleteReviewModal={showDeleteReviewModal}/>}
 
       </div>
     </div>

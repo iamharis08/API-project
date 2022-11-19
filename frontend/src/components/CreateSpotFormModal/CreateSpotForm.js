@@ -39,7 +39,7 @@ function CreateSpotForm({ setShowHostModal, ShowHostModal }) {
     }
     return dispatch(spotsActions.fetchPostSpot(spot))
     .then(() => {setShowHostModal(false)
-        
+
     })
     .catch(async (res) => {
 
@@ -123,7 +123,7 @@ function CreateSpotForm({ setShowHostModal, ShowHostModal }) {
       <label>
         Add Image Url
         <input
-          type="text"
+          type="url"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           required
