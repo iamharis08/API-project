@@ -62,11 +62,11 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
           <span>{spot?.numReviews} Reviews</span>
           </div>
           <div className="review-buttons">
-          {isLoaded && user && (spot?.ownerId !== user?.id) && (!reviewExists(reviews)) ? (
+          {isLoaded && user && (spot?.ownerId !== user?.id) && (!reviewExists(reviewsArray)) ? (
             <div className="write-review-button" onClick={handleClick}>
               Write a Review
             </div>
-          ) : (reviewExists(reviews) ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
+          ) : (reviewExists(reviewsArray) ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
           </div>) : null)
          }
          </div>
@@ -118,11 +118,11 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
           <span>{spot?.numReviews} Reviews</span>
           </div>
           <div className="review-buttons">
-          {isLoaded && user && (spot?.ownerId !== user?.id) && (!reviewExists(reviews)) ? (
+          {isLoaded && user && (spot?.ownerId !== user?.id) && (!reviewExists(reviewsArray)) ? (
             <div className="write-review-button" onClick={handleClick}>
               Write a Review
             </div>
-          ) : (reviewExists(reviews) ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
+          ) : (reviewExists(reviewsArray) ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
           </div>) : null)
          }
          </div>
@@ -188,11 +188,11 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
           <span>{spot?.numReviews} Reviews</span>
           </div>
           <div className="review-buttons">
-          {isLoaded && user && (spot?.ownerId !== user?.id) && (!reviewExists(reviews)) ? (
+          {isLoaded && user && (spot?.ownerId !== user?.id) && (!reviewExists(reviewsArray)) ? (
             <div className="write-review-button" onClick={handleClick}>
               Write a Review
             </div>
-          ) : (reviewExists(reviews) ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
+          ) : ((reviewExists(reviewsArray)) ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
           </div>) : null)
          }
          </div>

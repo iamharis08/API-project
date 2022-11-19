@@ -54,7 +54,7 @@ module.exports = {
           price: 3000,
         },
         {
-          ownerId: 3,
+          ownerId: 4,
           address: "523 Lisbon Street",
           city: "Seffner",
           state: "Florida",
@@ -66,7 +66,7 @@ module.exports = {
           price: 5000,
         },
         {
-          ownerId: 3,
+          ownerId: 5,
           address: "982 Sorbonne Loop",
           city: "Seffner",
           state: "Florida",
