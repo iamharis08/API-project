@@ -23,6 +23,7 @@ import EditSpotForm from "../EditSpotFormModal/EditSpotForm";
 import DeleteSpotConfirmation from "../EditSpotFormModal/DeleteSpotConfirmation";
 import "./SpotDetails.css";
 import Reviews from "../ReviewComponents/Reviews";
+import DeleteReviewConfirmation from '../ReviewComponents/DeleteReviewConfirmation'
 import { fetchAllReviews } from "../../store/reviews";
 
 function SpotDetails() {
@@ -219,7 +220,8 @@ function SpotDetails() {
           </div> */}
         </div>
 
-        {spot && sessionUser && <Reviews reviews={reviews} spot={spot} user={sessionUser} showWriteReviewsModal={showWriteReviewsModal} setShowWriteReviewsModal={setShowWriteReviewsModal}/>}
+        {spot && <Reviews reviews={reviews} spot={spot} showWriteReviewsModal={showWriteReviewsModal} setShowWriteReviewsModal={setShowWriteReviewsModal} showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal}/>}
+
       </div>
     </div>
   );

@@ -7,20 +7,32 @@ import userIcon from "../Navigation/NavBarImages/user-icon.svg";
 import ReviewForm from "./ReviewForm";
 import "./Reviews.css";
 import { Modal } from "../../context/Modal";
+import DeleteReviewConfirmation from "./DeleteReviewConfirmation";
 
-function Reviews({ spot, reviews, user, showWriteReviewsModal,setShowWriteReviewsModal }) {
+function Reviews({ spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal, showDeleteModal, setShowDeleteModal }) {
   const dispatch = useDispatch();
-  console.log(user, spot,"-----------", reviews)
+
   //   const reviews = useSelector((state) => state.reviews.reviews);
     // const reviewIsSubmitted = review
+    const user = useSelector((state) => state.session.user);
+
+    const reviewsArray = Object.values(reviews ? reviews : []);
+    console.log(reviewsArray, "REVIEWS ARRAY")
+    const deleteReviewId = reviewsArray.length ? reviewsArray.find(ele => ele.userId === user.id).id : null
+    console.log("reviewId--------", deleteReviewId)
+    // console.log(user, spot,"-----------", reviews)
     const reviewExists = (reviews) => {
         {for(let reviewKey in reviews){
             let review = reviews[reviewKey];
-            if(review.userId === user.id){
+            if(review.userId === user?.id){
                 return false
             }
         }}
         return true
+    }
+
+    const handleDeleteClick = () => {
+        setShowDeleteModal(true)
     }
   const handleClick = () => {
     setShowWriteReviewsModal(true);
@@ -29,19 +41,26 @@ function Reviews({ spot, reviews, user, showWriteReviewsModal,setShowWriteReview
     dispatch(fetchAllReviews(spot?.id));
   }, [dispatch, spot.id]);
 
+
   if (!reviews) {
     return (
       <div className="reviews-section">
         <div className="no-review-heading">
-          <img src={stars} style={{ height: 16, width: 16 }} alt="star" />
+        <div className="review-details">
+          <img src={stars} style={{ height: 16, width: 16 }} alt="star" />{" "}
           &nbsp;
-          {"0"} · &nbsp;
-          <span>No Reviews</span>
-          {(spot.ownerId !== user.id) && (reviewExists(reviews)) ? (
+          {spot?.avgStarRating} · &nbsp;
+          <span>{spot?.numReviews} Reviews</span>
+          </div>
+          <div className="review-buttons">
+          {user && (spot.ownerId !== user?.id) && (reviewExists(reviews)) ? (
             <div className="write-review-button" onClick={handleClick}>
               Write a Review
             </div>
-          ) : null}
+          ) : (reviewsArray.length ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
+          </div>) : null)
+         }
+         </div>
           {showWriteReviewsModal && spot &&(
             <Modal onClose={() => setShowWriteReviewsModal(false)}>
               <ReviewForm
@@ -51,11 +70,21 @@ function Reviews({ spot, reviews, user, showWriteReviewsModal,setShowWriteReview
               />
             </Modal>
           )}
+
+          {showDeleteModal && (
+            <Modal onClose={() => setShowDeleteModal(false)}>
+              <DeleteReviewConfirmation
+                setShowDeleteModal={setShowDeleteModal}
+                spotId={spot.id}
+                reviewId={deleteReviewId}
+              />
+            </Modal>
+          )}
         </div>
       </div>
     );
   }
-  const reviewsArray = Object.values(reviews);
+
 
   const array = [0, 1, 2, 3, 4, 5];
 
@@ -73,23 +102,40 @@ function Reviews({ spot, reviews, user, showWriteReviewsModal,setShowWriteReview
     return (
       <div className="reviews-section">
         <div className="review-heading">
+         <div className="review-details">
           <img src={stars} style={{ height: 16, width: 16 }} alt="star" />{" "}
           &nbsp;
           {spot?.avgStarRating} · &nbsp;
           <span>{spot?.numReviews} Reviews</span>
-          {(spot.ownerId !== user.id) && (reviewExists(reviews)) ? (
+          </div>
+          <div className="review-buttons">
+          {user && (spot.ownerId !== user?.id) && (reviewExists(reviews)) ? (
             <div className="write-review-button" onClick={handleClick}>
               Write a Review
             </div>
-          ) : null}
-          {showWriteReviewsModal && (
+          ) : (reviewsArray.length ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
+          </div>) : null)
+         }
+         </div>
+          {showWriteReviewsModal && spot &&(
             <Modal onClose={() => setShowWriteReviewsModal(false)}>
               <ReviewForm
                 spot={spot}
                 user={user}
                 setShowWriteReviewsModal={setShowWriteReviewsModal}
               />
-            </Modal>)}
+            </Modal>
+          )}
+
+          {showDeleteModal && (
+            <Modal onClose={() => setShowDeleteModal(false)}>
+              <DeleteReviewConfirmation
+                setShowDeleteModal={setShowDeleteModal}
+                spotId={spot.id}
+                reviewId={deleteReviewId}
+              />
+            </Modal>
+          )}
         </div>
 
         <div className="reviews">
@@ -126,23 +172,40 @@ function Reviews({ spot, reviews, user, showWriteReviewsModal,setShowWriteReview
     return (
       <div className="reviews-section">
         <div className="review-heading">
+        <div className="review-details">
           <img src={stars} style={{ height: 16, width: 16 }} alt="star" />{" "}
           &nbsp;
           {spot?.avgStarRating} · &nbsp;
           <span>{spot?.numReviews} Reviews</span>
-          {(spot.ownerId !== user.id) && (reviewExists(reviews)) ? (
+          </div>
+          <div className="review-buttons">
+          {user && (spot.ownerId !== user?.id) && (reviewExists(reviews)) ? (
             <div className="write-review-button" onClick={handleClick}>
               Write a Review
             </div>
-          ) : null}
-                {showWriteReviewsModal && (
+          ) : (reviewsArray.length ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
+          </div>) : null)
+         }
+         </div>
+          {showWriteReviewsModal && spot &&(
             <Modal onClose={() => setShowWriteReviewsModal(false)}>
               <ReviewForm
                 spot={spot}
                 user={user}
                 setShowWriteReviewsModal={setShowWriteReviewsModal}
               />
-            </Modal>)}
+            </Modal>
+          )}
+
+          {showDeleteModal && (
+            <Modal onClose={() => setShowDeleteModal(false)}>
+              <DeleteReviewConfirmation
+                setShowDeleteModal={setShowDeleteModal}
+                spotId={spot.id}
+                reviewId={deleteReviewId}
+              />
+            </Modal>
+          )}
         </div>
         <div className="reviews">
           {reviewsArray &&
