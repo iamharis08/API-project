@@ -1,5 +1,5 @@
 .form-wrapper {
-  width: 37vw;
+  width: 568px;
   height: 90vh;
   border-radius: 12px;
   position: relative;
@@ -25,10 +25,10 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 38vw;
+  height: 75vh;
   padding: 1.5em;
   box-sizing: border-box;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .welcome-text {
@@ -61,6 +61,10 @@ input[name="password"] {
 .errors-list {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  padding-left: 1.2em;
+  padding-bottom: 1em;
+  padding-top: 1em;
   color: red;
 }
 
@@ -85,6 +89,7 @@ input[name="password"] {
 
 .login-demo-button-container {
   width: 100%;
+  margin-top: 1em;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,0 +1,22 @@
+input {
+    width: 100%;
+    height: 3.5em;
+    font-size: 1em;
+    padding-left: 1em;
+    border-top: 0;
+    border-right: solid #afafaf 1px;
+    border-left: solid #afafaf 1px;
+    border-bottom: solid #afafaf 1px;
+
+  }
+
+  input[name="firstName"] {
+
+    border-radius: 5px 5px 0px 0px;
+    border: solid #afafaf 1px;
+  }
+
+  input[name="confirm"] {
+    border-radius: 0px 0px 5px 5px;
+    margin-bottom: 2.5rem;
+  }

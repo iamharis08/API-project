@@ -21,7 +21,7 @@ function LoginForm({ setShowModal }) {
   const closeModal = () => {
     setShowModal(false)
   }
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});
@@ -44,7 +44,7 @@ function LoginForm({ setShowModal }) {
       <div className="heading-wrapper">
       <div className="login-heading">
         <div className="close-button" onClick={closeModal}><img src={close} alt="close" /> </div>
-        Log in or sign up</div>
+        Log in</div>
         </div>
       <div className="form-inputs">
         <div className="welcome-text">Welcome to Airbnbs</div>
