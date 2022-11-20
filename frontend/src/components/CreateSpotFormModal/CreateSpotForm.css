@@ -1,0 +1,44 @@
+input {
+    width: 100%;
+    height: 3.5em;
+    font-size: 1em;
+    padding-left: 1em;
+    border-top: 0;
+    border-right: solid #afafaf 1px;
+    border-left: solid #afafaf 1px;
+    border-bottom: solid #afafaf 1px;
+  }
+  input:focus,
+  input[name="name"]{
+      border: solid #afafaf 1px;
+      border-radius: 8px;
+      transition: border 0.3s ease-in-out;
+  }
+
+  input[name="name"] {
+    border-radius: 5px 5px 0px 0px;
+    border: solid #afafaf 1px;
+  }
+  input[name="price"]::-webkit-inner-spin-button,
+  input[name="price"]::-webkit-outer-spin-button {
+    appearance: none;
+  }
+
+  textarea {
+    border-radius: 0px 0px 5px 5px;
+    margin-bottom: 2.5rem;
+    width: 100%;
+    height: 6rem;
+    resize: none;
+    overflow-y: auto;
+    border-top: none;
+    border-right: solid #afafaf 1px;
+    border-left: solid #afafaf 1px;
+    border-bottom: solid #afafaf 1px;
+    font-size: 1rem;
+    padding-left: 1em;
+    padding-top: 1em;
+    font-family: 'Poppins', sans-serif;
+    font-stretch: expanded;
+    letter-spacing: -0.2;
+  }

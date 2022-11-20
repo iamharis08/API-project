@@ -11,8 +11,10 @@ body {
     font-family: 'Poppins', sans-serif;
     /* font-family: 'Montserrat', sans-serif; */
     font-stretch: expanded;
+    letter-spacing: -0.2;
     width: 100%;
     color: #222222;
+    box-sizing: border-box;
 }
 
 *{

@@ -1,21 +1,22 @@
-.become-host-wrapper{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    width: 15rem;
+.become-host-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 15rem;
 }
-.become-host-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 500;
-    border-radius: 22px;
-    width: 9rem;
-    font-size: 14px;
-    cursor: pointer;
+.become-host-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  border-radius: 22px;
+  width: 10.5rem;
+  font-size: 0.85rem;
+
+  cursor: pointer;
 }
 
-.become-host-button:hover{
-    background-color: #f5f5f5 ;
+.become-host-button:hover {
+  background-color: #f5f5f5;
 }

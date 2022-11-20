@@ -19,7 +19,7 @@ function BecomeHostButton({ user, setLogin, setShowModal, setShowHostModal}) {
 
         <div className="become-host-wrapper">
             <div className="become-host-button" onClick={handleClick}>
-                <span>Become a Host</span>
+                <span>Airbnbs your home</span>
             </div>
         </div>
 
