@@ -19,7 +19,7 @@ function Spots() {
 
   if (!spots) return null;
   return (
-
+    <div className="spots-wrapper">
     <div className="spots">
       {Object.values(spots).map((spot) => (
         <div key={spot.id}>
@@ -53,7 +53,8 @@ function Spots() {
           </NavLink>
         </div>
       ))}
- 
+
+    </div>
     </div>
   );
 }

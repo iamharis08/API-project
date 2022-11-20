@@ -1,7 +1,7 @@
 /* TODO Add site wide styles */
 html {
     width: 100%;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 body {
     display: flex;
@@ -14,3 +14,8 @@ body {
     width: 100%;
     color: #222222;
 }
+
+*{
+    margin:0;
+    padding: 0;
+  }
