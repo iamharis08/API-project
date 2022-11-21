@@ -22,7 +22,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <FilterBar />
+            {/* <FilterBar /> */}
             <Spots />
           </Route>
           {/* <Route path="/signup">

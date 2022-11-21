@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Redirect, useHistory } from "react-router-dom";
+import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
 import { fetchAllReviews } from "../../store/reviews";
 import stars from "../SpotDetailsPage/SpotDetailsPageImages/stars.svg";
 import userIcon from "../Navigation/NavBarImages/user-icon.svg";
@@ -12,7 +12,8 @@ import AllReviewsModal from "./AllReviewsModal";
 import LoginForm from "../LoginFormModal/LoginForm";
 
 function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal, showDeleteReviewModal, setShowDeleteReviewModal }) {
-  
+
+
   const [showAllReviewsModal, setShowAllReviewsModal] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch();
@@ -22,11 +23,9 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
     const user = useSelector((state) => state.session.user);
     // const reviewState = useSelector((state) => state.reviews.reviews)
     const reviewsArray = Object.values(reviews ? reviews : []);
-    // console.log(reviewsArray, "REVIEWS ARRAY")
-    // console.log(user, "USERRRRRRRRRRRRRRRRR")
+
     const deleteReviewId = reviewsArray.length ? reviewsArray.find(ele => ele.userId === user?.id)?.id : null
-    // console.log("reviewId--------", deleteReviewId)
-    // console.log(user, spot,"-----------", reviews)
+
     const reviewExists = (reviews) => {
 
         // for(let reviewKey in reviews){
@@ -44,7 +43,6 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
         return false
     }
 
-    // console.log("WWWWWWWWWWWWW",isLoaded && user && (spot?.ownerId !== user?.id) && (reviewExists(reviews)), "DELETEBUTON SHOWNIG", reviewExists(reviews), user)
 const openLoginModel = () => {
   setShowModal(true)
 }

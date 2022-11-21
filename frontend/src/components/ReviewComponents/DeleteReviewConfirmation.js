@@ -7,7 +7,7 @@ import "../EditSpotFormModal/DeleteSpotConfirmation.css";
 
 function DeleteReviewConfirmation({ setShowDeleteModal, spotId, reviewId }) {
     const [errors, setErrors] = useState([]);
-    console.log("DELTEREVIEWID",reviewId)
+  
   const history = useHistory()
   const dispatch = useDispatch();
 

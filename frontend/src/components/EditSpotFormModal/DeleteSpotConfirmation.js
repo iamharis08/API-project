@@ -25,31 +25,7 @@ function DeleteSpotConfirmation({ setShowDeleteModal, spotId, spot }) {
   };
   const mouseHandler = (e) => {
     // logic here
-    let noBtn = document.getElementById("no-button");
-
-    noBtn.onmousemove = function (e) {
-      let rect = e.target.getBoundingClientRect();
-      let x = e.clientX - rect.left;
-      noBtn.style.setProperty("--x", x + "px");
-    };
-    noBtn.onmouseleave = function (e) {
-      let rect = e.target.getBoundingClientRect();
-      let x = 140;
-      noBtn.style.setProperty("--x", x + "px");
-    };
-
-    let yesBtn = document.getElementById("yes-button");
-
-    yesBtn.onmousemove = function (e) {
-      let rect = e.target.getBoundingClientRect();
-      let x = e.clientX - rect.left;
-      yesBtn.style.setProperty("--x", x + "px");
-    };
-    yesBtn.onmouseleave = function (e) {
-      let rect = e.target.getBoundingClientRect();
-      let x = 140;
-      yesBtn.style.setProperty("--x", x + "px");
-    };
+   
   };
   return (
     <div className="delete-confirmation">

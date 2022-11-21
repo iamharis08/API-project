@@ -52,6 +52,7 @@
   font-weight: bold;
   width: 100%;
   height: 100%;
+ 
 }
 
 #yes-button {
@@ -71,6 +72,7 @@
     #f85390 var(--x),
     #BD1E59 100%
   );
+  cursor: pointer;
 }
 #no-button {
   display: flex;
@@ -88,6 +90,7 @@
     #f85390 var(--x),
     #BD1E59 100%
   );
+  cursor: pointer;
 }
 .no-button:focus {
   outline: none;

@@ -32,7 +32,7 @@ export const fetchAllReviews = (spotId) => async (dispatch) => {
 
 export const fetchCreateReview = (Review, spotId) => async (dispatch) => {
    const {review, stars} = Review
-    console.log(Review)
+
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: "POST",
         body: JSON.stringify({
@@ -56,7 +56,6 @@ export const fetchCreateReview = (Review, spotId) => async (dispatch) => {
     });
 
       const data = await response.json()
-      console.log(data, "FROM THE FETCH")
       if (response.ok){
         dispatch(fetchAllReviews(spotId))
         .then(() => response);

@@ -109,6 +109,10 @@
 
 .spots-info {
   height: 120px;
+  font-size: 16px;
+  line-height: 26px;
+
+
 }
 .spots-address {
   display: flex;
@@ -123,8 +127,15 @@
 }
 .spots-address,
 .spots-price span {
-  font-weight: 550;
-  font-size: 0.9rem;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.3;
+}
+
+.added-weeks-ago,
+.date-created {
+  color: grey;
+  font-weight: 400;
 }
 
 .loading {

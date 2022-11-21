@@ -13,6 +13,28 @@ function Spots() {
     // <Redirect to="/" />
     // history.push(`/spots/${spotId}`);
   };
+
+  const convertToDate = (oldDate) => {
+    if (oldDate) {
+      const date = oldDate.split("T")[0];
+      const newDate = new Date(date);
+      const convertedDate = newDate.toDateString();
+      return convertedDate;
+    }
+
+    return null;
+  };
+
+  // const currentDate = new Date(Date.now())
+
+  const weekDifference = (addedDate) =>{
+    // if((currentDate - addedDate) < 604800000) {
+    //   return "0"
+    // } else Math.round(Math.abs( currentDate - addedDate ) / 604800000)
+    return Math.floor(Math.random() * 15)
+  }
+
+
   useEffect(() => {
     dispatch(fetchAllSpots());
   }, [dispatch]);
@@ -44,7 +66,12 @@ function Spots() {
                   {`${spot.city}, ${spot.state}`}
                   <span className="spots-stars"><span className="star"><img src={stars} alt="stars" /></span>{spot.avgRating}</span>
                 </div>
-
+                  <div className="added-weeks-ago">
+                    Added {weekDifference(convertToDate(spot.createdAt))} weeks ago
+                  </div>
+                  <div className="date-created">
+                    {convertToDate(spot.createdAt)}
+                  </div>
                 <div className="spots-price">
                   <span>{`$${spot.price} `}</span>night
                 </div>

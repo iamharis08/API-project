@@ -40,7 +40,7 @@ function SpotDetails({isLoaded}) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showDeleteReviewModal, setShowDeleteReviewModal] = useState(false);
   const [showWriteReviewsModal, setShowWriteReviewsModal] = useState(false)
- 
+
 
   const spotImages = spot?.SpotImages;
   const array = [0, 1, 2, 3, 4];
@@ -195,7 +195,7 @@ function SpotDetails({isLoaded}) {
               listing inaccuracies, and other issues like trouble checking in.
             </div>
             <div className="link">
-              <Link to='' style={{ textDecoration: "none", color: "black" }}>
+              <Link to='/comingsoon' style={{ textDecoration: "none", color: "black" }}>
                 Learn More
               </Link>
             </div>
@@ -204,7 +204,7 @@ function SpotDetails({isLoaded}) {
           <div className="spot-description">
             <div className="spot-description-text">{spot.description}</div>
             <div className="link">
-              <Link to='' style={{ textDecoration: "none", color: "black" }}>
+              <Link to='/comingsoon' style={{ textDecoration: "none", color: "black" }}>
                 Show More {">"}{" "}
               </Link>
             </div>

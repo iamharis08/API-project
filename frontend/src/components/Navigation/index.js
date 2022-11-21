@@ -11,6 +11,7 @@ import { Modal } from "../../context/Modal";
 import CreateSpotForm from "../CreateSpotFormModal/CreateSpotForm";
 import Logo from "./NavBar/Logo.js";
 import BecomeHostButton from "./NavBar/BecomeHostButton";
+import SearchBar from "./NavBar/SearchBar";
 
 function Navigation({ isLoaded }) {
   const params = useParams();
@@ -49,6 +50,8 @@ function Navigation({ isLoaded }) {
           <NavLink style={{ textDecoration: "none" }} exact to="/">
             <Logo />
           </NavLink>
+          
+          <SearchBar />
 
           <div className="nav-buttons">
             {isLoaded && (

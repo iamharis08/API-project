@@ -3,11 +3,13 @@ html {
     width: 100%;
     /* overflow-x: hidden; */
     /* overflow: overlay; */
+
 }
 body {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    margin-top: 100px;
     /* font-family: 'Montserrat', sans-serif; */
     font-family: 'Poppins', sans-serif;
     /* font-family: 'Montserrat', sans-serif; */
