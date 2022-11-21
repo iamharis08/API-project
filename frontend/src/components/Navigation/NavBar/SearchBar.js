@@ -9,7 +9,7 @@ function SearchBar() {
     const history = useHistory()
     const [anywhere, setAnyWhere] = useState('')
     const [anyweek, setAnyWeek] = useState('')
-    const [guests, setgeusts] = useState('')
+    const [guests, setGuests] = useState('')
   return (
     <div className="search-bar-wrapper">
         <div className="search-bar">
@@ -31,7 +31,7 @@ function SearchBar() {
               type="text"
               name="anyweek"
               placeholder="Anywhere"
-              value={anywhere}
+              value={anyweek}
               onChange={(e) => setAnyWeek(e.target.value)}
               required
             />
@@ -43,8 +43,8 @@ function SearchBar() {
               type="text"
               name="addguests"
               placeholder="Add guests"
-              value={anywhere}
-              onChange={(e) => setAnyWhere(e.target.value)}
+              value={guests}
+              onChange={(e) => setGuests(e.target.value)}
               required
             />
 
@@ -52,7 +52,12 @@ function SearchBar() {
 
 
 
-            <div className="search-button" onClick={() => history.push('/comingsoon')}>
+            <div className="search-button" onClick={() => {
+                history.push('/comingsoon')
+                setAnyWeek('')
+                setAnyWhere('')
+                setGuests('')
+                }}>
                 <img src={magnify} alt="search" />
             </div>
 
