@@ -104,7 +104,7 @@
   display: flex;
   justify-content: flex-end;
   align-content: center;
-  width: 40vw;
+  width: 21vw;
 }
 
 .other-button,
@@ -219,6 +219,7 @@ input[name="anywhere"]:focus{
 
 .search{
     position: relative;
+
 }
 .search-button {
     right: 1%;
@@ -241,4 +242,101 @@ input[name="anywhere"]:focus{
   width: 12px;
   fill: white;
 
+}
+
+
+@media (max-width: 1200px) {
+    .search-bar-wrapper {
+        width: 20vw;
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        margin-left: 1%;
+        
+      }
+      .search-bar-spot-details{
+          width: 20vw;
+          height: 48px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 100;
+          margin-left: 1%;
+      }
+      .become-host-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        width: 240px;
+        height: 48px;
+        visibility: hidden;
+      }
+}
+
+@media (max-width: 800px) {
+    .search-bar-wrapper {
+        width: 20vw;
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        margin-left: 1%;
+        visibility: hidden;
+      }
+      .search-bar-spot-details{
+          width: 20vw;
+          height: 48px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 100;
+          margin-left: 1%;
+          visibility: hidden;
+      }
+      .become-host-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        width: 240px;
+        height: 48px;
+        visibility: visible;
+      }
+}
+
+
+@media (max-width: 550px) {
+    .search-bar-wrapper {
+        width: 20vw;
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        margin-left: 1%;
+        visibility: hidden;
+      }
+      .search-bar-spot-details{
+          width: 20vw;
+          height: 48px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 100;
+          margin-left: 1%;
+          visibility: hidden;
+      }
+      .become-host-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        width: 240px;
+        height: 48px;
+        visibility: hidden;
+      }
 }
