@@ -30,7 +30,7 @@ function ProfileButton({ user, setLogin, setShowModal, setShowHostModal }) {
 
   };
   const handleRedirect = () => {
-    history.push('/')
+    history.push('/comingsoon')
   }
 
   useEffect(() => {

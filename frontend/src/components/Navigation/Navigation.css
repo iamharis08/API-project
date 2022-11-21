@@ -48,7 +48,7 @@
 
 .profile-dropdown-container-spot-details {
   position: absolute;
-  height: 16vw;
+  height: 28vw;
   width: 280px;
   right: 220px;
   top: 50px;
@@ -179,7 +179,15 @@
   z-index: 100;
   margin-left: 1%;
 }
-
+.search-bar-spot-details{
+    width: 10vw;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    margin-left: 1%;
+}
 /* .search-bar { */
   /* display: grid; */
   /* grid-template-columns: repeat(3, 100px); */
@@ -196,34 +204,19 @@
 } */
 input[name="anywhere"],
 input[name="anywhere"]:focus{
-  grid-area: a;
+
   border-left: none;
   height: 100%;
-  width: 100%;
+  width: 20vw;
   border: none;
   overflow: auto;
-  height: 48px;
-  width: 38vw;
+
   border-radius: 22px;
   border: solid #f5f5f5 1px;
   box-shadow: 0px 1px 13px 0px rgb(211, 210, 210);
-  position: relative;
+  /* position: relative; */
 }
 
-input[name="anyweek"] {
-  /* padding-left: 20px; */
-  grid-area: b;
-  height: 100%;
-  width: 110px;
-  border-width: 0px 1px;
-}
-input[name="addguests"] {
-  /* padding-left: 20px; */
-  grid-area: c;
-  height: 100%;
-  width: 100%;
-  border: none;
-}
 .search{
     position: relative;
 }
