@@ -1,5 +1,13 @@
 .filter-bar{
-    height: 100px;
+    position: -webkit-sticky;
+    position: --moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    height: 120px;
     width: 100%;
-    border-bottom: solid rgb(235,235,235) 2px
+    margin-top: 80px;
+    position: sticky;
+    top: 42px;
+    background-color: white;
+    border-bottom: solid rgb(235,235,235) 1px;
 }

@@ -65,6 +65,7 @@ function Navigation({ isLoaded }) {
                 user={sessionUser}
                 setLogin={setLogin}
                 setShowModal={setShowModal}
+                setShowHostModal={setShowHostModal}
               />
             )}
 

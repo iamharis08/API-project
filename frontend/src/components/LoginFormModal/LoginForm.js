@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import "./LoginForm.css";
 import facebook from "./icons/facebook.svg"
 import apple from "./icons/apple.svg"
@@ -11,6 +11,7 @@ import close from "./icons/close.svg"
 
 function LoginForm({ setShowModal }) {
   const dispatch = useDispatch();
+  const history = useHistory()
   const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +22,10 @@ function LoginForm({ setShowModal }) {
   const closeModal = () => {
     setShowModal(false)
   }
-
+  const redirect = () => {
+    history.push('/comingsoon')
+    setShowModal(false)
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});
@@ -98,21 +102,21 @@ function LoginForm({ setShowModal }) {
             <div className="company-icon">
               <img src={facebook} alt="facebook" />
             </div>
-            <div className="button-text">Continue with Facebook</div>
+            <div className="button-text" onClick={redirect}>Continue with Facebook</div>
           </div>
           <div className="other-login-buttons">
             <div className="company-icon">
             <img src={google} id="google" alt="google" />
             </div>
-            <div className="button-text">Continue with Google</div>
+            <div className="button-text" onClick={redirect}>Continue with Google</div>
           </div>
           <div className="other-login-buttons">
             <div className="company-icon"><img src={apple} id="apple" alt="facebook" /></div>
-            <div className="button-text">Continue with Apple</div>
+            <div className="button-text" onClick={redirect}>Continue with Apple</div>
           </div>
           <div className="other-login-buttons">
             <div className="company-icon"><img src={email} alt="facebook" /></div>
-            <div className="button-text">Continue with email</div>
+            <div className="button-text" onClick={redirect}>Continue with email</div>
           </div>
         </div>
       </div>

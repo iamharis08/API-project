@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink, useLocation, useParams } from "react-router-dom";
+import { NavLink, useHistory, useLocation, useParams } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import DropDown from "./NavBar/DropDownButton.js";
 import "./Navigation.css";
 
-function ProfileButton({ user, setLogin, setShowModal }) {
+function ProfileButton({ user, setLogin, setShowModal, setShowHostModal }) {
   const dispatch = useDispatch();
+  const history = useHistory()
   const [showMenu, setShowMenu] = useState(false);
   const { pathname } = useLocation();
   const spotId = (pathname) =>  pathname.split('/')[2]
@@ -16,6 +17,21 @@ function ProfileButton({ user, setLogin, setShowModal }) {
     if (showMenu) return;
     setShowMenu(true);
   };
+
+  const hostModal = (e) => {
+    e.preventDefault();
+    if (user){
+        setShowHostModal(true)
+    }else {
+        setLogin(true)
+        setShowModal(true)
+    }
+
+
+  };
+  const handleRedirect = () => {
+    history.push('/')
+  }
 
   useEffect(() => {
     if (!showMenu) return;
@@ -47,10 +63,34 @@ function ProfileButton({ user, setLogin, setShowModal }) {
 
           <div className= {pathname === `/spots/${spotId(pathname)}` ? "profile-dropdown-container-spot-details" : "profile-dropdown-container"}>
             <ul className="profile-dropdown">
-              <li>{user.username}</li>
-              <li>{user.email}</li>
+              <li className="user-info-top">{user.username}</li>
+              <li className="user-info">{user.email}</li>
               <li>
-                <button onClick={logout}>Log Out</button>
+                <div id="logout-button" onClick={logout}>Log Out</div>
+              </li>
+              <li>
+              <div className="other-button"
+                  onClick={hostModal}
+                >
+                  Airbnbs your home
+                </div>
+
+              </li>
+              <li>
+              <div className="other-button"
+                  onClick={handleRedirect}
+                >
+                  Host an experience
+                </div>
+
+              </li>
+              <li>
+              <div className="other-button"
+                  onClick={handleRedirect}
+                >
+                  Help
+                </div>
+
               </li>
             </ul>
           </div>
@@ -58,17 +98,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
           <div className= {pathname === `/spots/${spotId(pathname)}` ? "profile-dropdown-container-spot-details" : "profile-dropdown-container"}>
             <ul className="profile-dropdown">
             <li>
-                <div id="signup-button"
-                  onClick={() => {
-                    setLogin(false);
-                    setShowModal(true);
-                  }}
-                >
-                  Sign Up
-                </div>
-              </li>
-              <li>
-                <div id="login-button"
+            <div id="login-button"
                   onClick={() => {
                     setLogin(true);
                     setShowModal(true);
@@ -77,7 +107,41 @@ function ProfileButton({ user, setLogin, setShowModal }) {
                   Log In
                 </div>
               </li>
+              <li>
+              <div id="signup-button"
+                  onClick={() => {
+                    setLogin(false);
+                    setShowModal(true);
+                  }}
+                >
+                  Sign Up
+                </div>
 
+              </li>
+              <li>
+              <div className="other-button"
+                  onClick={hostModal}
+                >
+                  Airbnbs your home
+                </div>
+
+              </li>
+              <li>
+              <div className="other-button"
+                  onClick={handleRedirect}
+                >
+                  Host an experience
+                </div>
+
+              </li>
+              <li>
+              <div className="other-button"
+                  onClick={handleRedirect}
+                >
+                  Help
+                </div>
+
+              </li>
             </ul>
           </div>
         ))}

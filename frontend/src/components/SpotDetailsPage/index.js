@@ -40,6 +40,7 @@ function SpotDetails({isLoaded}) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showDeleteReviewModal, setShowDeleteReviewModal] = useState(false);
   const [showWriteReviewsModal, setShowWriteReviewsModal] = useState(false)
+ 
 
   const spotImages = spot?.SpotImages;
   const array = [0, 1, 2, 3, 4];

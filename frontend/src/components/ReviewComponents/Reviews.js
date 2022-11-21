@@ -9,10 +9,12 @@ import "./Reviews.css";
 import { Modal } from "../../context/Modal";
 import DeleteReviewConfirmation from "./DeleteReviewConfirmation";
 import AllReviewsModal from "./AllReviewsModal";
+import LoginForm from "../LoginFormModal/LoginForm";
 
 function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal, showDeleteReviewModal, setShowDeleteReviewModal }) {
 
   const [showAllReviewsModal, setShowAllReviewsModal] = useState(false)
+  const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch();
 
   //   const reviews = useSelector((state) => state.reviews.reviews);
@@ -43,10 +45,15 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
     }
 
     // console.log("WWWWWWWWWWWWW",isLoaded && user && (spot?.ownerId !== user?.id) && (reviewExists(reviews)), "DELETEBUTON SHOWNIG", reviewExists(reviews), user)
+const openLoginModel = () => {
+  setShowModal(true)
+}
+
     const handleDeleteClick = () => {
         setShowDeleteReviewModal(true)
     }
   const handleClick = () => {
+
     setShowWriteReviewsModal(true);
   };
 
@@ -71,13 +78,24 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
           <div className="review-buttons">
 
           {isLoaded && user && (spot?.ownerId !== user?.id) && (!reviewExists(reviewsArray)) ? (
-            <div className="write-review-button" onClick={handleClick}>
+            (<div className="write-review-button" onClick={handleClick}>
               Write a Review
-            </div>
+            </div>)
           ) : (reviewExists(reviewsArray) ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
           </div>) : null)
          }
-
+         {!user && (spot?.ownerId !== user?.id) && (!reviewExists(reviewsArray)) &&
+          (<div className="write-review-button" onClick={openLoginModel}>
+          Write a Review
+        </div>)
+        }
+        {showModal && spot &&(
+            <Modal onClose={() => setShowModal(false)}>
+              <LoginForm
+                setShowModal={setShowModal}
+              />
+            </Modal>
+          )}
          </div>
           {showWriteReviewsModal && spot &&(
             <Modal onClose={() => setShowWriteReviewsModal(false)}>
@@ -128,12 +146,24 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
           </div>
           <div className="review-buttons">
           {isLoaded && user && (spot?.ownerId !== user?.id) && (!reviewExists(reviewsArray)) ? (
-            <div className="write-review-button" onClick={handleClick}>
+            (<div className="write-review-button" onClick={handleClick}>
               Write a Review
-            </div>
+            </div>)
           ) : (reviewExists(reviewsArray) ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
           </div>) : null)
          }
+         {!user && (spot?.ownerId !== user?.id) && (!reviewExists(reviewsArray)) &&
+          (<div className="write-review-button" onClick={openLoginModel}>
+          Write a Review
+        </div>)
+        }
+        {showModal && spot &&(
+            <Modal onClose={() => setShowModal(false)}>
+              <LoginForm
+                setShowModal={setShowModal}
+              />
+            </Modal>
+          )}
          </div>
           {showWriteReviewsModal && spot &&(
             <Modal onClose={() => setShowWriteReviewsModal(false)}>
@@ -209,12 +239,24 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
           </div>
           <div className="review-buttons">
           {isLoaded && user && (spot?.ownerId !== user?.id) && (!reviewExists(reviewsArray)) ? (
-            <div className="write-review-button" onClick={handleClick}>
+            (<div className="write-review-button" onClick={handleClick}>
               Write a Review
-            </div>
-          ) : ((reviewExists(reviewsArray)) ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
+            </div>)
+          ) : (reviewExists(reviewsArray) ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
           </div>) : null)
          }
+         {!user && (spot?.ownerId !== user?.id) && (!reviewExists(reviewsArray)) &&
+          (<div className="write-review-button" onClick={openLoginModel}>
+          Write a Review
+        </div>)
+        }
+        {showModal && spot &&(
+            <Modal onClose={() => setShowModal(false)}>
+              <LoginForm
+                setShowModal={setShowModal}
+              />
+            </Modal>
+          )}
          </div>
           {showWriteReviewsModal && spot &&(
             <Modal onClose={() => setShowWriteReviewsModal(false)}>
