@@ -68,7 +68,7 @@ function CreateSpotForm({ setShowHostModal, ShowHostModal }) {
         </div>
       </div>
       <div className="form-inputs">
-        <div className="welcome-text">Welcome to Airbnbs</div>
+        <div className="welcome-text">Create your spot</div>
 
         <form onSubmit={handleSubmit}  action="page_submission_URL" method="POST">
           <ul className="errors-list">

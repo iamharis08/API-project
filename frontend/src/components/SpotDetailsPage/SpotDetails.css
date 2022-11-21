@@ -20,39 +20,41 @@
   width: 50px;
   text-align: center;
   right: 15%;
-  bottom: 2%;
+  bottom: 40%;
   font-size: 18px;
   border-radius: 22px;
+  cursor: pointer;
 }
 .edit-spot-button:hover{
   position: absolute;
   width: 50px;
   text-align: center;
   right: 15%;
-  bottom: 2%;
+  bottom: 40%;
   font-size: 18px;
   background-color: #d4d4d4 ;
-
+  cursor: pointer;
 }
 .delete-spot-button{
   position: absolute;
   width: 75px;
   text-align: center;
   right: 5%;
-  bottom: 2%;
+  bottom: 40%;
   font-size: 18px;
-  border-radius: 22px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 .delete-spot-button:hover{
   position: absolute;
   width: 75px;
   text-align: center;
   right: 5%;
-  bottom: 2%;
+  bottom: 40%;
   font-size: 18px;
   background-color: #ff385c ;
   color: white;
-
+  cursor: pointer;
 }
 .spot-info-wrapper {
   margin: 0px auto;
