@@ -12,9 +12,7 @@ function SearchBar() {
     const [guests, setGuests] = useState('')
   return (
     <div className="search-bar-wrapper">
-        <div className="search-bar">
-            <div className="anywhere">
-
+        <div className="search">
             <input
               type="text"
               name="anywhere"
@@ -24,31 +22,7 @@ function SearchBar() {
               required
             />
 
-            </div>
-            <div className="any-week">
 
-            <input
-              type="text"
-              name="anyweek"
-              placeholder="Anywhere"
-              value={anyweek}
-              onChange={(e) => setAnyWeek(e.target.value)}
-              required
-            />
-
-            </div>
-            <div className="add-guests">
-
-            <input
-              type="text"
-              name="addguests"
-              placeholder="Add guests"
-              value={guests}
-              onChange={(e) => setGuests(e.target.value)}
-              required
-            />
-
-            </div>
 
 
 
@@ -60,9 +34,11 @@ function SearchBar() {
                 }}>
                 <img src={magnify} alt="search" />
             </div>
+            </div>
+            </div>
 
-        </div>
-    </div>
+
+
   );
 }
 
