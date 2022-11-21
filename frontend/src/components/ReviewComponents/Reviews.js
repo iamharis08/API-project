@@ -8,8 +8,11 @@ import ReviewForm from "./ReviewForm";
 import "./Reviews.css";
 import { Modal } from "../../context/Modal";
 import DeleteReviewConfirmation from "./DeleteReviewConfirmation";
+import AllReviewsModal from "./AllReviewsModal";
 
 function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal, showDeleteReviewModal, setShowDeleteReviewModal }) {
+
+  const [showAllReviewsModal, setShowAllReviewsModal] = useState(false)
   const dispatch = useDispatch();
 
   //   const reviews = useSelector((state) => state.reviews.reviews);
@@ -17,10 +20,10 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
     const user = useSelector((state) => state.session.user);
     // const reviewState = useSelector((state) => state.reviews.reviews)
     const reviewsArray = Object.values(reviews ? reviews : []);
-    console.log(reviewsArray, "REVIEWS ARRAY")
-    console.log(user, "USERRRRRRRRRRRRRRRRR")
+    // console.log(reviewsArray, "REVIEWS ARRAY")
+    // console.log(user, "USERRRRRRRRRRRRRRRRR")
     const deleteReviewId = reviewsArray.length ? reviewsArray.find(ele => ele.userId === user?.id)?.id : null
-    console.log("reviewId--------", deleteReviewId)
+    // console.log("reviewId--------", deleteReviewId)
     // console.log(user, spot,"-----------", reviews)
     const reviewExists = (reviews) => {
 
@@ -39,12 +42,16 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
         return false
     }
 
-    console.log("WWWWWWWWWWWWW",isLoaded && user && (spot?.ownerId !== user?.id) && (reviewExists(reviews)), "DELETEBUTON SHOWNIG", reviewExists(reviews), user)
+    // console.log("WWWWWWWWWWWWW",isLoaded && user && (spot?.ownerId !== user?.id) && (reviewExists(reviews)), "DELETEBUTON SHOWNIG", reviewExists(reviews), user)
     const handleDeleteClick = () => {
         setShowDeleteReviewModal(true)
     }
   const handleClick = () => {
     setShowWriteReviewsModal(true);
+  };
+
+  const handleAllReviewsClick = () => {
+    setShowAllReviewsModal(true);
   };
   useEffect(() => {
     dispatch(fetchAllReviews(spot?.id));
@@ -62,6 +69,7 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
           <span>{spot?.numReviews} Reviews</span>
           </div>
           <div className="review-buttons">
+
           {isLoaded && user && (spot?.ownerId !== user?.id) && (!reviewExists(reviewsArray)) ? (
             <div className="write-review-button" onClick={handleClick}>
               Write a Review
@@ -69,6 +77,7 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
           ) : (reviewExists(reviewsArray) ? (<div className="delete-review-button" onClick={handleDeleteClick}> Delete Review
           </div>) : null)
          }
+
          </div>
           {showWriteReviewsModal && spot &&(
             <Modal onClose={() => setShowWriteReviewsModal(false)}>
@@ -171,9 +180,20 @@ function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteRe
                 </div>
               </div>
             ))}
-          <div className="show-all-reviews-button">
-            Show All {reviewsArray.length} Reviews
+          <div className="show-all-reviews-button" onClick={handleAllReviewsClick}>
+          Show All {reviewsArray.length} Reviews
           </div>
+          {showAllReviewsModal && (
+            <Modal onClose={() => setShowAllReviewsModal(false)}>
+              <AllReviewsModal
+                spot={spot}
+                user={user}
+                isLoaded={isLoaded}
+                reviewsArray={reviewsArray}
+                setShowAllReviewsModal={setShowAllReviewsModal}
+              />
+            </Modal>
+          )}
         </div>
       </div>
     );

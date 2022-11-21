@@ -5,10 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import "./CreateSpotForm.css";
 import "../LoginFormModal/LoginForm.css";
-import facebook from "../LoginFormModal/icons/facebook.svg";
-import apple from "../LoginFormModal/icons/apple.svg";
-import emailIcon from "../LoginFormModal/icons/email.png";
-import google from "../LoginFormModal/icons/google.png";
+
 import close from "../LoginFormModal/icons/close.svg";
 
 function CreateSpotForm({ setShowHostModal, ShowHostModal }) {

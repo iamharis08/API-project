@@ -21,7 +21,7 @@ input {
   }
   input[name="price"]::-webkit-inner-spin-button,
   input[name="price"]::-webkit-outer-spin-button {
-    appearance: none;
+    height: 4em
   }
 
   textarea {
@@ -41,4 +41,31 @@ input {
     font-family: 'Poppins', sans-serif;
     font-stretch: expanded;
     letter-spacing: -0.2;
+  }
+
+  input[name="stars"] {
+    border-radius: 5px 5px 0px 0px;
+    border: solid #afafaf 1px;
+  }
+
+  input[name="stars"]::-webkit-inner-spin-button,
+  input[name="stars"]::-webkit-outer-spin-button {
+    height: 4em;
+  }
+
+  .review-form-wrapper {
+    width: 568px;
+    height: 100%;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .review-form-inputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 52vh;
+    padding: 1.5em;
+    box-sizing: border-box;
+    overflow-y: auto;
   }
