@@ -12,7 +12,7 @@ import AllReviewsModal from "./AllReviewsModal";
 import LoginForm from "../LoginFormModal/LoginForm";
 
 function Reviews({ isLoaded, spot, reviews, showWriteReviewsModal,setShowWriteReviewsModal, showDeleteReviewModal, setShowDeleteReviewModal }) {
-
+  
   const [showAllReviewsModal, setShowAllReviewsModal] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch();

@@ -19,10 +19,12 @@ function LoginForm({ setShowModal }) {
 
   if (sessionUser) return <Redirect to="/" />;
 
-  const closeModal = () => {
+  const closeModal = (e) => {
+    e.preventDefault();
     setShowModal(false)
   }
-  const redirect = () => {
+  const redirect = (e) => {
+    e.preventDefault();
     history.push('/comingsoon')
     setShowModal(false)
   }
