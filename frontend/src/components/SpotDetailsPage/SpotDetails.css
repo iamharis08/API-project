@@ -144,10 +144,21 @@ h1 {
 }
 
 .middle-page-details {
-  width: 50%;
+  width: 100%;
+  display: flex;
+}
+
+.left-spot-details{
+  /* flex-grow: 1; */
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+.right-spot-details{
+  flex-grow: 1;
+  /* height: 100%; */
+
 }
 
 .spot-hosted-details {
