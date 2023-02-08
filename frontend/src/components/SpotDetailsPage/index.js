@@ -25,6 +25,7 @@ import "./SpotDetails.css";
 import Reviews from "../ReviewComponents/Reviews";
 import DeleteReviewConfirmation from '../ReviewComponents/DeleteReviewConfirmation'
 import { fetchAllReviews } from "../../store/reviews";
+import Bookings from "../BookingsComponents/Bookings";
 
 function SpotDetails({isLoaded}) {
   const dispatch = useDispatch();
@@ -122,6 +123,7 @@ function SpotDetails({isLoaded}) {
         </div>
 
         <div className="middle-page-details">
+          <div className="left-spot-details">
           <div className="spot-hosted-details">
             <div className="hostedBy">
               <h2>
@@ -209,7 +211,10 @@ function SpotDetails({isLoaded}) {
               </Link>
             </div>
           </div>
-
+          </div>
+          <div className="right-spot-details">
+            <Bookings />
+          </div>
           {/* <div className="place-offers">
             <div className="offers-img">
               <img
@@ -219,6 +224,7 @@ function SpotDetails({isLoaded}) {
               />
             </div>
           </div> */}
+
         </div>
 
         {spot && <Reviews isLoaded={isLoaded} reviews={reviews} spot={spot} showWriteReviewsModal={showWriteReviewsModal} setShowWriteReviewsModal={setShowWriteReviewsModal} showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal}
