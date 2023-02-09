@@ -33,7 +33,7 @@
 
 .profile-dropdown-container {
   position: absolute;
-  height: 280px;
+  height: fit-content;
   width: 280px;
   right: 0px;
   top: 8vh;
@@ -48,7 +48,7 @@
 
 .profile-dropdown-container-spot-details {
   position: absolute;
-  height: 55vh;
+  height: fit-content;
   width: 280px;
   right: 15vw;
   top: 50px;

@@ -700,7 +700,8 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
       for (let i = 0; i < isBooked.length; i++) {
         const bookedStartDate = isBooked[i].toJSON().startDate;
         const bookedEndDate = isBooked[i].toJSON().endDate;
-
+        console.log(bookedStartDate, bookedEndDate, "bookeddates")
+        console.log(startDate, endDate, "startdateenddate")
         if (bookedStartDate === startDate && bookedEndDate === endDate) {
           res.status(403);
           return res.json({
@@ -742,7 +743,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         startDate,
         endDate,
       });
-
+      console.log(newBooking.toJSON())
       return res.json({
         ...newBooking.toJSON(),
       });
