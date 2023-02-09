@@ -1,4 +1,4 @@
-# API-project
+# Airbnb Clone Project
 Live Link: https://airbnbs.herokuapp.com/
 ## Aribnbs   
 
