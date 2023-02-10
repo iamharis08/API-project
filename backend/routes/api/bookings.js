@@ -99,12 +99,18 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
         res.status(404)
         return res.json({
             message: "Booking couldn't be found",
+            errors: {
+              input: "Not Found",
+            },
             statusCode: 404
         })
     }else if (booking.toJSON().userId !== req.user.id) {
         res.status(403)
         return res.json({
           message: "Forbidden",
+          errors: {
+            input: "Not Authorized",
+          },
           statusCode: 403
         })
     }
@@ -117,7 +123,10 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     if (bookingsEndDateToObject < Date.now()) {
         res.status(403)
         return res.json({
-            message: "Past bookings can't be modified",
+            message: "Forbidden Access",
+            errors: {
+              input: "Past bookings can't be modified",
+            },
             statusCode: 403
         })
     }
@@ -163,10 +172,12 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
 
     if (isBooked.length) {
         for (let i = 0; i < isBooked.length; i++) {
-          const bookedStartDate = isBooked[i].toJSON().startDate;
-          const bookedEndDate = isBooked[i].toJSON().endDate;
-
-          if (bookedStartDate === startDate && bookedEndDate === endDate) {
+          const bookedStartDate = new Date(isBooked[i].toJSON().startDate);
+          const bookedEndDate = new Date(isBooked[i].toJSON().endDate);
+          console.log("\n",bookedStartDate,bookedEndDate, "BOOKED DATES")
+          console.log("\n",startDateToObject,endDateToObject, "DATES")
+          console.log("\n",bookedStartDate < endDateToObject && bookedEndDate >= endDateToObject, "ENDDDDATES")
+          if (bookedStartDate === startDateToObject && bookedEndDate === endDateToObject) {
             res.status(403);
             return res.json({
               message:
@@ -177,7 +188,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
                 endDate: "End date conflicts with an existing booking",
               },
             });
-          } else if (bookedStartDate < endDate && bookedEndDate >= endDate) {
+          } else if (bookedStartDate < endDateToObject && bookedEndDate >= endDateToObject) {
             res.status(403);
             return res.json({
               message:
@@ -187,7 +198,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
                 endDate: "End date conflicts with an existing booking",
               },
             });
-          } else if (bookedStartDate <= startDate && bookedEndDate > startDate) {
+          } else if (bookedStartDate <= startDateToObject && bookedEndDate > startDate) {
             res.status(403);
             return res.json({
               message:
@@ -207,10 +218,12 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
           startDate,
           endDate,
         });
+        console.log(booking.toJSON())
 
-        res.json({
-          booking,
-        });
+        res.status(200)
+        return res.json(
+          {...booking.toJSON()}
+        );
 
 
 
@@ -223,14 +236,14 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
 
 
     const booking = await Booking.findOne({
-        attributes: {
-            include: ["id"]
-        },
+        // attributes: {
+        //     include: ["id"]
+        // },
         where: {
             id: bookingId
         }
     })
-
+     console.log(booking.toJSON(), req.user.id)
     if (!booking) {
         res.status(404)
         return res.json({
@@ -238,6 +251,7 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
             statusCode: 404
         })
     }else if (booking.toJSON().userId !== req.user.id) {
+      console.log("why")
         res.status(403)
         return res.json({
             message: "Forbidden",

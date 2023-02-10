@@ -80,8 +80,12 @@
     background-color: aliceblue;
 }
 
+/* .booking-info{
+;
+} */
+
 .booking-picture{
-    width: 250px;
+    width: 220px;
     height: 100%;
 }
 
@@ -98,29 +102,70 @@
 }
 
 .booking-spot-name{
+    flex-grow: 2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font-weight: 600;
     font-size: 18px;
     margin-bottom: 22px;
+    overflow: hidden;
 }
 
 .bookings-options-container{
     display: flex;
     justify-content: flex-end;
     flex-grow: 1;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .booking-options-button{
-    width: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
     border: solid black 1px;
     transition: width 0.5s ease-in-out;
-    z-index: 100;
+    /* z-index: 100; */
 }
 
 .expanded-booking-options-button{
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    width: 100px;
     border: solid black 1px;
     transition: width 0.5s ease-in-out;
+}
+
+.close-options{
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-bottom: 1px grey solid;
+    height: 20%;
+}
+
+.edit-booking{
+    display: flex;
+    height: 40%;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+.edit-booking:hover{
+    background-color: #f5f5f5;
+}
+
+.delete-booking{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40%;
+    color: white;
+    background-color: #ee143c;
+
+}
+.delete-booking:hover{
+    background-color: #ff5f7d;
 }
 
 .hide-options{
@@ -128,6 +173,7 @@
     /* transition: opacity 0.5s cubic-bezier(0.933, 0, 0.865, 0); */
 }
 .show-options{
+    width: 100%;
     opacity: 1;
     animation: fadeIn 0.8s ease-in-out;
     /* transition: opacity 0.5s cubic-bezier(0.001, 0.991, 0.001, 0.991); */

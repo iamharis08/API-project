@@ -11,10 +11,10 @@ function EditBookingModal({ setShowEditModal, showEditModal, editBooking }) {
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const booking = useSelector((state) => state.bookings.bookings[editBooking]);
-  const [checkin, setCheckIn] = useState("");
-  const [checkout, setCheckOut] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [checkin, setCheckIn] = useState('');
+  const [checkout, setCheckOut] = useState('');
+  const [startDate, setStartDate] = useState(booking.startDate);
+  const [endDate, setEndDate] = useState(booking.endDate);
   const [bookedNights, setBookedNights] = useState(0);
   const [bookedNightsPrice, setBookedNightsPrice] = useState(0);
   const [cleaningFee, setCleaningFee] = useState(0);
@@ -38,16 +38,21 @@ function EditBookingModal({ setShowEditModal, showEditModal, editBooking }) {
       .then(() => {
         setShowEditModal(false);
       })
-      .catch(async (res) => {
-        const data = await res.json();
+      .catch(async (response) => {
+        const data = await response.json()
+        console.log(data)
         if (data && data.errors) setErrors(data.errors);
       });
   };
-  useEffect(() => {}, [showEditModal]);
+
+  useEffect(() => {
+
+  }, [showEditModal, startDate, endDate]);
+
   useEffect(() => {
     setErrors({});
     const totalBookedPrice =
-      (booking.Spot.price * (checkout - checkin) / (1000 * 60 * 60 * 24));
+      (booking.Spot?.price * (checkout - checkin) / (1000 * 60 * 60 * 24));
     if (totalBookedPrice > 0) {
       setBookedNights((checkout - checkin) / (1000 * 60 * 60 * 24));
       setBookedNightsPrice(totalBookedPrice);
@@ -64,7 +69,7 @@ function EditBookingModal({ setShowEditModal, showEditModal, editBooking }) {
     <div className="bookings-section">
     <div className="bookings-container">
       <div className="bookings-header">
-        <div className="bookings-price">${booking.Spot.price} night</div>
+        <div className="bookings-price">${booking.Spot?.price} night</div>
       </div>
 
       <div className="bookings-inputs">
@@ -77,6 +82,7 @@ function EditBookingModal({ setShowEditModal, showEditModal, editBooking }) {
                 id="start"
                 name="start"
                 min="2023-01-01"
+                value={startDate}
                 placeholder="mm/dd/yyyy"
                 required
                 onChange={(e) => {
@@ -92,6 +98,7 @@ function EditBookingModal({ setShowEditModal, showEditModal, editBooking }) {
                 id="end"
                 name="trip-start"
                 min="2023-01-01"
+                value={endDate}
                 placeholder="mm/dd/yyyy"
                 required
                 onChange={(e) => {
@@ -123,7 +130,7 @@ function EditBookingModal({ setShowEditModal, showEditModal, editBooking }) {
       <div className="bookings-info">
         <div className="price-totals-container">
           <div className="total-nights">
-            ${booking.Spot.price} X {bookedNights ? bookedNights : 0}{" "}
+            ${booking.Spot?.price} X {bookedNights ? bookedNights : 0}{" "}
             {bookedNights === 1 ? "night" : "nights"}
           </div>
           <div className="total-nights-price">

@@ -16,8 +16,10 @@ function Bookings() {
   const [serviceFee, setServiceFee] = useState(0);
   const [guests, setGuests] = useState(1);
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = (e) => {
+    setSuccessMessage("")
     setErrors({});
     e.preventDefault()
     const booking = {
@@ -26,6 +28,7 @@ function Bookings() {
     }
     console.log(booking, "NEW BOOKING")
     return dispatch(fetchPostBooking(spot.id, booking))
+    .then(() => setSuccessMessage("Successfully Booked: Check Account Page"))
     .catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) setErrors(data.errors);
@@ -33,6 +36,7 @@ function Bookings() {
   }
 
   useEffect(() => {
+    setSuccessMessage("")
     setErrors({});
     const totalBookedPrice =
       (spot.price * (checkout - checkin) / (1000 * 60 * 60 * 24));
@@ -105,8 +109,8 @@ function Bookings() {
                 onChange={(e) => setGuests(e.target.value)}
               />
             </div>
-            <ul className="bookings-errors-list">
-            {Object.values(errors).map((error, idx) => (
+            <ul className={successMessage ? "successfully-booked" : "bookings-errors-list"}>
+            {successMessage ? successMessage : Object.values(errors).map((error, idx) => (
               <li key={idx}>{error}</li>
             ))}
           </ul>
