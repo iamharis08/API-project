@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100;
+    z-index: 10000;
 
 
   }
@@ -23,7 +23,7 @@
 
   #modal-content {
     position: absolute;
-    background-color:#fefefe;
+    /* background-color:#fefefe; */
     border-radius: 15px;
 
   }

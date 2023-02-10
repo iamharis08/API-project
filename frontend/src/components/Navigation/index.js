@@ -42,15 +42,16 @@ function Navigation({ isLoaded }) {
       <div className="nav-bar">
         <div
           className={
-            pathname === `/spots/${spotId(pathname)}`
-              ? "nav-container-spot-details"
-              : "nav-container"
+            pathname === `/`
+            // pathname === `/spots/${spotId(pathname)}`
+              ? "nav-container"
+              : "nav-container-spot-details"
           }
         >
           <NavLink style={{ textDecoration: "none" }} exact to="/">
             <Logo />
           </NavLink>
-          
+
           <SearchBar />
 
           <div className="nav-buttons">

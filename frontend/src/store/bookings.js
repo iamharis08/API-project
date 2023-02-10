@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const ADD_BOOKING = "bookings/ADD_BOOKING";
 const LOAD_BOOKINGS = "bookings/LOAD_BOOKINGS";
 
+
 const addBooking = (booking) => {
   return {
     type: ADD_BOOKING,
@@ -10,9 +11,42 @@ const addBooking = (booking) => {
   };
 };
 
+const loadBookings = (bookings) => {
+  return {
+    type: LOAD_BOOKINGS,
+    bookings,
+  };
+};
+
+
+
+export const fetchAllBookings = (userId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/bookings/current`, {
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(loadBookings(data));
+  }
+  return response;
+};
+
 export const fetchPostBooking = (spotId, booking) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}/bookings`, {
     method: "POST",
+    body: JSON.stringify(booking),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(addBooking(data));
+  }
+  return response;
+};
+
+export const fetchUpdateBooking = (bookingId, booking) => async (dispatch) => {
+  const response = await csrfFetch(`/api/bookings/${bookingId}`, {
+    method: "PUT",
     body: JSON.stringify(booking),
   });
 

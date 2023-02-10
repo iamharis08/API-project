@@ -8,6 +8,9 @@ import FilterBar from "./components/FilterBar/FilterBar";
 import Spots from "./components/Spots/Spots";
 import SpotDetails from "./components/SpotDetailsPage";
 import ComingSoon from "./components/Navigation/ComingSoon";
+import Account from "./components/AccountComponent/Account";
+
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -22,17 +25,16 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            {/* <FilterBar /> */}
             <Spots />
           </Route>
-          {/* <Route path="/signup">
-            <SignupFormPage />
-          </Route> */}
           <Route path="/spots/:spotId">
             <SpotDetails isLoaded={isLoaded} />
           </Route>
           <Route path='/comingsoon'>
             <ComingSoon />
+          </Route>
+          <Route path='/user/account'>
+            <Account />
           </Route>
           <h1> 404: page not found</h1>
         </Switch>

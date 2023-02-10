@@ -34,9 +34,9 @@
 .profile-dropdown-container {
   position: absolute;
   height: fit-content;
-  width: 280px;
+  width: 210px;
   right: 0px;
-  top: 8vh;
+  top: 70px;
   background-color: white;
   border-radius: 15px;
   box-shadow: 0px 1px 13px 0px rgb(211, 210, 210);
@@ -49,9 +49,9 @@
 .profile-dropdown-container-spot-details {
   position: absolute;
   height: fit-content;
-  width: 280px;
+  width: 210px;
   right: 15vw;
-  top: 50px;
+  top: 60px;
   background-color: white;
   border-radius: 15px;
   box-shadow: 0px 1px 13px 0px rgb(211, 210, 210);
@@ -118,7 +118,7 @@
   padding-left: 20px;
   font-weight: light;
   cursor: pointer;
-  color: rgb(88, 88, 88);
+  color: rgb(37, 37, 37);
 }
 
 .other-button:hover,
@@ -138,13 +138,16 @@
   color: rgb(88, 88, 88);
 }
 
+.user-info {
+  border-bottom: solid rgb(235, 235, 235) 2px;
+}
 .user-info-top {
   margin-top: 10px;
 }
 
 #logout-button {
   font-weight: 600;
-  border-bottom: solid rgb(235, 235, 235) 1px;
+
 }
 
 .coming-soon {

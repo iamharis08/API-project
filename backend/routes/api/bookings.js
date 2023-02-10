@@ -84,17 +84,17 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     const { startDate, endDate } = req.body
     const bookingId = req.params.bookingId
 
-
+  console.log(startDate, endDate, bookingId)
 
     const booking = await Booking.findOne({
-        attributes: {
-            include: ["id"]
-        },
+        // attributes: {
+        //     include: ["id"]
+        // },
         where: {
             id: bookingId
         }
     })
-
+      console.log(booking.toJSON())
     if (!booking) {
         res.status(404)
         return res.json({

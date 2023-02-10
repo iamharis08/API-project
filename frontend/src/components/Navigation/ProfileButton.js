@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink, useHistory, useLocation, useParams } from "react-router-dom";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import * as sessionActions from "../../store/session";
 import DropDown from "./NavBar/DropDownButton.js";
 import "./Navigation.css";
@@ -61,13 +62,11 @@ function ProfileButton({ user, setLogin, setShowModal, setShowHostModal }) {
       {showMenu &&
         (user ? (
 
-          <div className= {pathname === `/spots/${spotId(pathname)}` ? "profile-dropdown-container-spot-details" : "profile-dropdown-container"}>
+          <div className= {pathname === `/` ? "profile-dropdown-container" : "profile-dropdown-container-spot-details"}>
             <ul className="profile-dropdown">
               <li className="user-info-top">{user.username}</li>
               <li className="user-info">{user.email}</li>
-              <li>
-                <div id="logout-button" onClick={logout}>Log Out</div>
-              </li>
+
               <li>
               <div className="other-button"
                   onClick={hostModal}
@@ -85,6 +84,15 @@ function ProfileButton({ user, setLogin, setShowModal, setShowHostModal }) {
 
               </li>
               <li>
+              <div className="other-button account"
+                  onClick={() => history.push('/user/account')}
+                >
+                  Account
+                </div>
+
+              </li>
+              <li></li>
+              <li>
               <div className="other-button"
                   onClick={handleRedirect}
                 >
@@ -92,10 +100,13 @@ function ProfileButton({ user, setLogin, setShowModal, setShowHostModal }) {
                 </div>
 
               </li>
+              <li>
+                <div id="logout-button" onClick={logout}>Log Out</div>
+              </li>
             </ul>
           </div>
         ) : (
-          <div className= {pathname === `/spots/${spotId(pathname)}` ? "profile-dropdown-container-spot-details" : "profile-dropdown-container"}>
+          <div className= {pathname === `/` ? "profile-dropdown-container" : "profile-dropdown-container-spot-details"}>
             <ul className="profile-dropdown">
             <li>
             <div id="login-button"
