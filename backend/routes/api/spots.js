@@ -123,22 +123,22 @@ router.get("/", validQueryResults, async (req, res, next) => {
       [Op.or]: [
         {
           address: {
-            [Op.substring]: searchLowerCase,
+            [Op.iLike]: `%${searchLowerCase}%`,
           },
         },
         {
           city: {
-            [Op.substring]: searchLowerCase,
+            [Op.iLike]: `%${searchLowerCase}%`,
           },
         },
         {
           state: {
-            [Op.substring]: searchLowerCase,
+            [Op.iLike]: `%${searchLowerCase}%`,
           },
         },
         {
           country: {
-            [Op.substring]: searchLowerCase,
+            [Op.iLike]: `%${searchLowerCase}%`,
           },
         },
       ],
@@ -193,6 +193,7 @@ router.get("/", validQueryResults, async (req, res, next) => {
   }
 
   const spots = await Spot.findAll({
+    ...query,
     include: [
       {
         model: Review,
@@ -204,7 +205,6 @@ router.get("/", validQueryResults, async (req, res, next) => {
     ],
 
     order: [["id"]],
-    ...query,
   });
 
   if (!spots.length) {

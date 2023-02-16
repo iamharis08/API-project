@@ -74,9 +74,10 @@ export const fetchAllSpots = () => async (dispatch) => {
 };
 export const fetchSearchedSpots = (searchInput) => async (dispatch) => {
   const response = await fetch(`/api/spots?search=${searchInput}`);
+
   if (response.ok) {
     const data = await response.json();
-    console.log(data,"made itttttttttttttttttttttttttttt")
+    
 
     dispatch(searchSpots(data));
     return response;
