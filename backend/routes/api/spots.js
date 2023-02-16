@@ -112,6 +112,7 @@ router.get("/", validQueryResults, async (req, res, next) => {
   const page = req.query.page === undefined ? 1 : parseInt(req.query.page);
   const size = req.query.size === undefined ? 20 : parseInt(req.query.size);
   const { Op } = require("sequelize");
+  const Sequelize = require('sequelize');
 
   let query = {
     where: {},
@@ -121,28 +122,28 @@ router.get("/", validQueryResults, async (req, res, next) => {
     const searchLowerCase = `%${search.toLowerCase()}`;
     query.where = {
       [Op.or]: [
-        {
-          address: {
-            [Op.iLike]: `%${searchLowerCase}%`,
-          },
-        },
-        {
-          city: {
-            [Op.iLike]: `%${searchLowerCase}%`,
-          },
-        },
-        {
-          state: {
-            [Op.iLike]: `%${searchLowerCase}%`,
-          },
-        },
-        {
-          country: {
-            [Op.iLike]: `%${searchLowerCase}%`,
-          },
-        },
-      ],
-    };
+        Sequelize.where(
+          Sequelize.fn('LOWER', Sequelize.col('address')),
+          'LIKE',
+          `%${searchLowerCase}%`
+        ),
+        Sequelize.where(
+          Sequelize.fn('LOWER', Sequelize.col('city')),
+          'LIKE',
+          `%${searchLowerCase}%`
+        ),
+        Sequelize.where(
+          Sequelize.fn('LOWER', Sequelize.col('state')),
+          'LIKE',
+          `%${searchLowerCase}%`
+        ),
+        Sequelize.where(
+          Sequelize.fn('LOWER', Sequelize.col('country')),
+          'LIKE',
+          `%${searchLowerCase}%`
+        )
+      ]
+    }
   }
 
   if (page >= 1 && size >= 1) {
