@@ -235,6 +235,7 @@ input[name="anywhere"]:focus{
   height: 32px;
   width: 32px;
   border-radius: 50%;
+  border: none;
   background-color: #ff385c;
   position: absolute;
   margin-right: 10px;
