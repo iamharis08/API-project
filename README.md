@@ -28,7 +28,7 @@ I can be contacted via email iamharis@gmail.com
 - Postgresql
 
 # Hosting
-- Heroku
+- Render
 
 ![image](https://user-images.githubusercontent.com/76670635/203098421-01a0dca7-160f-42ba-b600-b33d0bebdbbc.png)
 
