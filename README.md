@@ -32,6 +32,9 @@ I can be contacted via email iamharis@gmail.com
 
 ![image](https://user-images.githubusercontent.com/76670635/203098421-01a0dca7-160f-42ba-b600-b33d0bebdbbc.png)
 
+#Spot Details Page
+![image](https://user-images.githubusercontent.com/76670635/221095821-92e0af85-8b7c-4864-9316-4c45429020d7.png)
+
 # User Login
 ![image](https://user-images.githubusercontent.com/76670635/203098690-b6c04204-5549-4f8e-aeb5-7750f3083972.png)
 
@@ -40,5 +43,11 @@ I can be contacted via email iamharis@gmail.com
 
 #User Reviews
 ![image](https://user-images.githubusercontent.com/76670635/203099309-95f598ed-2cad-47ca-bc70-13ae678d19f6.png)
+
+#Bookings
+![image](https://user-images.githubusercontent.com/76670635/221095504-f9e267c8-fb1c-4c6c-a822-0c9988bb0020.png)
+
+#Account page
+![image](https://user-images.githubusercontent.com/76670635/221095712-749c0180-79c5-41e6-b798-b2b45c5c541b.png)
 
 
